@@ -910,102 +910,109 @@ function bukaMenuUtama(nama){
    BUKA SCANNER
 ===================================================== */
 
-async function bukaScanner(){
+function bukaScanner(){
 
-    // Bersihkan scanner lama
+    console.log("BUKA SCANNER BARU");
+
+    // PAKSA RESET SEMUA STATE SCAN SEBELUM MULAI
     resetScannerState();
 
-    const overlay =
+    // HAPUS HASIL SCAN LAMA
+    const hasilScan =
+        document.getElementById("hasilScan");
+
+    if(hasilScan){
+        hasilScan.style.display = "none";
+    }
+
+    // PASTIKAN OVERLAY SCANNER MUNCUL
+    const scannerOverlay =
         document.getElementById("scannerOverlay");
 
-    if(!overlay){
-        return;
+    if(scannerOverlay){
+        scannerOverlay.style.display = "flex";
     }
 
-    overlay.style.display = "flex";
-
-    scannerRunning = true;
+    // RESET LOCK
     scanLocked = false;
+    scannerRunning = false;
 
-    try{
+    // BUAT READER BARU
+    codeReader =
+        new ZXingBrowser.BrowserMultiFormatReader();
 
-        codeReader =
-            new ZXingBrowser.BrowserMultiFormatReader();
+    const video =
+        document.getElementById("video");
 
-        const video =
-            document.getElementById("video");
-
-        await codeReader.decodeFromConstraints(
-
-            {
-                video:{
-                    facingMode:{
-                        ideal:"environment"
-                    },
-
-                    width:{
-                        ideal:1280
-                    },
-
-                    height:{
-                        ideal:720
-                    }
+    navigator.mediaDevices
+        .getUserMedia({
+            video:{
+                facingMode:{
+                    ideal:"environment"
                 },
-
-                audio:false
-            },
-
-            video,
-
-            function(result, error){
-
-                if(!scannerRunning){
-                    return;
+                width:{
+                    ideal:1280
+                },
+                height:{
+                    ideal:720
                 }
-
-                if(scanLocked){
-                    return;
-                }
-
-                if(result){
-
-                    scanLocked = true;
-
-                    const teks =
-                        result.getText();
-
-                    console.log(
-                        "QR TERBACA:",
-                        teks
-                    );
-
-                    scannerBerhasil(teks);
-
-                }
-
             }
+        })
+        .then(function(stream){
 
-        );
+            video.srcObject = stream;
 
-    }
-    catch(error){
+            video.play();
 
-        console.error(
-            "ERROR SCANNER:",
-            error
-        );
+            scannerRunning = true;
 
-        resetScannerState();
+            codeReader.decodeFromVideoElement(
+                video,
+                function(result, error){
 
-        alert(
-            "KAMERA GAGAL DIBUKA.\n\n" +
-            "Pastikan izin kamera sudah diberikan."
-        );
+                    if(!scannerRunning){
+                        return;
+                    }
 
-    }
+                    if(scanLocked){
+                        return;
+                    }
+
+                    if(result){
+
+                        scanLocked = true;
+
+                        const teks =
+                            result.getText();
+
+                        console.log(
+                            "QR TERBACA:",
+                            teks
+                        );
+
+                        scannerBerhasil(teks);
+                    }
+
+                }
+            );
+
+        })
+        .catch(function(error){
+
+            console.error(
+                "ERROR KAMERA:",
+                error
+            );
+
+            resetScannerState();
+
+            alert(
+                "Kamera tidak dapat dibuka."
+            );
+
+        });
 
 }
-
 
 /* =====================================================
    DETEKSI QR
