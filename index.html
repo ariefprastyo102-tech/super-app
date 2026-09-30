@@ -13,23 +13,36 @@
       padding:0;
     }
 
+    html,
+    body{
+      width:100%;
+      min-height:100%;
+    }
+
     body{
       font-family:Arial,sans-serif;
       background:#f3f6f4;
       color:#173b2a;
-      min-height:100vh;
     }
 
     .app{
+      width:100%;
       max-width:600px;
       min-height:100vh;
       margin:auto;
-      background:#fff;
+
+      background:#ffffff;
+
       position:relative;
-      padding-bottom:100px;
+
+      padding-bottom:95px;
     }
 
-    /* HEADER */
+
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
     .header{
       background:linear-gradient(
         135deg,
@@ -38,44 +51,67 @@
         #23834d
       );
 
-      color:white;
+      color:#ffffff;
+
       padding:22px 20px 26px;
 
       border-radius:0 0 24px 24px;
     }
 
     .header small{
+      display:block;
+
       font-size:12px;
+
       opacity:.85;
     }
 
     .header h1{
       margin-top:5px;
+
       font-size:25px;
+
+      font-weight:700;
+
       letter-spacing:.3px;
     }
 
     .header p{
       margin-top:6px;
+
       font-size:13px;
+
       opacity:.9;
     }
 
-    /* CONTENT */
+
+    /* =====================================================
+       CONTENT
+    ===================================================== */
+
     .content{
-      padding:22px 16px;
+      padding:22px 16px 20px;
     }
 
     .section-title{
       font-size:17px;
+
       font-weight:700;
+
       margin-bottom:15px;
     }
 
-    /* MENU GRID */
+
+    /* =====================================================
+       MENU UTAMA
+    ===================================================== */
+
     .menu-grid{
       display:grid;
-      grid-template-columns:repeat(2,1fr);
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
       gap:13px;
     }
 
@@ -84,14 +120,18 @@
 
       padding:18px 15px;
 
-      background:#fff;
+      background:#ffffff;
 
       border:1px solid #e1ebe4;
+
       border-radius:18px;
 
       display:flex;
+
       flex-direction:column;
+
       justify-content:center;
+
       align-items:flex-start;
 
       cursor:pointer;
@@ -99,11 +139,16 @@
       box-shadow:
         0 4px 12px rgba(0,0,0,.05);
 
-      transition:transform .15s;
+      transition:
+        transform .15s,
+        box-shadow .15s;
     }
 
     .menu-item:active{
       transform:scale(.97);
+
+      box-shadow:
+        0 2px 7px rgba(0,0,0,.06);
     }
 
     .menu-icon{
@@ -115,7 +160,9 @@
       background:#e8f4ec;
 
       display:flex;
+
       align-items:center;
+
       justify-content:center;
 
       font-size:25px;
@@ -125,6 +172,7 @@
 
     .menu-item strong{
       font-size:14px;
+
       line-height:1.25;
     }
 
@@ -134,120 +182,170 @@
       color:#718078;
 
       font-size:11px;
+
+      line-height:1.25;
     }
 
-    /* SCAN AREA */
-    .scan-area{
+
+    /* =====================================================
+       BOTTOM NAVIGATION
+    ===================================================== */
+
+    .bottom-nav{
       position:fixed;
 
       left:50%;
+
       bottom:0;
 
       transform:translateX(-50%);
 
-      width:min(600px,100%);
-      height:86px;
+      width:100%;
 
-      pointer-events:none;
+      max-width:600px;
+
+      height:72px;
+
+      background:#ffffff;
+
+      border-top:1px solid #e7ece9;
+
+      display:grid;
+
+      grid-template-columns:
+        1fr 1fr 1fr;
+
+      align-items:center;
 
       z-index:20;
     }
 
-    /* BOTTOM NAV */
-    .bottom-nav{
-      position:absolute;
 
-      left:0;
-      right:0;
-      bottom:0;
-
-      height:68px;
-
-      background:#fff;
-
-      border-top:1px solid #e7ece9;
-
-      display:flex;
-      align-items:center;
-      justify-content:space-around;
-
-      padding:0 12px;
-    }
+    /* =====================================================
+       NAV ITEM
+    ===================================================== */
 
     .nav-item{
-      width:25%;
+      height:72px;
 
-      text-align:center;
+      display:flex;
+
+      flex-direction:column;
+
+      align-items:center;
+
+      justify-content:center;
 
       color:#738078;
 
       font-size:10px;
 
+      font-weight:600;
+
       cursor:pointer;
+
+      user-select:none;
     }
 
-    .nav-icon{
+    .nav-item .nav-icon{
       display:block;
 
       font-size:21px;
 
-      margin-bottom:3px;
+      line-height:1;
+
+      margin-bottom:4px;
     }
 
     .nav-item.active{
       color:#0d6b3c;
-      font-weight:bold;
     }
 
-    .nav-space{
-      width:25%;
+
+    /* =====================================================
+       SCAN TENGAH
+    ===================================================== */
+
+    .scan-wrapper{
+      position:relative;
+
+      height:72px;
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:center;
     }
 
-    /* SCAN BUTTON */
     .scan-button{
-      pointer-events:auto;
-
       position:absolute;
 
       left:50%;
-      top:-28px;
+
+      top:-27px;
 
       transform:translateX(-50%);
 
-      width:76px;
-      height:76px;
+      width:78px;
+      height:78px;
 
       border-radius:50%;
 
-      border:6px solid white;
+      border:6px solid #ffffff;
 
       background:#0d6b3c;
 
-      color:white;
+      color:#ffffff;
 
       display:flex;
+
       flex-direction:column;
+
       align-items:center;
+
       justify-content:center;
+
+      cursor:pointer;
 
       box-shadow:
         0 5px 18px rgba(0,0,0,.22);
 
-      cursor:pointer;
+      z-index:30;
+
+      transition:
+        transform .15s,
+        box-shadow .15s;
     }
 
-    .scan-button .icon{
-      font-size:25px;
+    .scan-button:active{
+      transform:
+        translateX(-50%)
+        scale(.94);
+
+      box-shadow:
+        0 3px 10px rgba(0,0,0,.18);
+    }
+
+    .scan-button .scan-icon{
+      font-size:26px;
+
       line-height:1;
     }
 
-    .scan-button .text{
-      font-size:10px;
-      font-weight:bold;
+    .scan-button .scan-text{
       margin-top:4px;
+
+      font-size:10px;
+
+      font-weight:700;
     }
 
-    /* MOBILE */
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
     @media(max-width:380px){
 
       .content{
@@ -261,7 +359,16 @@
 
       .menu-item{
         min-height:115px;
+
         padding:15px 13px;
+      }
+
+      .menu-item strong{
+        font-size:13px;
+      }
+
+      .menu-item span{
+        font-size:10px;
       }
 
     }
@@ -269,16 +376,26 @@
   </style>
 </head>
 
+
 <body>
+
 
 <div class="app">
 
-  <!-- HEADER -->
+
+  <!-- =====================================================
+       HEADER
+  ===================================================== -->
+
   <header class="header">
 
-    <small>SELAMAT DATANG</small>
+    <small>
+      SELAMAT DATANG
+    </small>
 
-    <h1>SUPER APP</h1>
+    <h1>
+      SUPER APP
+    </h1>
 
     <p>
       Sistem Operasional Terpadu
@@ -287,7 +404,11 @@
   </header>
 
 
-  <!-- MENU UTAMA -->
+
+  <!-- =====================================================
+       MENU UTAMA
+  ===================================================== -->
+
   <main class="content">
 
     <div class="section-title">
@@ -299,6 +420,7 @@
 
 
       <!-- DATA OLAH -->
+
       <div
         class="menu-item"
         onclick="bukaMenu('DATA OLAH')"
@@ -319,7 +441,9 @@
       </div>
 
 
+
       <!-- MUTASI BBI -->
+
       <div
         class="menu-item"
         onclick="bukaMenu('MUTASI BBI')"
@@ -340,7 +464,9 @@
       </div>
 
 
+
       <!-- PERSEDIAAN RST -->
+
       <div
         class="menu-item"
         onclick="bukaMenu('PERSEDIAAN RST')"
@@ -361,7 +487,9 @@
       </div>
 
 
-      <!-- MUTASI -->
+
+      <!-- MUTASI RST -->
+
       <div
         class="menu-item"
         onclick="bukaMenu('MUTASI RST')"
@@ -382,7 +510,9 @@
       </div>
 
 
+
       <!-- ENTRY RST -->
+
       <div
         class="menu-item"
         onclick="bukaMenu('ENTRY RST')"
@@ -403,7 +533,9 @@
       </div>
 
 
+
       <!-- BARCODE REGISTER -->
+
       <div
         class="menu-item"
         onclick="bukaMenu('BARCODE REGISTER')"
@@ -424,7 +556,9 @@
       </div>
 
 
+
       <!-- BARCODE TUMPUK -->
+
       <div
         class="menu-item"
         onclick="bukaMenu('BARCODE TUMPUK')"
@@ -450,8 +584,15 @@
   </main>
 
 
-  <!-- BOTTOM NAV -->
+
+  <!-- =====================================================
+       BOTTOM NAVIGATION
+  ===================================================== -->
+
   <nav class="bottom-nav">
+
+
+    <!-- HOME -->
 
     <div
       class="nav-item active"
@@ -467,22 +608,31 @@
     </div>
 
 
-    <div
-      class="nav-item"
-      onclick="bukaMenu('DATA')"
-    >
 
-      <span class="nav-icon">
-        📊
-      </span>
+    <!-- SCAN -->
 
-      DATA
+    <div class="scan-wrapper">
+
+      <button
+        class="scan-button"
+        onclick="bukaScanner()"
+      >
+
+        <span class="scan-icon">
+          📷
+        </span>
+
+        <span class="scan-text">
+          SCAN
+        </span>
+
+      </button>
 
     </div>
 
 
-    <div class="nav-space"></div>
 
+    <!-- MENU -->
 
     <div
       class="nav-item"
@@ -497,34 +647,20 @@
 
     </div>
 
+
   </nav>
-
-
-  <!-- SCANER -->
-  <div class="scan-area">
-
-    <button
-      class="scan-button"
-      onclick="bukaScanner()"
-    >
-
-      <span class="icon">
-        📷
-      </span>
-
-      <span class="text">
-        SCAN
-      </span>
-
-    </button>
-
-  </div>
 
 
 </div>
 
 
+
 <script>
+
+
+/* =====================================================
+   MENU SEMENTARA
+===================================================== */
 
 function bukaMenu(nama){
 
@@ -536,6 +672,11 @@ function bukaMenu(nama){
 }
 
 
+
+/* =====================================================
+   SCANNER SEMENTARA
+===================================================== */
+
 function bukaScanner(){
 
   alert(
@@ -544,7 +685,9 @@ function bukaScanner(){
 
 }
 
+
 </script>
+
 
 </body>
 </html>
