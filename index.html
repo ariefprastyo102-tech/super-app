@@ -11,7 +11,6 @@
 
 <title>SUPER APP</title>
 
-<!-- ZXING -->
 <script src="https://unpkg.com/@zxing/browser@0.1.5/umd/zxing-browser.min.js"></script>
 
 <style>
@@ -33,13 +32,10 @@ body{
     max-width:600px;
     min-height:100vh;
     margin:auto;
-    background:#f3f6f4;
     padding-bottom:90px;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 .header{
     background:linear-gradient(
@@ -50,9 +46,7 @@ body{
     );
 
     color:white;
-
     padding:22px 20px 24px;
-
     border-radius:0 0 22px 22px;
 
     box-shadow:
@@ -76,9 +70,7 @@ body{
     opacity:.9;
 }
 
-/* =========================
-   CONTENT
-========================= */
+/* CONTENT */
 
 .content{
     padding:20px 16px;
@@ -90,9 +82,7 @@ body{
     margin-bottom:14px;
 }
 
-/* =========================
-   MENU
-========================= */
+/* MENU */
 
 .menu-grid{
     display:grid;
@@ -118,8 +108,6 @@ body{
         0 3px 12px rgba(0,0,0,.07);
 
     cursor:pointer;
-
-    transition:.15s;
 }
 
 .menu-card:active{
@@ -136,9 +124,7 @@ body{
     font-weight:700;
 }
 
-/* =========================
-   BOTTOM NAV
-========================= */
+/* BOTTOM NAV */
 
 .bottom-nav{
     position:fixed;
@@ -151,7 +137,6 @@ body{
 
     width:100%;
     max-width:600px;
-
     height:72px;
 
     background:white;
@@ -188,9 +173,7 @@ body{
     font-size:21px;
 }
 
-/* =========================
-   SCAN BUTTON
-========================= */
+/* SCAN BUTTON */
 
 .scan-wrapper{
     position:relative;
@@ -200,7 +183,6 @@ body{
     position:absolute;
 
     left:50%;
-
     transform:translateX(-50%);
 
     bottom:7px;
@@ -242,9 +224,7 @@ body{
     font-weight:800;
 }
 
-/* =========================
-   SCANNER
-========================= */
+/* SCANNER */
 
 .scanner-overlay{
     position:fixed;
@@ -268,7 +248,6 @@ body{
 
     display:flex;
     align-items:center;
-
     justify-content:space-between;
 
     padding:0 18px;
@@ -281,6 +260,7 @@ body{
 
 .close-scanner{
     border:none;
+
     background:rgba(255,255,255,.15);
 
     color:white;
@@ -310,7 +290,6 @@ body{
 #video{
     width:100%;
     height:100%;
-
     object-fit:cover;
 }
 
@@ -359,7 +338,6 @@ body{
     position:absolute;
 
     bottom:35px;
-
     left:20px;
     right:20px;
 
@@ -373,9 +351,80 @@ body{
         0 2px 5px #000;
 }
 
-/* =========================
-   MENU PANEL
-========================= */
+/* HASIL SCAN */
+
+.scan-result{
+    position:fixed;
+    inset:0;
+
+    z-index:120;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(0,0,0,.65);
+
+    padding:20px;
+}
+
+.result-box{
+    width:100%;
+    max-width:400px;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.25);
+}
+
+.result-icon{
+    font-size:48px;
+    margin-bottom:12px;
+}
+
+.result-title{
+    font-size:20px;
+    font-weight:800;
+
+    margin-bottom:8px;
+}
+
+.result-text{
+    font-size:14px;
+    color:#64748b;
+
+    word-break:break-word;
+
+    margin-bottom:20px;
+}
+
+.result-button{
+    width:100%;
+
+    border:none;
+
+    background:#0d5c36;
+
+    color:white;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+/* MENU PANEL */
 
 .menu-overlay{
     position:fixed;
@@ -401,9 +450,6 @@ body{
     border-radius:22px 22px 0 0;
 
     padding:20px;
-
-    box-shadow:
-        0 -8px 25px rgba(0,0,0,.15);
 }
 
 .menu-sheet h2{
@@ -438,10 +484,6 @@ body{
     color:white;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
 @media(max-width:380px){
 
     .menu-card{
@@ -463,142 +505,134 @@ body{
 
 <div class="app">
 
-    <!-- HEADER -->
+<header class="header">
 
-    <header class="header">
+    <small>SELAMAT DATANG</small>
 
-        <small>SELAMAT DATANG</small>
+    <h1>SUPER APP</h1>
 
-        <h1>SUPER APP</h1>
+    <p>Sistem Operasional Terpadu</p>
 
-        <p>Sistem Operasional Terpadu</p>
-
-    </header>
+</header>
 
 
-    <!-- CONTENT -->
+<main class="content">
 
-    <main class="content">
-
-        <div class="section-title">
-            Menu Utama
-        </div>
+    <div class="section-title">
+        Menu Utama
+    </div>
 
 
-        <div class="menu-grid">
-
-            <button
-                class="menu-card"
-                onclick="bukaMenuUtama('DATA OLAH')"
-            >
-                <div class="menu-icon">🪵</div>
-                <div class="menu-name">DATA OLAH</div>
-            </button>
-
-
-            <button
-                class="menu-card"
-                onclick="bukaMenuUtama('MUTASI BBI')"
-            >
-                <div class="menu-icon">📊</div>
-                <div class="menu-name">MUTASI BBI</div>
-            </button>
-
-
-            <button
-                class="menu-card"
-                onclick="bukaMenuUtama('PERSEDIAAN RST')"
-            >
-                <div class="menu-icon">📦</div>
-                <div class="menu-name">PERSEDIAAN RST</div>
-            </button>
-
-
-            <button
-                class="menu-card"
-                onclick="bukaMenuUtama('MUTASI RST')"
-            >
-                <div class="menu-icon">📈</div>
-                <div class="menu-name">MUTASI RST</div>
-            </button>
-
-
-            <button
-                class="menu-card"
-                onclick="bukaMenuUtama('ENTRY RST')"
-            >
-                <div class="menu-icon">📝</div>
-                <div class="menu-name">ENTRY RST</div>
-            </button>
-
-
-            <button
-                class="menu-card"
-                onclick="bukaMenuUtama('BARCODE REGISTER')"
-            >
-                <div class="menu-icon">🔖</div>
-                <div class="menu-name">BARCODE REGISTER</div>
-            </button>
-
-
-            <button
-                class="menu-card"
-                onclick="bukaMenuUtama('BARCODE TUMPUK')"
-            >
-                <div class="menu-icon">🏷️</div>
-                <div class="menu-name">BARCODE TUMPUK</div>
-            </button>
-
-        </div>
-
-    </main>
-
-
-    <!-- BOTTOM NAV -->
-
-    <nav class="bottom-nav">
+    <div class="menu-grid">
 
         <button
-            class="nav-item"
-            onclick="bukaHome()"
+            class="menu-card"
+            onclick="bukaMenuUtama('DATA OLAH')"
         >
-            <div class="nav-icon">🏠</div>
-            <span>HOME</span>
+            <div class="menu-icon">🪵</div>
+            <div class="menu-name">DATA OLAH</div>
         </button>
 
 
-        <div class="scan-wrapper">
-
-            <button
-                class="scan-button"
-                onclick="bukaScanner()"
-            >
-
-                <div class="nav-icon">📷</div>
-
-                <span>SCAN</span>
-
-            </button>
-
-        </div>
+        <button
+            class="menu-card"
+            onclick="bukaMenuUtama('MUTASI BBI')"
+        >
+            <div class="menu-icon">📊</div>
+            <div class="menu-name">MUTASI BBI</div>
+        </button>
 
 
         <button
-            class="nav-item"
-            onclick="bukaMenuPanel()"
+            class="menu-card"
+            onclick="bukaMenuUtama('PERSEDIAAN RST')"
         >
-            <div class="nav-icon">☰</div>
-            <span>MENU</span>
+            <div class="menu-icon">📦</div>
+            <div class="menu-name">PERSEDIAAN RST</div>
         </button>
 
-    </nav>
+
+        <button
+            class="menu-card"
+            onclick="bukaMenuUtama('MUTASI RST')"
+        >
+            <div class="menu-icon">📈</div>
+            <div class="menu-name">MUTASI RST</div>
+        </button>
+
+
+        <button
+            class="menu-card"
+            onclick="bukaMenuUtama('ENTRY RST')"
+        >
+            <div class="menu-icon">📝</div>
+            <div class="menu-name">ENTRY RST</div>
+        </button>
+
+
+        <button
+            class="menu-card"
+            onclick="bukaMenuUtama('BARCODE REGISTER')"
+        >
+            <div class="menu-icon">🔖</div>
+            <div class="menu-name">BARCODE REGISTER</div>
+        </button>
+
+
+        <button
+            class="menu-card"
+            onclick="bukaMenuUtama('BARCODE TUMPUK')"
+        >
+            <div class="menu-icon">🏷️</div>
+            <div class="menu-name">BARCODE TUMPUK</div>
+        </button>
+
+    </div>
+
+</main>
+
+
+<nav class="bottom-nav">
+
+    <button
+        class="nav-item"
+        onclick="bukaHome()"
+    >
+        <div class="nav-icon">🏠</div>
+        <span>HOME</span>
+    </button>
+
+
+    <div class="scan-wrapper">
+
+        <button
+            class="scan-button"
+            onclick="bukaScanner()"
+        >
+
+            <div class="nav-icon">📷</div>
+
+            <span>SCAN</span>
+
+        </button>
+
+    </div>
+
+
+    <button
+        class="nav-item"
+        onclick="bukaMenuPanel()"
+    >
+        <div class="nav-icon">☰</div>
+        <span>MENU</span>
+    </button>
+
+</nav>
 
 </div>
 
 
-<!-- =========================
-     SCANNER
-========================= -->
+<!-- SCANNER -->
 
 <div
     id="scannerOverlay"
@@ -630,11 +664,9 @@ body{
             playsinline
         ></video>
 
-
         <div class="scan-frame"></div>
 
         <div class="scan-line"></div>
-
 
         <div class="scanner-info">
             Arahkan kamera ke QR REGISTER atau QR TUMPUK
@@ -645,9 +677,50 @@ body{
 </div>
 
 
-<!-- =========================
-     MENU PANEL
-========================= -->
+<!-- HASIL SCAN -->
+
+<div
+    id="scanResult"
+    class="scan-result"
+>
+
+    <div class="result-box">
+
+        <div
+            id="resultIcon"
+            class="result-icon"
+        >
+            📦
+        </div>
+
+
+        <div
+            id="resultTitle"
+            class="result-title"
+        >
+            QR TERBACA
+        </div>
+
+
+        <div
+            id="resultText"
+            class="result-text"
+        ></div>
+
+
+        <button
+            class="result-button"
+            onclick="tutupHasilScan()"
+        >
+            TUTUP
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MENU -->
 
 <div
     id="menuOverlay"
@@ -702,12 +775,29 @@ body{
 <script>
 
 /* =====================================================
-   GLOBAL SCANNER
+   URL APLIKASI
+===================================================== */
+
+const URL_SCAN_REGISTER =
+    "https://ariefprastyo102-tech.github.io/scan-kayu/";
+
+
+/*
+   URL CEK TUMPUK BELUM DIISI.
+
+   JANGAN DIUBAH DULU.
+*/
+
+
+/* =====================================================
+   SCANNER
 ===================================================== */
 
 let codeReader = null;
 
 let scannerRunning = false;
+
+let scanLocked = false;
 
 
 /* =====================================================
@@ -749,9 +839,9 @@ async function bukaScanner(){
             "scannerOverlay"
         );
 
-    overlay.style.display =
-        "flex";
+    overlay.style.display = "flex";
 
+    scanLocked = false;
 
     try{
 
@@ -760,7 +850,6 @@ async function bukaScanner(){
 
         scannerRunning = true;
 
-
         const video =
             document.getElementById("video");
 
@@ -768,14 +857,19 @@ async function bukaScanner(){
         await codeReader.decodeFromVideoDevice(
             undefined,
             video,
-            (result, error) => {
+            function(result, error){
 
                 if(!scannerRunning){
                     return;
                 }
 
+                if(scanLocked){
+                    return;
+                }
 
                 if(result){
+
+                    scanLocked = true;
 
                     scannerBerhasil(
                         result.getText()
@@ -804,15 +898,86 @@ async function bukaScanner(){
 
 
 /* =====================================================
+   DETEKSI QR
+===================================================== */
+
+function deteksiJenisQR(teks){
+
+    const nilai =
+        String(teks || "")
+        .trim();
+
+
+    /*
+       REGISTER
+
+       Contoh:
+       2600389
+
+       Register BBI menggunakan
+       nomor register.
+    */
+
+    if(
+        /^\d{7}$/.test(nilai)
+    ){
+
+        return "REGISTER";
+
+    }
+
+
+    /*
+       TUMPUK
+
+       Format lama:
+       TUMPUK|29
+
+       Format lain:
+       TPK|45
+    */
+
+    const upper =
+        nilai.toUpperCase();
+
+
+    if(
+        upper.startsWith("TUMPUK|") ||
+        upper.startsWith("TPK|")
+    ){
+
+        return "TUMPUK";
+
+    }
+
+
+    /*
+       Jika QR berupa URL
+       dan mengandung informasi
+       tumpuk.
+    */
+
+    if(
+        upper.includes("CEK-TUMPUK") ||
+        upper.includes("CEK_TUMPUK") ||
+        upper.includes("TUMPUK=")
+    ){
+
+        return "TUMPUK";
+
+    }
+
+
+    return "TIDAK DIKENAL";
+
+}
+
+
+/* =====================================================
    HASIL SCAN
 ===================================================== */
 
 function scannerBerhasil(teks){
-
-    if(!teks){
-        return;
-    }
-
 
     scannerRunning = false;
 
@@ -829,32 +994,105 @@ function scannerBerhasil(teks){
     }
 
 
+    const jenis =
+        deteksiJenisQR(teks);
+
+
     console.log(
-        "HASIL SCAN:",
-        teks
+        "QR:",
+        teks,
+        "JENIS:",
+        jenis
     );
 
 
-    /*
-       UNTUK SEMENTARA
-       KITA TAMPILKAN HASIL QR.
+    /* REGISTER */
 
-       NANTI DI LANGKAH BERIKUTNYA
-       KITA BUAT DETEKSI:
+    if(jenis === "REGISTER"){
 
-       REGISTER
-       ↓
-       SCAN REGISTER
+        /*
+           Langsung buka
+           aplikasi SCAN REGISTER.
+        */
 
-       TUMPUK
-       ↓
-       CEK TUMPUK
-    */
+        window.location.href =
+            URL_SCAN_REGISTER;
 
-    alert(
-        "QR TERBACA\n\n" +
+        return;
+
+    }
+
+
+    /* TUMPUK */
+
+    if(jenis === "TUMPUK"){
+
+        tampilkanHasilScan(
+            "🏗️",
+            "QR TUMPUK TERBACA",
+            teks
+        );
+
+        return;
+
+    }
+
+
+    /* TIDAK DIKENAL */
+
+    tampilkanHasilScan(
+        "❓",
+        "QR TIDAK DIKENALI",
         teks
     );
+
+}
+
+
+/* =====================================================
+   TAMPILKAN HASIL
+===================================================== */
+
+function tampilkanHasilScan(
+    icon,
+    title,
+    text
+){
+
+    tutupScanner();
+
+
+    document.getElementById(
+        "resultIcon"
+    ).textContent = icon;
+
+
+    document.getElementById(
+        "resultTitle"
+    ).textContent = title;
+
+
+    document.getElementById(
+        "resultText"
+    ).textContent = text;
+
+
+    document.getElementById(
+        "scanResult"
+    ).style.display = "flex";
+
+}
+
+
+/* =====================================================
+   TUTUP HASIL
+===================================================== */
+
+function tutupHasilScan(){
+
+    document.getElementById(
+        "scanResult"
+    ).style.display = "none";
 
 }
 
@@ -866,6 +1104,8 @@ function scannerBerhasil(teks){
 function tutupScanner(){
 
     scannerRunning = false;
+
+    scanLocked = false;
 
 
     if(codeReader){
@@ -891,7 +1131,9 @@ function tutupScanner(){
         video.srcObject
             .getTracks()
             .forEach(
-                track => track.stop()
+                function(track){
+                    track.stop();
+                }
             );
 
         video.srcObject = null;
