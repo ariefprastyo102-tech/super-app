@@ -928,27 +928,47 @@ async function bukaScanner(){
 
 function deteksiJenisQR(teks){
 
-    const nilai =
-        String(teks || "")
-        .trim();
+    const nilai = String(teks || "").trim();
 
+    // ==========================================
+    // REGISTER
+    // ==========================================
 
-    /* REGISTER */
-
-    if(
-        /^\d{7}$/.test(nilai)
-    ){
-
+    // QR langsung berupa nomor register
+    if(/^\d{7}$/.test(nilai)){
         return "REGISTER";
+    }
+
+    // QR berupa URL:
+    // https://.../index-test-qr?register=2600014
+    try{
+
+        const url = new URL(nilai);
+
+        const register =
+            url.searchParams.get("register");
+
+        if(
+            register &&
+            /^\d{7}$/.test(register)
+        ){
+            return "REGISTER";
+        }
+
+    }
+    catch(e){
+
+        // Bukan URL, lanjut cek format lain
 
     }
 
 
-    /* TUMPUK */
+    // ==========================================
+    // TUMPUK
+    // ==========================================
 
     const upper =
         nilai.toUpperCase();
-
 
     if(
         upper.startsWith("TUMPUK|") ||
@@ -957,16 +977,16 @@ function deteksiJenisQR(teks){
         upper.includes("CEK_TUMPUK") ||
         upper.includes("TUMPUK=")
     ){
-
         return "TUMPUK";
-
     }
 
 
+    // ==========================================
+    // TIDAK DIKENALI
+    // ==========================================
+
     return "TIDAK DIKENAL";
-
 }
-
 
 /* =====================================================
    HASIL SCAN
