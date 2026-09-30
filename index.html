@@ -929,10 +929,17 @@ function bukaScanner(){
 
     console.log("BUKA SCANNER BARU");
 
-    // PAKSA RESET SEMUA STATE SCAN SEBELUM MULAI
+    // =========================================
+    // RESET STATE
+    // =========================================
+
     resetScannerState();
 
+
+    // =========================================
     // HAPUS HASIL SCAN LAMA
+    // =========================================
+
     const hasilScan =
         document.getElementById("hasilScan");
 
@@ -940,7 +947,11 @@ function bukaScanner(){
         hasilScan.style.display = "none";
     }
 
-    // PASTIKAN OVERLAY SCANNER MUNCUL
+
+    // =========================================
+    // TAMPILKAN SCANNER
+    // =========================================
+
     const scannerOverlay =
         document.getElementById("scannerOverlay");
 
@@ -948,58 +959,83 @@ function bukaScanner(){
         scannerOverlay.style.display = "flex";
     }
 
-    // RESET LOCK
+
+    // =========================================
+    // RESET STATUS
+    // =========================================
+
     scanLocked = false;
     scannerRunning = false;
 
-    // BUAT READER BARU
-    const hints = new Map();
 
-hints.set(
-    ZXing.DecodeHintType.POSSIBLE_FORMATS,
-    [
-        ZXing.BarcodeFormat.QR_CODE,
-        ZXing.BarcodeFormat.CODE_128
-    ]
-);
+    // =========================================
+    // READER BARU
+    // =========================================
 
-hints.set(
-    ZXing.DecodeHintType.TRY_HARDER,
-    true
-);
+    codeReader =
+        new ZXingBrowser.BrowserMultiFormatReader();
 
-codeReader =
-    new ZXingBrowser.BrowserMultiFormatReader(
-        hints
-    );
+
+    // =========================================
+    // VIDEO
+    // =========================================
 
     const video =
         document.getElementById("video");
 
+
+    // =========================================
+    // BUKA KAMERA
+    // =========================================
+
     navigator.mediaDevices
         .getUserMedia({
+
             video:{
+
                 facingMode:{
                     ideal:"environment"
                 },
+
                 width:{
                     ideal:1280
                 },
+
                 height:{
                     ideal:720
                 }
+
             }
+
         })
+
         .then(function(stream){
 
-            video.srcObject = stream;
+            video.srcObject =
+                stream;
+
+            video.setAttribute(
+                "playsinline",
+                true
+            );
+
+            video.setAttribute(
+                "muted",
+                true
+            );
 
             video.play();
 
             scannerRunning = true;
 
+
+            // =================================
+            // MULAI DECODE
+            // =================================
+
             codeReader.decodeFromVideoElement(
                 video,
+
                 function(result, error){
 
                     if(!scannerRunning){
@@ -1010,6 +1046,11 @@ codeReader =
                         return;
                     }
 
+
+                    // =========================
+                    // BARCODE / QR TERBACA
+                    // =========================
+
                     if(result){
 
                         scanLocked = true;
@@ -1018,17 +1059,29 @@ codeReader =
                             result.getText();
 
                         console.log(
-                            "QR TERBACA:",
+                            "HASIL SCAN:",
                             teks
                         );
 
-                        scannerBerhasil(teks);
+                        console.log(
+                            "FORMAT BARCODE:",
+                            result.getBarcodeFormat
+                                ? result.getBarcodeFormat()
+                                : "TIDAK TERSEDIA"
+                        );
+
+
+                        scannerBerhasil(
+                            teks
+                        );
+
                     }
 
                 }
             );
 
         })
+
         .catch(function(error){
 
             console.error(
@@ -1045,7 +1098,6 @@ codeReader =
         });
 
 }
-
 /* =====================================================
    DETEKSI QR
 ===================================================== */
