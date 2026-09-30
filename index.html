@@ -14,6 +14,7 @@
 <script src="https://unpkg.com/@zxing/browser@0.1.5/umd/zxing-browser.min.js"></script>
 
 <script src="https://unpkg.com/@zxing/library@0.21.2/umd/index.min.js"></script>
+
 <style>
 
 *{
@@ -107,6 +108,10 @@ body{
         0 3px 12px rgba(0,0,0,.07);
 
     cursor:pointer;
+
+    transition:
+        transform .12s ease,
+        box-shadow .12s ease;
 }
 
 .menu-card:active{
@@ -530,67 +535,132 @@ body{
 
     <div class="menu-grid">
 
+
+        <!-- DATA OLAH -->
+
         <button
             class="menu-card"
             onclick="bukaMenuUtama('DATA OLAH')"
         >
-            <div class="menu-icon">🪵</div>
-            <div class="menu-name">DATA OLAH</div>
+
+            <div class="menu-icon">
+                🪵
+            </div>
+
+            <div class="menu-name">
+                DATA OLAH
+            </div>
+
         </button>
 
+
+        <!-- MUTASI BBI -->
 
         <button
             class="menu-card"
             onclick="bukaMenuUtama('MUTASI BBI')"
         >
-            <div class="menu-icon">📊</div>
-            <div class="menu-name">MUTASI BBI</div>
+
+            <div class="menu-icon">
+                📊
+            </div>
+
+            <div class="menu-name">
+                MUTASI BBI
+            </div>
+
         </button>
 
+
+        <!-- PERSEDIAAN RST -->
 
         <button
             class="menu-card"
             onclick="bukaMenuUtama('PERSEDIAAN RST')"
         >
-            <div class="menu-icon">📦</div>
-            <div class="menu-name">PERSEDIAAN RST</div>
+
+            <div class="menu-icon">
+                📦
+            </div>
+
+            <div class="menu-name">
+                PERSEDIAAN RST
+            </div>
+
         </button>
 
+
+        <!-- MUTASI RST -->
 
         <button
             class="menu-card"
             onclick="bukaMenuUtama('MUTASI RST')"
         >
-            <div class="menu-icon">📈</div>
-            <div class="menu-name">MUTASI RST</div>
+
+            <div class="menu-icon">
+                📈
+            </div>
+
+            <div class="menu-name">
+                MUTASI RST
+            </div>
+
         </button>
 
+
+        <!-- ENTRY RST -->
 
         <button
             class="menu-card"
             onclick="bukaMenuUtama('ENTRY RST')"
         >
-            <div class="menu-icon">📝</div>
-            <div class="menu-name">ENTRY RST</div>
+
+            <div class="menu-icon">
+                📝
+            </div>
+
+            <div class="menu-name">
+                ENTRY RST
+            </div>
+
         </button>
 
+
+        <!-- BARCODE REGISTER -->
 
         <button
             class="menu-card"
             onclick="bukaMenuUtama('BARCODE REGISTER')"
         >
-            <div class="menu-icon">🔖</div>
-            <div class="menu-name">BARCODE REGISTER</div>
+
+            <div class="menu-icon">
+                🔖
+            </div>
+
+            <div class="menu-name">
+                BARCODE REGISTER
+            </div>
+
         </button>
 
+
+        <!-- BARCODE TUMPUK -->
 
         <button
             class="menu-card"
             onclick="bukaMenuUtama('BARCODE TUMPUK')"
         >
-            <div class="menu-icon">🏷️</div>
-            <div class="menu-name">BARCODE TUMPUK</div>
+
+            <div class="menu-icon">
+                🏷️
+            </div>
+
+            <div class="menu-name">
+                BARCODE TUMPUK
+            </div>
+
         </button>
+
 
     </div>
 
@@ -603,8 +673,15 @@ body{
         class="nav-item"
         onclick="bukaHome()"
     >
-        <div class="nav-icon">🏠</div>
-        <span>HOME</span>
+
+        <div class="nav-icon">
+            🏠
+        </div>
+
+        <span>
+            HOME
+        </span>
+
     </button>
 
 
@@ -614,8 +691,15 @@ body{
             class="scan-button"
             onclick="bukaScanner()"
         >
-            <div class="nav-icon">📷</div>
-            <span>SCAN</span>
+
+            <div class="nav-icon">
+                📷
+            </div>
+
+            <span>
+                SCAN
+            </span>
+
         </button>
 
     </div>
@@ -625,8 +709,15 @@ body{
         class="nav-item"
         onclick="bukaMenuPanel()"
     >
-        <div class="nav-icon">☰</div>
-        <span>MENU</span>
+
+        <div class="nav-icon">
+            ☰
+        </div>
+
+        <span>
+            MENU
+        </span>
+
     </button>
 
 </nav>
@@ -634,7 +725,9 @@ body{
 </div>
 
 
-<!-- SCANNER -->
+<!-- =====================================================
+     SCANNER
+===================================================== -->
 
 <div
     id="scannerOverlay"
@@ -671,7 +764,7 @@ body{
         <div class="scan-line"></div>
 
         <div class="scanner-info">
-            Arahkan QR REGISTER ke kotak putih
+            Arahkan QR / BARCODE REGISTER / QR TUMPUK ke kotak putih
         </div>
 
     </div>
@@ -679,7 +772,9 @@ body{
 </div>
 
 
-<!-- HASIL SCAN -->
+<!-- =====================================================
+     HASIL SCAN
+===================================================== -->
 
 <div
     id="scanResult"
@@ -719,7 +814,9 @@ body{
 </div>
 
 
-<!-- MENU PANEL -->
+<!-- =====================================================
+     MENU PANEL
+===================================================== -->
 
 <div
     id="menuOverlay"
@@ -732,7 +829,10 @@ body{
         onclick="event.stopPropagation()"
     >
 
-        <h2>MENU</h2>
+        <h2>
+            MENU
+        </h2>
+
 
         <button
             class="panel-item"
@@ -741,6 +841,7 @@ body{
             🔧 OPERASIONAL
         </button>
 
+
         <button
             class="panel-item"
             onclick="bukaPengaturan()"
@@ -748,12 +849,14 @@ body{
             ⚙️ PENGATURAN
         </button>
 
+
         <button
             class="panel-item"
             onclick="bukaTentang()"
         >
             ℹ️ TENTANG APLIKASI
         </button>
+
 
         <button
             class="panel-item panel-close"
@@ -770,11 +873,29 @@ body{
 <script>
 
 /* =====================================================
-   URL SCAN REGISTER
+   URL APLIKASI
 ===================================================== */
 
-const URL_SCAN_REGISTER =
-    "https://ariefprastyo102-tech.github.io/scan-kayu/";
+const URL_DATA_OLAH =
+    "https://ariefprastyo102-tech.github.io/scan-kayu/index-olah.html";
+
+const URL_MUTASI_BBI =
+    "https://ariefprastyo102-tech.github.io/scan-kayu/persediaan.html";
+
+const URL_PERSEDIAAN_RST =
+    "https://ariefprastyo102-tech.github.io/Persediaan-RST/";
+
+const URL_MUTASI_RST =
+    "https://ariefprastyo102-tech.github.io/Persediaan-RST/mutasi-rst.html";
+
+const URL_ENTRY_RST =
+    "https://ariefprastyo102-tech.github.io/Kalkulator-RST/";
+
+const URL_BARCODE_REGISTER =
+    "https://ariefprastyo102-tech.github.io/scan-kayu/barcode.html";
+
+const URL_BARCODE_TUMPUK =
+    "https://ariefprastyo102-tech.github.io/scan-kayu/cetak-barcode-tumpuk.html";
 
 
 /* =====================================================
@@ -785,6 +906,7 @@ let codeReader = null;
 let scannerRunning = false;
 let scanLocked = false;
 let scanSession = 0;
+
 
 /* =====================================================
    RESET SCANNER
@@ -850,7 +972,6 @@ function resetScannerState(){
 
 /* =====================================================
    PAGESHOW
-   RESET SAAT KEMBALI KE SUPER APP
 ===================================================== */
 
 window.addEventListener(
@@ -876,11 +997,6 @@ window.addEventListener(
             menu.style.display = "none";
         }
 
-        /*
-         * Kalau Super App dipulihkan dari
-         * browser history / bfcache,
-         * reload agar state QR lama benar-benar hilang.
-         */
         if(event.persisted){
 
             window.location.reload();
@@ -899,6 +1015,10 @@ function bukaHome(){
 
     resetScannerState();
 
+    document.getElementById(
+        "menuOverlay"
+    ).style.display = "none";
+
     window.scrollTo({
         top:0,
         behavior:"smooth"
@@ -912,6 +1032,82 @@ function bukaHome(){
 ===================================================== */
 
 function bukaMenuUtama(nama){
+
+    let link = null;
+
+
+    if(nama === "DATA OLAH"){
+
+        link =
+            URL_DATA_OLAH;
+
+    }
+
+
+    else if(nama === "MUTASI BBI"){
+
+        link =
+            URL_MUTASI_BBI;
+
+    }
+
+
+    else if(nama === "PERSEDIAAN RST"){
+
+        link =
+            URL_PERSEDIAAN_RST;
+
+    }
+
+
+    else if(nama === "MUTASI RST"){
+
+        link =
+            URL_MUTASI_RST;
+
+    }
+
+
+    else if(nama === "ENTRY RST"){
+
+        link =
+            URL_ENTRY_RST;
+
+    }
+
+
+    else if(nama === "BARCODE REGISTER"){
+
+        link =
+            URL_BARCODE_REGISTER;
+
+    }
+
+
+    else if(nama === "BARCODE TUMPUK"){
+
+        link =
+            URL_BARCODE_TUMPUK;
+
+    }
+
+
+    if(link){
+
+        console.log(
+            "BUKA MENU:",
+            nama,
+            link
+        );
+
+        window.location.assign(
+            link
+        );
+
+        return;
+
+    }
+
 
     alert(
         nama +
@@ -927,18 +1123,13 @@ function bukaMenuUtama(nama){
 
 function bukaScanner(){
 
-    console.log("BUKA SCANNER BARU");
+    console.log(
+        "BUKA SCANNER BARU"
+    );
 
-    // =========================================
-    // RESET STATE
-    // =========================================
 
     resetScannerState();
 
-
-    // =========================================
-    // HAPUS HASIL SCAN LAMA
-    // =========================================
 
     const hasilScan =
         document.getElementById("hasilScan");
@@ -948,10 +1139,6 @@ function bukaScanner(){
     }
 
 
-    // =========================================
-    // TAMPILKAN SCANNER
-    // =========================================
-
     const scannerOverlay =
         document.getElementById("scannerOverlay");
 
@@ -960,33 +1147,17 @@ function bukaScanner(){
     }
 
 
-    // =========================================
-    // RESET STATUS
-    // =========================================
-
     scanLocked = false;
     scannerRunning = false;
 
-
-    // =========================================
-    // READER BARU
-    // =========================================
 
     codeReader =
         new ZXingBrowser.BrowserMultiFormatReader();
 
 
-    // =========================================
-    // VIDEO
-    // =========================================
-
     const video =
         document.getElementById("video");
 
-
-    // =========================================
-    // BUKA KAMERA
-    // =========================================
 
     navigator.mediaDevices
         .getUserMedia({
@@ -1029,14 +1200,10 @@ function bukaScanner(){
             scannerRunning = true;
 
 
-            // =================================
-            // MULAI DECODE
-            // =================================
-
             codeReader.decodeFromVideoElement(
                 video,
 
-                function(result, error){
+                function(result,error){
 
                     if(!scannerRunning){
                         return;
@@ -1047,10 +1214,6 @@ function bukaScanner(){
                     }
 
 
-                    // =========================
-                    // BARCODE / QR TERBACA
-                    // =========================
-
                     if(result){
 
                         scanLocked = true;
@@ -1058,10 +1221,12 @@ function bukaScanner(){
                         const teks =
                             result.getText();
 
+
                         console.log(
                             "HASIL SCAN:",
                             teks
                         );
+
 
                         console.log(
                             "FORMAT BARCODE:",
@@ -1098,6 +1263,8 @@ function bukaScanner(){
         });
 
 }
+
+
 /* =====================================================
    DETEKSI QR
 ===================================================== */
@@ -1107,12 +1274,14 @@ function deteksiJenisQR(teks){
     const nilai =
         String(teks || "").trim();
 
-    // REGISTER langsung
+
     if(/^\d{7}$/.test(nilai)){
+
         return "REGISTER";
+
     }
 
-    // REGISTER berupa URL
+
     try{
 
         const url =
@@ -1120,6 +1289,7 @@ function deteksiJenisQR(teks){
 
         const register =
             url.searchParams.get("register");
+
 
         if(
             register &&
@@ -1134,9 +1304,9 @@ function deteksiJenisQR(teks){
     catch(e){}
 
 
-    // TUMPUK
     const upper =
         nilai.toUpperCase();
+
 
     if(
         upper.startsWith("TUMPUK|") ||
@@ -1149,6 +1319,7 @@ function deteksiJenisQR(teks){
         return "TUMPUK";
 
     }
+
 
     return "TIDAK DIKENAL";
 
@@ -1164,58 +1335,64 @@ function scannerBerhasil(teks){
     const nilai =
         String(teks || "").trim();
 
+
     console.log(
         "HASIL SCAN:",
         nilai
     );
 
-    // MATIKAN SCANNER
+
     resetScannerState();
 
 
-    /* ================================================
-       REGISTER CODE 128
-       HASIL SCAN = NOMOR REGISTER 7 DIGIT
-       CONTOH: 2600014
-    ================================================ */
+    /* =================================================
+       CODE 128 REGISTER
+    ================================================= */
 
     if(
         /^\d{7}$/.test(nilai)
     ){
+
+        const urlRegister =
+            "https://ariefprastyo102-tech.github.io/scan-kayu/index-test-qr?register=" +
+            encodeURIComponent(nilai);
+
 
         console.log(
             "REGISTER CODE 128:",
             nilai
         );
 
-        const urlRegister =
-            "https://ariefprastyo102-tech.github.io/scan-kayu/index-test-qr?register=" +
-            encodeURIComponent(nilai);
 
         console.log(
             "BUKA SCAN REGISTER:",
             urlRegister
         );
 
+
         window.location.assign(
             urlRegister
         );
 
+
         return;
+
     }
 
 
-    /* ================================================
+    /* =================================================
        QR REGISTER
-    ================================================ */
+    ================================================= */
 
     try{
 
         const url =
             new URL(nilai);
 
+
         const register =
             url.searchParams.get("register");
+
 
         if(
             register &&
@@ -1227,10 +1404,11 @@ function scannerBerhasil(teks){
                 register
             );
 
-            // PAKAI URL ASLI DARI QR
+
             window.location.assign(
                 nilai
             );
+
 
             return;
 
@@ -1240,23 +1418,27 @@ function scannerBerhasil(teks){
     catch(e){}
 
 
-    /* ================================================
+    /* =================================================
        QR TUMPUK
-    ================================================ */
+    ================================================= */
 
     try{
 
         const url =
             new URL(nilai);
 
+
         const pathname =
             url.pathname.toLowerCase();
+
 
         const tpk =
             url.searchParams.get("tpk");
 
+
         const tumpuk =
             url.searchParams.get("tumpuk");
+
 
         if(
             pathname.includes("cek-tumpuk.html") &&
@@ -1270,10 +1452,11 @@ function scannerBerhasil(teks){
                 tumpuk
             );
 
-            // PAKAI URL ASLI DARI QR
+
             window.location.assign(
                 nilai
             );
+
 
             return;
 
@@ -1283,12 +1466,13 @@ function scannerBerhasil(teks){
     catch(e){}
 
 
-    /* ================================================
-       TUMPUK FORMAT LAIN
-    ================================================ */
+    /* =================================================
+       FORMAT TUMPUK LAIN
+    ================================================= */
 
     const upper =
         nilai.toUpperCase();
+
 
     if(
         upper.startsWith("TUMPUK|") ||
@@ -1303,14 +1487,15 @@ function scannerBerhasil(teks){
             nilai
         );
 
+
         return;
 
     }
 
 
-    /* ================================================
+    /* =================================================
        TIDAK DIKENALI
-    ================================================ */
+    ================================================= */
 
     alert(
         "QR / BARCODE TIDAK DIKENALI.\n\n" +
@@ -1318,38 +1503,48 @@ function scannerBerhasil(teks){
     );
 
 }
+
+
 /* =====================================================
    TUTUP SCANNER
 ===================================================== */
 
 function tutupScanner(){
 
-    // Matikan scanner
     resetScannerState();
 
-    // Hapus hasil scan lama
     scanLocked = false;
     scannerRunning = false;
 
-    // Pastikan overlay hasil scan tertutup
+
     const hasil =
         document.getElementById("scanResult");
 
+
     if(hasil){
-        hasil.style.display = "none";
+
+        hasil.style.display =
+            "none";
+
     }
 
-    // Pastikan scanner benar-benar tertutup
+
     const scanner =
         document.getElementById("scannerOverlay");
 
+
     if(scanner){
-        scanner.style.display = "none";
+
+        scanner.style.display =
+            "none";
+
     }
+
 
     console.log(
         "SCANNER DITUTUP - STATE LAMA DIHAPUS"
     );
+
 }
 
 
@@ -1364,45 +1559,66 @@ function tampilkanHasilScan(
 
     resetScannerState();
 
-    let icon = "❓";
+
+    let icon =
+        "❓";
+
 
     let title =
         "QR TIDAK DIKENALI";
 
-    if(jenis === "REGISTER"){
 
-        icon = "📦";
+    if(
+        jenis === "REGISTER"
+    ){
+
+        icon =
+            "📦";
+
 
         title =
             "REGISTER TERBACA";
 
     }
 
-    if(jenis === "TUMPUK"){
 
-        icon = "🏗️";
+    if(
+        jenis === "TUMPUK"
+    ){
+
+        icon =
+            "🏗️";
+
 
         title =
             "TUMPUK TERBACA";
 
     }
 
+
     document.getElementById(
         "resultIcon"
-    ).textContent = icon;
+    ).textContent =
+        icon;
+
 
     document.getElementById(
         "resultTitle"
-    ).textContent = title;
+    ).textContent =
+        title;
+
 
     document.getElementById(
         "resultText"
     ).textContent =
-        "ISI QR:\n" + teks;
+        "ISI QR:\n" +
+        teks;
+
 
     document.getElementById(
         "scanResult"
-    ).style.display = "flex";
+    ).style.display =
+        "flex";
 
 }
 
@@ -1415,7 +1631,9 @@ function tutupHasilScan(){
 
     document.getElementById(
         "scanResult"
-    ).style.display = "none";
+    ).style.display =
+        "none";
+
 
     resetScannerState();
 
@@ -1423,14 +1641,15 @@ function tutupHasilScan(){
 
 
 /* =====================================================
-   MENU
+   MENU PANEL
 ===================================================== */
 
 function bukaMenuPanel(){
 
     document.getElementById(
         "menuOverlay"
-    ).style.display = "flex";
+    ).style.display =
+        "flex";
 
 }
 
@@ -1446,9 +1665,11 @@ function tutupMenuPanel(event){
 
     }
 
+
     document.getElementById(
         "menuOverlay"
-    ).style.display = "none";
+    ).style.display =
+        "none";
 
 }
 
