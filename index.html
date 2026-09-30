@@ -821,32 +821,24 @@ function bukaMenuUtama(nama){
 
 async function bukaScanner(){
 
+    // Pastikan scanner lama benar-benar mati
+    tutupScanner();
+
     const overlay =
-        document.getElementById(
-            "scannerOverlay"
-        );
+        document.getElementById("scannerOverlay");
 
     overlay.style.display = "flex";
 
     scannerRunning = true;
-
     scanLocked = false;
 
-
     try{
-
-        /*
-         * PAKAI MULTI FORMAT READER
-         * SEPERTI APLIKASI SCAN LAMA
-         */
 
         codeReader =
             new ZXingBrowser.BrowserMultiFormatReader();
 
-
         const video =
             document.getElementById("video");
-
 
         await codeReader.decodeFromConstraints(
             {
@@ -854,30 +846,20 @@ async function bukaScanner(){
                     facingMode:{
                         ideal:"environment"
                     },
-
                     width:{
                         ideal:1280
                     },
-
                     height:{
                         ideal:720
                     }
                 },
-
                 audio:false
             },
-
             video,
-
             function(result, error){
 
-                if(!scannerRunning){
-                    return;
-                }
-
-                if(scanLocked){
-                    return;
-                }
+                if(!scannerRunning) return;
+                if(scanLocked) return;
 
                 if(result){
 
@@ -891,9 +873,7 @@ async function bukaScanner(){
                         teks
                     );
 
-                    scannerBerhasil(
-                        teks
-                    );
+                    scannerBerhasil(teks);
 
                 }
 
@@ -920,7 +900,6 @@ async function bukaScanner(){
     }
 
 }
-
 
 /* =====================================================
    DETEKSI QR
