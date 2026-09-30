@@ -854,9 +854,12 @@ function resetScannerState(){
 
 window.addEventListener(
     "pageshow",
-    function(){
+    function(event){
 
         resetScannerState();
+
+        scanLocked = false;
+        scannerRunning = false;
 
         const hasil =
             document.getElementById("scanResult");
@@ -870,6 +873,17 @@ window.addEventListener(
 
         if(menu){
             menu.style.display = "none";
+        }
+
+        /*
+         * Kalau Super App dipulihkan dari
+         * browser history / bfcache,
+         * reload agar state QR lama benar-benar hilang.
+         */
+        if(event.persisted){
+
+            window.location.reload();
+
         }
 
     }
