@@ -13,6 +13,7 @@
 
 <script src="https://unpkg.com/@zxing/browser@0.1.5/umd/zxing-browser.min.js"></script>
 
+<script src="https://unpkg.com/@zxing/library@0.21.2/umd/index.min.js"></script>
 <style>
 
 *{
@@ -952,8 +953,25 @@ function bukaScanner(){
     scannerRunning = false;
 
     // BUAT READER BARU
-    codeReader =
-        new ZXingBrowser.BrowserMultiFormatReader();
+    const hints = new Map();
+
+hints.set(
+    ZXing.DecodeHintType.POSSIBLE_FORMATS,
+    [
+        ZXing.BarcodeFormat.QR_CODE,
+        ZXing.BarcodeFormat.CODE_128
+    ]
+);
+
+hints.set(
+    ZXing.DecodeHintType.TRY_HARDER,
+    true
+);
+
+codeReader =
+    new ZXingBrowser.BrowserMultiFormatReader(
+        hints
+    );
 
     const video =
         document.getElementById("video");
