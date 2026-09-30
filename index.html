@@ -976,7 +976,6 @@ function scannerBerhasil(teks){
 
     scannerRunning = false;
 
-
     if(codeReader){
 
         try{
@@ -986,32 +985,17 @@ function scannerBerhasil(teks){
 
     }
 
+    tutupScanner();
 
-    const jenis =
-        deteksiJenisQR(teks);
-
-
-    /*
-     * UNTUK TEST SEKARANG:
-     *
-     * JANGAN LANGSUNG PINDAH HALAMAN.
-     *
-     * KITA TAMPILKAN DULU HASILNYA.
-     *
-     * Kalau QR 2600389 berhasil,
-     * harus muncul:
-     *
-     * REGISTER
-     * 2600389
-     */
-
-    tampilkanHasilScan(
-        jenis,
-        teks
+    alert(
+        "HASIL MENTAH QR:\n\n[" +
+        teks +
+        "]\n\n" +
+        "PANJANG DATA: " +
+        String(teks).length
     );
 
 }
-
 
 /* =====================================================
    TAMPILKAN HASIL
