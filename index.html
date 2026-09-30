@@ -82,8 +82,6 @@ body{
     margin-bottom:14px;
 }
 
-/* MENU */
-
 .menu-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
@@ -296,8 +294,8 @@ body{
 .scan-frame{
     position:absolute;
 
-    width:260px;
-    height:260px;
+    width:270px;
+    height:270px;
 
     border:3px solid white;
 
@@ -305,31 +303,35 @@ body{
 
     box-shadow:
         0 0 0 9999px rgba(0,0,0,.35);
+
+    pointer-events:none;
 }
 
 .scan-line{
     position:absolute;
 
-    width:230px;
+    width:235px;
     height:2px;
 
     background:#22c55e;
 
     animation:scanLine 2s infinite;
+
+    pointer-events:none;
 }
 
 @keyframes scanLine{
 
     0%{
-        transform:translateY(-110px);
+        transform:translateY(-115px);
     }
 
     50%{
-        transform:translateY(110px);
+        transform:translateY(115px);
     }
 
     100%{
-        transform:translateY(-110px);
+        transform:translateY(-115px);
     }
 
 }
@@ -347,11 +349,15 @@ body{
 
     font-size:14px;
 
+    font-weight:600;
+
     text-shadow:
         0 2px 5px #000;
+
+    pointer-events:none;
 }
 
-/* HASIL SCAN */
+/* HASIL */
 
 .scan-result{
     position:fixed;
@@ -393,7 +399,6 @@ body{
 .result-title{
     font-size:20px;
     font-weight:800;
-
     margin-bottom:8px;
 }
 
@@ -424,7 +429,7 @@ body{
     cursor:pointer;
 }
 
-/* MENU PANEL */
+/* MENU */
 
 .menu-overlay{
     position:fixed;
@@ -522,7 +527,6 @@ body{
         Menu Utama
     </div>
 
-
     <div class="menu-grid">
 
         <button
@@ -609,11 +613,8 @@ body{
             class="scan-button"
             onclick="bukaScanner()"
         >
-
             <div class="nav-icon">📷</div>
-
             <span>SCAN</span>
-
         </button>
 
     </div>
@@ -669,7 +670,7 @@ body{
         <div class="scan-line"></div>
 
         <div class="scanner-info">
-            Arahkan kamera ke QR REGISTER atau QR TUMPUK
+            Arahkan QR REGISTER ke kotak putih
         </div>
 
     </div>
@@ -690,9 +691,8 @@ body{
             id="resultIcon"
             class="result-icon"
         >
-            📦
+            ✅
         </div>
-
 
         <div
             id="resultTitle"
@@ -701,12 +701,10 @@ body{
             QR TERBACA
         </div>
 
-
         <div
             id="resultText"
             class="result-text"
         ></div>
-
 
         <button
             class="result-button"
@@ -720,7 +718,7 @@ body{
 </div>
 
 
-<!-- MENU -->
+<!-- MENU PANEL -->
 
 <div
     id="menuOverlay"
@@ -735,14 +733,12 @@ body{
 
         <h2>MENU</h2>
 
-
         <button
             class="panel-item"
             onclick="bukaOperasional()"
         >
             🔧 OPERASIONAL
         </button>
-
 
         <button
             class="panel-item"
@@ -751,14 +747,12 @@ body{
             ⚙️ PENGATURAN
         </button>
 
-
         <button
             class="panel-item"
             onclick="bukaTentang()"
         >
             ℹ️ TENTANG APLIKASI
         </button>
-
 
         <button
             class="panel-item panel-close"
@@ -775,18 +769,11 @@ body{
 <script>
 
 /* =====================================================
-   URL APLIKASI
+   URL SCAN REGISTER
 ===================================================== */
 
 const URL_SCAN_REGISTER =
     "https://ariefprastyo102-tech.github.io/scan-kayu/";
-
-
-/*
-   URL CEK TUMPUK BELUM DIISI.
-
-   JANGAN DIUBAH DULU.
-*/
 
 
 /* =====================================================
@@ -841,22 +828,47 @@ async function bukaScanner(){
 
     overlay.style.display = "flex";
 
+    scannerRunning = true;
+
     scanLocked = false;
+
 
     try{
 
-        codeReader =
-            new ZXingBrowser.BrowserQRCodeReader();
+        /*
+         * PAKAI MULTI FORMAT READER
+         * SEPERTI APLIKASI SCAN LAMA
+         */
 
-        scannerRunning = true;
+        codeReader =
+            new ZXingBrowser.BrowserMultiFormatReader();
+
 
         const video =
             document.getElementById("video");
 
 
-        await codeReader.decodeFromVideoDevice(
-            undefined,
+        await codeReader.decodeFromConstraints(
+            {
+                video:{
+                    facingMode:{
+                        ideal:"environment"
+                    },
+
+                    width:{
+                        ideal:1280
+                    },
+
+                    height:{
+                        ideal:720
+                    }
+                },
+
+                audio:false
+            },
+
             video,
+
             function(result, error){
 
                 if(!scannerRunning){
@@ -871,8 +883,16 @@ async function bukaScanner(){
 
                     scanLocked = true;
 
+                    const teks =
+                        result.getText();
+
+                    console.log(
+                        "QR TERBACA:",
+                        teks
+                    );
+
                     scannerBerhasil(
-                        result.getText()
+                        teks
                     );
 
                 }
@@ -883,10 +903,15 @@ async function bukaScanner(){
     }
     catch(error){
 
-        console.error(error);
+        console.error(
+            "ERROR SCANNER:",
+            error
+        );
+
+        scannerRunning = false;
 
         alert(
-            "Kamera tidak dapat dibuka.\n\n" +
+            "KAMERA GAGAL DIBUKA.\n\n" +
             "Pastikan izin kamera sudah diberikan."
         );
 
@@ -908,15 +933,7 @@ function deteksiJenisQR(teks){
         .trim();
 
 
-    /*
-       REGISTER
-
-       Contoh:
-       2600389
-
-       Register BBI menggunakan
-       nomor register.
-    */
+    /* REGISTER */
 
     if(
         /^\d{7}$/.test(nilai)
@@ -927,15 +944,7 @@ function deteksiJenisQR(teks){
     }
 
 
-    /*
-       TUMPUK
-
-       Format lama:
-       TUMPUK|29
-
-       Format lain:
-       TPK|45
-    */
+    /* TUMPUK */
 
     const upper =
         nilai.toUpperCase();
@@ -943,21 +952,7 @@ function deteksiJenisQR(teks){
 
     if(
         upper.startsWith("TUMPUK|") ||
-        upper.startsWith("TPK|")
-    ){
-
-        return "TUMPUK";
-
-    }
-
-
-    /*
-       Jika QR berupa URL
-       dan mengandung informasi
-       tumpuk.
-    */
-
-    if(
+        upper.startsWith("TPK|") ||
         upper.includes("CEK-TUMPUK") ||
         upper.includes("CEK_TUMPUK") ||
         upper.includes("TUMPUK=")
@@ -985,9 +980,7 @@ function scannerBerhasil(teks){
     if(codeReader){
 
         try{
-
             codeReader.reset();
-
         }
         catch(e){}
 
@@ -998,51 +991,22 @@ function scannerBerhasil(teks){
         deteksiJenisQR(teks);
 
 
-    console.log(
-        "QR:",
-        teks,
-        "JENIS:",
-        jenis
-    );
-
-
-    /* REGISTER */
-
-    if(jenis === "REGISTER"){
-
-        /*
-           Langsung buka
-           aplikasi SCAN REGISTER.
-        */
-
-        window.location.href =
-            URL_SCAN_REGISTER;
-
-        return;
-
-    }
-
-
-    /* TUMPUK */
-
-    if(jenis === "TUMPUK"){
-
-        tampilkanHasilScan(
-            "🏗️",
-            "QR TUMPUK TERBACA",
-            teks
-        );
-
-        return;
-
-    }
-
-
-    /* TIDAK DIKENAL */
+    /*
+     * UNTUK TEST SEKARANG:
+     *
+     * JANGAN LANGSUNG PINDAH HALAMAN.
+     *
+     * KITA TAMPILKAN DULU HASILNYA.
+     *
+     * Kalau QR 2600389 berhasil,
+     * harus muncul:
+     *
+     * REGISTER
+     * 2600389
+     */
 
     tampilkanHasilScan(
-        "❓",
-        "QR TIDAK DIKENALI",
+        jenis,
         teks
     );
 
@@ -1054,12 +1018,37 @@ function scannerBerhasil(teks){
 ===================================================== */
 
 function tampilkanHasilScan(
-    icon,
-    title,
-    text
+    jenis,
+    teks
 ){
 
     tutupScanner();
+
+
+    let icon = "❓";
+
+    let title =
+        "QR TIDAK DIKENALI";
+
+
+    if(jenis === "REGISTER"){
+
+        icon = "📦";
+
+        title =
+            "REGISTER TERBACA";
+
+    }
+
+
+    if(jenis === "TUMPUK"){
+
+        icon = "🏗️";
+
+        title =
+            "TUMPUK TERBACA";
+
+    }
 
 
     document.getElementById(
@@ -1074,7 +1063,8 @@ function tampilkanHasilScan(
 
     document.getElementById(
         "resultText"
-    ).textContent = text;
+    ).textContent =
+        "ISI QR:\n" + teks;
 
 
     document.getElementById(
@@ -1111,9 +1101,7 @@ function tutupScanner(){
     if(codeReader){
 
         try{
-
             codeReader.reset();
-
         }
         catch(e){}
 
@@ -1149,7 +1137,7 @@ function tutupScanner(){
 
 
 /* =====================================================
-   MENU PANEL
+   MENU
 ===================================================== */
 
 function bukaMenuPanel(){
@@ -1167,11 +1155,8 @@ function tutupMenuPanel(event){
         event &&
         event.target !== event.currentTarget
     ){
-
         return;
-
     }
-
 
     document.getElementById(
         "menuOverlay"
@@ -1179,10 +1164,6 @@ function tutupMenuPanel(event){
 
 }
 
-
-/* =====================================================
-   OPERASIONAL
-===================================================== */
 
 function bukaOperasional(){
 
@@ -1195,10 +1176,6 @@ function bukaOperasional(){
 }
 
 
-/* =====================================================
-   PENGATURAN
-===================================================== */
-
 function bukaPengaturan(){
 
     alert(
@@ -1208,10 +1185,6 @@ function bukaPengaturan(){
 
 }
 
-
-/* =====================================================
-   TENTANG
-===================================================== */
 
 function bukaTentang(){
 
