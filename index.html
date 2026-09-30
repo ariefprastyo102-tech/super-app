@@ -37,7 +37,9 @@ body{
     padding-bottom:90px;
 }
 
-/* HEADER */
+/* =====================================================
+   HEADER
+===================================================== */
 
 .header{
     background:linear-gradient(
@@ -48,7 +50,7 @@ body{
     );
 
     color:white;
-    padding:22px 20px 24px;
+    padding:22px 20px 20px;
     border-radius:0 0 22px 22px;
 
     box-shadow:
@@ -72,34 +74,280 @@ body{
     opacity:.9;
 }
 
-/* CONTENT */
+
+/* =====================================================
+   TANGGAL DASHBOARD
+===================================================== */
+
+.dashboard-date{
+    margin-top:16px;
+
+    background:rgba(255,255,255,.14);
+
+    border:1px solid rgba(255,255,255,.18);
+
+    border-radius:12px;
+
+    padding:10px 12px;
+
+    text-align:center;
+
+    font-size:13px;
+
+    font-weight:800;
+
+    letter-spacing:.3px;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
 
 .content{
-    padding:20px 16px;
+    padding:18px 16px;
 }
 
 .section-title{
     font-size:17px;
     font-weight:800;
-    margin-bottom:14px;
+    margin-bottom:12px;
 }
+
+
+/* =====================================================
+   DASHBOARD PERSEDIAAN
+===================================================== */
+
+.dashboard-section{
+    margin-bottom:18px;
+}
+
+.stock-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.stock-card{
+    background:white;
+
+    border-radius:17px;
+
+    padding:15px 13px;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,.07);
+
+    border:1px solid #e7ece9;
+}
+
+.stock-label{
+    font-size:11px;
+
+    font-weight:800;
+
+    color:#64748b;
+
+    letter-spacing:.3px;
+}
+
+.stock-value{
+    margin-top:8px;
+
+    font-size:22px;
+
+    font-weight:900;
+
+    color:#0d5c36;
+
+    line-height:1.1;
+}
+
+.stock-unit{
+    margin-top:4px;
+
+    font-size:10px;
+
+    color:#94a3b8;
+}
+
+
+/* =====================================================
+   PENGOLAHAN HARIAN
+===================================================== */
+
+.daily-card{
+    background:white;
+
+    border-radius:18px;
+
+    padding:16px;
+
+    margin-bottom:20px;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,.07);
+
+    border:1px solid #e7ece9;
+}
+
+.daily-header{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:13px;
+}
+
+.daily-title{
+    font-size:15px;
+
+    font-weight:800;
+
+    color:#1f2937;
+}
+
+.daily-date{
+    font-size:10px;
+
+    font-weight:800;
+
+    color:#64748b;
+
+    white-space:nowrap;
+}
+
+.daily-grid{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:10px;
+}
+
+.daily-item{
+    background:#f3f6f4;
+
+    border-radius:13px;
+
+    padding:13px;
+}
+
+.daily-label{
+    font-size:10px;
+
+    font-weight:800;
+
+    color:#64748b;
+}
+
+.daily-value{
+    margin-top:6px;
+
+    font-size:20px;
+
+    font-weight:900;
+
+    color:#0d5c36;
+}
+
+.daily-unit{
+    margin-top:3px;
+
+    font-size:10px;
+
+    color:#94a3b8;
+}
+
+
+/* =====================================================
+   RENDEMEN
+===================================================== */
+
+.rendemen-box{
+    margin-top:11px;
+
+    border-radius:15px;
+
+    padding:15px;
+
+    text-align:center;
+
+    background:linear-gradient(
+        135deg,
+        #e5f4eb,
+        #f4faf6
+    );
+
+    border:1px solid #cde5d5;
+}
+
+.rendemen-label{
+    font-size:10px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+
+    color:#4b6355;
+}
+
+.rendemen-value{
+    margin-top:5px;
+
+    font-size:34px;
+
+    line-height:1;
+
+    font-weight:900;
+
+    color:#0d6b39;
+}
+
+.rendemen-info{
+    margin-top:6px;
+
+    font-size:9px;
+
+    color:#718078;
+}
+
+
+/* =====================================================
+   MENU UTAMA
+===================================================== */
 
 .menu-grid{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+
+    grid-template-columns:
+        repeat(2,1fr);
+
     gap:13px;
 }
 
 .menu-card{
     border:none;
+
     background:white;
+
     border-radius:17px;
+
     padding:18px 13px;
+
     min-height:105px;
 
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
+
     justify-content:center;
 
     gap:9px;
@@ -124,29 +372,40 @@ body{
 
 .menu-name{
     text-align:center;
+
     font-size:13px;
+
     font-weight:700;
 }
 
-/* BOTTOM NAV */
+
+/* =====================================================
+   BOTTOM NAV
+===================================================== */
 
 .bottom-nav{
     position:fixed;
+
     z-index:50;
 
     bottom:0;
+
     left:50%;
 
     transform:translateX(-50%);
 
     width:100%;
+
     max-width:600px;
+
     height:72px;
 
     background:white;
 
     display:grid;
-    grid-template-columns:1fr 1fr 1fr;
+
+    grid-template-columns:
+        1fr 1fr 1fr;
 
     border-top:1px solid #e5e7eb;
 
@@ -156,11 +415,15 @@ body{
 
 .nav-item{
     border:none;
+
     background:none;
 
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
+
     justify-content:center;
 
     gap:3px;
@@ -168,16 +431,24 @@ body{
     color:#64748b;
 
     font-size:11px;
+
     font-weight:700;
 
     cursor:pointer;
+}
+
+.nav-item.active{
+    color:#0d5c36;
 }
 
 .nav-icon{
     font-size:21px;
 }
 
-/* SCAN BUTTON */
+
+/* =====================================================
+   SCAN BUTTON
+===================================================== */
 
 .scan-wrapper{
     position:relative;
@@ -187,11 +458,13 @@ body{
     position:absolute;
 
     left:50%;
+
     transform:translateX(-50%);
 
     bottom:7px;
 
     width:64px;
+
     height:64px;
 
     border-radius:50%;
@@ -207,8 +480,11 @@ body{
     color:white;
 
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
+
     justify-content:center;
 
     box-shadow:
@@ -225,13 +501,167 @@ body{
 
 .scan-button span{
     font-size:9px;
+
     font-weight:800;
 }
 
-/* SCANNER */
+
+/* =====================================================
+   HISTORY OVERLAY
+===================================================== */
+
+.history-overlay{
+    position:fixed;
+
+    inset:0;
+
+    z-index:90;
+
+    background:rgba(0,0,0,.45);
+
+    display:none;
+
+    align-items:flex-end;
+}
+
+.history-sheet{
+    width:100%;
+
+    max-width:600px;
+
+    margin:auto;
+
+    max-height:88vh;
+
+    overflow-y:auto;
+
+    background:#f3f6f4;
+
+    border-radius:22px 22px 0 0;
+
+    padding:20px 16px 30px;
+}
+
+.history-head{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:15px;
+}
+
+.history-title{
+    font-size:19px;
+
+    font-weight:800;
+}
+
+.history-close{
+    width:38px;
+
+    height:38px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:white;
+
+    color:#475569;
+
+    font-size:21px;
+
+    cursor:pointer;
+}
+
+.history-card{
+    background:white;
+
+    border-radius:16px;
+
+    padding:14px;
+
+    margin-bottom:10px;
+
+    border:1px solid #e5e7eb;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,.05);
+}
+
+.history-date{
+    font-size:13px;
+
+    font-weight:900;
+
+    color:#0d5c36;
+
+    margin-bottom:10px;
+}
+
+.history-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:8px;
+}
+
+.history-item{
+    background:#f3f6f4;
+
+    border-radius:10px;
+
+    padding:9px 6px;
+
+    text-align:center;
+}
+
+.history-label{
+    font-size:8px;
+
+    font-weight:800;
+
+    color:#64748b;
+}
+
+.history-value{
+    margin-top:4px;
+
+    font-size:11px;
+
+    font-weight:900;
+
+    color:#1f2937;
+}
+
+.history-empty{
+    background:white;
+
+    border-radius:16px;
+
+    padding:25px 15px;
+
+    text-align:center;
+
+    color:#64748b;
+
+    font-size:12px;
+
+    line-height:1.5;
+}
+
+
+/* =====================================================
+   SCANNER
+===================================================== */
 
 .scanner-overlay{
     position:fixed;
+
     inset:0;
 
     z-index:100;
@@ -251,7 +681,9 @@ body{
     color:white;
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 
     padding:0 18px;
@@ -259,6 +691,7 @@ body{
 
 .scanner-title{
     font-size:17px;
+
     font-weight:800;
 }
 
@@ -270,6 +703,7 @@ body{
     color:white;
 
     width:40px;
+
     height:40px;
 
     border-radius:50%;
@@ -285,7 +719,9 @@ body{
     flex:1;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     overflow:hidden;
@@ -293,7 +729,9 @@ body{
 
 #video{
     width:100%;
+
     height:100%;
+
     object-fit:cover;
 }
 
@@ -301,6 +739,7 @@ body{
     position:absolute;
 
     width:270px;
+
     height:270px;
 
     border:3px solid white;
@@ -317,6 +756,7 @@ body{
     position:absolute;
 
     width:235px;
+
     height:2px;
 
     background:#22c55e;
@@ -346,7 +786,9 @@ body{
     position:absolute;
 
     bottom:35px;
+
     left:20px;
+
     right:20px;
 
     text-align:center;
@@ -363,10 +805,14 @@ body{
     pointer-events:none;
 }
 
-/* HASIL */
+
+/* =====================================================
+   HASIL SCAN
+===================================================== */
 
 .scan-result{
     position:fixed;
+
     inset:0;
 
     z-index:120;
@@ -374,6 +820,7 @@ body{
     display:none;
 
     align-items:center;
+
     justify-content:center;
 
     background:rgba(0,0,0,.65);
@@ -383,6 +830,7 @@ body{
 
 .result-box{
     width:100%;
+
     max-width:400px;
 
     background:white;
@@ -399,17 +847,21 @@ body{
 
 .result-icon{
     font-size:48px;
+
     margin-bottom:12px;
 }
 
 .result-title{
     font-size:20px;
+
     font-weight:800;
+
     margin-bottom:8px;
 }
 
 .result-text{
     font-size:14px;
+
     color:#64748b;
 
     word-break:break-word;
@@ -435,75 +887,29 @@ body{
     cursor:pointer;
 }
 
-/* MENU */
 
-.menu-overlay{
-    position:fixed;
-    inset:0;
-
-    z-index:90;
-
-    background:rgba(0,0,0,.45);
-
-    display:none;
-
-    align-items:flex-end;
-}
-
-.menu-sheet{
-    width:100%;
-    max-width:600px;
-
-    margin:auto;
-
-    background:white;
-
-    border-radius:22px 22px 0 0;
-
-    padding:20px;
-}
-
-.menu-sheet h2{
-    font-size:19px;
-    margin-bottom:15px;
-}
-
-.panel-item{
-    width:100%;
-
-    border:none;
-
-    background:#f3f6f4;
-
-    padding:15px;
-
-    border-radius:13px;
-
-    margin-bottom:10px;
-
-    text-align:left;
-
-    font-size:14px;
-
-    font-weight:700;
-
-    cursor:pointer;
-}
-
-.panel-close{
-    background:#0d5c36;
-    color:white;
-}
+/* =====================================================
+   RESPONSIVE
+===================================================== */
 
 @media(max-width:380px){
 
     .menu-card{
         min-height:95px;
+
         padding:14px 8px;
     }
 
     .menu-name{
         font-size:12px;
+    }
+
+    .stock-value{
+        font-size:19px;
+    }
+
+    .rendemen-value{
+        font-size:30px;
     }
 
 }
@@ -516,22 +922,199 @@ body{
 
 <div class="app">
 
+
 <header class="header">
 
-    <small>SELAMAT DATANG</small>
+    <small>
+        SELAMAT DATANG
+    </small>
 
-    <h1>SUPER APP</h1>
+    <h1>
+        SUPER APP
+    </h1>
 
-    <p>Sistem Operasional Terpadu</p>
+    <p>
+        Sistem Operasional Terpadu
+    </p>
+
+
+    <div
+        id="dashboardDate"
+        class="dashboard-date"
+    >
+        MEMUAT TANGGAL...
+    </div>
 
 </header>
 
 
 <main class="content">
 
+
+    <!-- =================================================
+         DASHBOARD PERSEDIAAN
+    ================================================== -->
+
+    <section class="dashboard-section">
+
+        <div class="section-title">
+            PERSEDIAAN
+        </div>
+
+
+        <div class="stock-grid">
+
+
+            <div class="stock-card">
+
+                <div class="stock-label">
+                    PERSEDIAAN BBI
+                </div>
+
+                <div
+                    id="persediaanBBI"
+                    class="stock-value"
+                >
+                    —
+                </div>
+
+                <div class="stock-unit">
+                    m³
+                </div>
+
+            </div>
+
+
+            <div class="stock-card">
+
+                <div class="stock-label">
+                    PERSEDIAAN RST
+                </div>
+
+                <div
+                    id="persediaanRST"
+                    class="stock-value"
+                >
+                    —
+                </div>
+
+                <div class="stock-unit">
+                    m³
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         PENGOLAHAN HARIAN
+    ================================================== -->
+
+    <section class="dashboard-section">
+
+
+        <div class="daily-card">
+
+
+            <div class="daily-header">
+
+                <div class="daily-title">
+                    PENGOLAHAN HARIAN
+                </div>
+
+                <div
+                    id="dailyDate"
+                    class="daily-date"
+                >
+                    —
+                </div>
+
+            </div>
+
+
+            <div class="daily-grid">
+
+
+                <div class="daily-item">
+
+                    <div class="daily-label">
+                        OLAH BBI
+                    </div>
+
+                    <div
+                        id="olahBBI"
+                        class="daily-value"
+                    >
+                        —
+                    </div>
+
+                    <div class="daily-unit">
+                        m³
+                    </div>
+
+                </div>
+
+
+                <div class="daily-item">
+
+                    <div class="daily-label">
+                        HASIL RST
+                    </div>
+
+                    <div
+                        id="hasilRST"
+                        class="daily-value"
+                    >
+                        —
+                    </div>
+
+                    <div class="daily-unit">
+                        m³
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="rendemen-box">
+
+                <div class="rendemen-label">
+                    RENDEMEN
+                </div>
+
+                <div
+                    id="rendemen"
+                    class="rendemen-value"
+                >
+                    —
+                </div>
+
+                <div class="rendemen-info">
+                    Hasil RST ÷ Olah BBI × 100%
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         MENU UTAMA
+    ================================================== -->
+
     <div class="section-title">
         Menu Utama
     </div>
+
 
     <div class="menu-grid">
 
@@ -664,13 +1247,21 @@ body{
 
     </div>
 
+
 </main>
 
 
+<!-- =====================================================
+     BOTTOM NAV
+===================================================== -->
+
 <nav class="bottom-nav">
 
+
+    <!-- HOME -->
+
     <button
-        class="nav-item"
+        class="nav-item active"
         onclick="bukaHome()"
     >
 
@@ -684,6 +1275,8 @@ body{
 
     </button>
 
+
+    <!-- SCAN -->
 
     <div class="scan-wrapper">
 
@@ -705,22 +1298,79 @@ body{
     </div>
 
 
+    <!-- HISTORY -->
+
     <button
         class="nav-item"
-        onclick="bukaMenuPanel()"
+        onclick="bukaHistory()"
     >
 
         <div class="nav-icon">
-            ☰
+            🕘
         </div>
 
         <span>
-            MENU
+            HISTORY
         </span>
 
     </button>
 
+
 </nav>
+
+</div>
+
+
+<!-- =====================================================
+     HISTORY
+===================================================== -->
+
+<div
+    id="historyOverlay"
+    class="history-overlay"
+    onclick="tutupHistory(event)"
+>
+
+
+    <div
+        class="history-sheet"
+        onclick="event.stopPropagation()"
+    >
+
+
+        <div class="history-head">
+
+            <div class="history-title">
+                HISTORY PENGOLAHAN
+            </div>
+
+            <button
+                class="history-close"
+                onclick="tutupHistory()"
+            >
+                ✕
+            </button>
+
+        </div>
+
+
+        <div id="historyList">
+
+
+            <div class="history-empty">
+
+                History pengolahan akan menampilkan
+                tanggal, Olah BBI, Hasil RST,
+                dan Rendemen setelah data API
+                dashboard kita sambungkan.
+
+            </div>
+
+
+        </div>
+
+
+    </div>
 
 </div>
 
@@ -733,6 +1383,7 @@ body{
     id="scannerOverlay"
     class="scanner-overlay"
 >
+
 
     <div class="scanner-header">
 
@@ -752,6 +1403,7 @@ body{
 
     <div class="scanner-body">
 
+
         <video
             id="video"
             autoplay
@@ -759,13 +1411,16 @@ body{
             playsinline
         ></video>
 
+
         <div class="scan-frame"></div>
 
         <div class="scan-line"></div>
 
+
         <div class="scanner-info">
             Arahkan QR / BARCODE REGISTER / QR TUMPUK ke kotak putih
         </div>
+
 
     </div>
 
@@ -781,7 +1436,9 @@ body{
     class="scan-result"
 >
 
+
     <div class="result-box">
+
 
         <div
             id="resultIcon"
@@ -790,6 +1447,7 @@ body{
             ✅
         </div>
 
+
         <div
             id="resultTitle"
             class="result-title"
@@ -797,10 +1455,12 @@ body{
             QR TERBACA
         </div>
 
+
         <div
             id="resultText"
             class="result-text"
         ></div>
+
 
         <button
             class="result-button"
@@ -809,61 +1469,6 @@ body{
             TUTUP
         </button>
 
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     MENU PANEL
-===================================================== -->
-
-<div
-    id="menuOverlay"
-    class="menu-overlay"
-    onclick="tutupMenuPanel(event)"
->
-
-    <div
-        class="menu-sheet"
-        onclick="event.stopPropagation()"
-    >
-
-        <h2>
-            MENU
-        </h2>
-
-
-        <button
-            class="panel-item"
-            onclick="bukaOperasional()"
-        >
-            🔧 OPERASIONAL
-        </button>
-
-
-        <button
-            class="panel-item"
-            onclick="bukaPengaturan()"
-        >
-            ⚙️ PENGATURAN
-        </button>
-
-
-        <button
-            class="panel-item"
-            onclick="bukaTentang()"
-        >
-            ℹ️ TENTANG APLIKASI
-        </button>
-
-
-        <button
-            class="panel-item panel-close"
-            onclick="tutupMenuPanel()"
-        >
-            TUTUP
-        </button>
 
     </div>
 
@@ -903,8 +1508,11 @@ const URL_BARCODE_TUMPUK =
 ===================================================== */
 
 let codeReader = null;
+
 let scannerRunning = false;
+
 let scanLocked = false;
+
 let scanSession = 0;
 
 
@@ -915,20 +1523,30 @@ let scanSession = 0;
 function resetScannerState(){
 
     scannerRunning = false;
+
     scanLocked = false;
+
+
+    scanSession++;
+
 
     if(codeReader){
 
         try{
+
             codeReader.reset();
+
         }
         catch(e){}
 
         codeReader = null;
+
     }
+
 
     const video =
         document.getElementById("video");
+
 
     if(video){
 
@@ -943,7 +1561,9 @@ function resetScannerState(){
                     .forEach(function(track){
 
                         try{
+
                             track.stop();
+
                         }
                         catch(e){}
 
@@ -958,12 +1578,17 @@ function resetScannerState(){
 
     }
 
+
     const overlay =
-        document.getElementById("scannerOverlay");
+        document.getElementById(
+            "scannerOverlay"
+        );
+
 
     if(overlay){
 
-        overlay.style.display = "none";
+        overlay.style.display =
+            "none";
 
     }
 
@@ -981,21 +1606,37 @@ window.addEventListener(
         resetScannerState();
 
         scanLocked = false;
+
         scannerRunning = false;
 
+
         const hasil =
-            document.getElementById("scanResult");
+            document.getElementById(
+                "scanResult"
+            );
+
 
         if(hasil){
-            hasil.style.display = "none";
+
+            hasil.style.display =
+                "none";
+
         }
 
-        const menu =
-            document.getElementById("menuOverlay");
 
-        if(menu){
-            menu.style.display = "none";
+        const history =
+            document.getElementById(
+                "historyOverlay"
+            );
+
+
+        if(history){
+
+            history.style.display =
+                "none";
+
         }
+
 
         if(event.persisted){
 
@@ -1008,6 +1649,99 @@ window.addEventListener(
 
 
 /* =====================================================
+   TANGGAL
+===================================================== */
+
+function formatTanggalIndonesia(
+    date
+){
+
+    const bulan = [
+
+        "JANUARI",
+        "FEBRUARI",
+        "MARET",
+        "APRIL",
+        "MEI",
+        "JUNI",
+        "JULI",
+        "AGUSTUS",
+        "SEPTEMBER",
+        "OKTOBER",
+        "NOVEMBER",
+        "DESEMBER"
+
+    ];
+
+
+    return (
+
+        String(
+            date.getDate()
+        ).padStart(2,"0")
+
+        +
+
+        " " +
+
+        bulan[
+            date.getMonth()
+        ]
+
+        +
+
+        " " +
+
+        date.getFullYear()
+
+    );
+
+}
+
+
+function updateTanggal(){
+
+    const sekarang =
+        new Date();
+
+
+    const teks =
+        formatTanggalIndonesia(
+            sekarang
+        );
+
+
+    const headerTanggal =
+        document.getElementById(
+            "dashboardDate"
+        );
+
+
+    const dailyTanggal =
+        document.getElementById(
+            "dailyDate"
+        );
+
+
+    if(headerTanggal){
+
+        headerTanggal.textContent =
+            teks;
+
+    }
+
+
+    if(dailyTanggal){
+
+        dailyTanggal.textContent =
+            teks;
+
+    }
+
+}
+
+
+/* =====================================================
    HOME
 ===================================================== */
 
@@ -1015,14 +1749,77 @@ function bukaHome(){
 
     resetScannerState();
 
-    document.getElementById(
-        "menuOverlay"
-    ).style.display = "none";
+    tutupHistory();
+
+    tutupHasilScan();
+
 
     window.scrollTo({
+
         top:0,
+
         behavior:"smooth"
+
     });
+
+}
+
+
+/* =====================================================
+   HISTORY
+===================================================== */
+
+function bukaHistory(){
+
+    resetScannerState();
+
+    tutupHasilScan();
+
+
+    const overlay =
+        document.getElementById(
+            "historyOverlay"
+        );
+
+
+    if(overlay){
+
+        overlay.style.display =
+            "flex";
+
+    }
+
+}
+
+
+function tutupHistory(event){
+
+    if(
+
+        event &&
+
+        event.target !==
+        event.currentTarget
+
+    ){
+
+        return;
+
+    }
+
+
+    const overlay =
+        document.getElementById(
+            "historyOverlay"
+        );
+
+
+    if(overlay){
+
+        overlay.style.display =
+            "none";
+
+    }
 
 }
 
@@ -1100,9 +1897,11 @@ function bukaMenuUtama(nama){
             link
         );
 
+
         window.location.assign(
             link
         );
+
 
         return;
 
@@ -1131,32 +1930,39 @@ function bukaScanner(){
     resetScannerState();
 
 
-    const hasilScan =
-        document.getElementById("hasilScan");
+    tutupHistory();
 
-    if(hasilScan){
-        hasilScan.style.display = "none";
-    }
+    tutupHasilScan();
 
 
     const scannerOverlay =
-        document.getElementById("scannerOverlay");
+        document.getElementById(
+            "scannerOverlay"
+        );
+
 
     if(scannerOverlay){
-        scannerOverlay.style.display = "flex";
+
+        scannerOverlay.style.display =
+            "flex";
+
     }
 
 
     scanLocked = false;
+
     scannerRunning = false;
 
 
     codeReader =
-        new ZXingBrowser.BrowserMultiFormatReader();
+        new ZXingBrowser
+            .BrowserMultiFormatReader();
 
 
     const video =
-        document.getElementById("video");
+        document.getElementById(
+            "video"
+        );
 
 
     navigator.mediaDevices
@@ -1185,67 +1991,89 @@ function bukaScanner(){
             video.srcObject =
                 stream;
 
+
             video.setAttribute(
                 "playsinline",
                 true
             );
+
 
             video.setAttribute(
                 "muted",
                 true
             );
 
+
             video.play();
 
-            scannerRunning = true;
+
+            scannerRunning =
+                true;
 
 
-            codeReader.decodeFromVideoElement(
-                video,
+            codeReader
+                .decodeFromVideoElement(
 
-                function(result,error){
+                    video,
 
-                    if(!scannerRunning){
-                        return;
+                    function(
+                        result,
+                        error
+                    ){
+
+                        if(
+                            !scannerRunning
+                        ){
+
+                            return;
+
+                        }
+
+
+                        if(scanLocked){
+
+                            return;
+
+                        }
+
+
+                        if(result){
+
+                            scanLocked =
+                                true;
+
+
+                            const teks =
+                                result.getText();
+
+
+                            console.log(
+                                "HASIL SCAN:",
+                                teks
+                            );
+
+
+                            console.log(
+                                "FORMAT BARCODE:",
+                                result.getBarcodeFormat
+                                    ? result
+                                        .getBarcodeFormat()
+                                    : "TIDAK TERSEDIA"
+                            );
+
+
+                            scannerBerhasil(
+                                teks
+                            );
+
+                        }
+
                     }
 
-                    if(scanLocked){
-                        return;
-                    }
-
-
-                    if(result){
-
-                        scanLocked = true;
-
-                        const teks =
-                            result.getText();
-
-
-                        console.log(
-                            "HASIL SCAN:",
-                            teks
-                        );
-
-
-                        console.log(
-                            "FORMAT BARCODE:",
-                            result.getBarcodeFormat
-                                ? result.getBarcodeFormat()
-                                : "TIDAK TERSEDIA"
-                        );
-
-
-                        scannerBerhasil(
-                            teks
-                        );
-
-                    }
-
-                }
-            );
+                );
 
         })
+
 
         .catch(function(error){
 
@@ -1254,7 +2082,9 @@ function bukaScanner(){
                 error
             );
 
+
             resetScannerState();
+
 
             alert(
                 "Kamera tidak dapat dibuka."
@@ -1275,7 +2105,9 @@ function deteksiJenisQR(teks){
         String(teks || "").trim();
 
 
-    if(/^\d{7}$/.test(nilai)){
+    if(
+        /^\d{7}$/.test(nilai)
+    ){
 
         return "REGISTER";
 
@@ -1287,13 +2119,19 @@ function deteksiJenisQR(teks){
         const url =
             new URL(nilai);
 
+
         const register =
-            url.searchParams.get("register");
+            url.searchParams.get(
+                "register"
+            );
 
 
         if(
+
             register &&
+
             /^\d{7}$/.test(register)
+
         ){
 
             return "REGISTER";
@@ -1301,6 +2139,7 @@ function deteksiJenisQR(teks){
         }
 
     }
+
     catch(e){}
 
 
@@ -1309,11 +2148,35 @@ function deteksiJenisQR(teks){
 
 
     if(
-        upper.startsWith("TUMPUK|") ||
-        upper.startsWith("TPK|") ||
-        upper.includes("CEK-TUMPUK") ||
-        upper.includes("CEK_TUMPUK") ||
-        upper.includes("TUMPUK=")
+
+        upper.startsWith(
+            "TUMPUK|"
+        )
+
+        ||
+
+        upper.startsWith(
+            "TPK|"
+        )
+
+        ||
+
+        upper.includes(
+            "CEK-TUMPUK"
+        )
+
+        ||
+
+        upper.includes(
+            "CEK_TUMPUK"
+        )
+
+        ||
+
+        upper.includes(
+            "TUMPUK="
+        )
+
     ){
 
         return "TUMPUK";
@@ -1391,12 +2254,17 @@ function scannerBerhasil(teks){
 
 
         const register =
-            url.searchParams.get("register");
+            url.searchParams.get(
+                "register"
+            );
 
 
         if(
+
             register &&
+
             /^\d{7}$/.test(register)
+
         ){
 
             console.log(
@@ -1415,6 +2283,7 @@ function scannerBerhasil(teks){
         }
 
     }
+
     catch(e){}
 
 
@@ -1433,17 +2302,31 @@ function scannerBerhasil(teks){
 
 
         const tpk =
-            url.searchParams.get("tpk");
+            url.searchParams.get(
+                "tpk"
+            );
 
 
         const tumpuk =
-            url.searchParams.get("tumpuk");
+            url.searchParams.get(
+                "tumpuk"
+            );
 
 
         if(
-            pathname.includes("cek-tumpuk.html") &&
-            tpk &&
+
+            pathname.includes(
+                "cek-tumpuk.html"
+            )
+
+            &&
+
+            tpk
+
+            &&
+
             tumpuk
+
         ){
 
             console.log(
@@ -1463,6 +2346,7 @@ function scannerBerhasil(teks){
         }
 
     }
+
     catch(e){}
 
 
@@ -1475,11 +2359,35 @@ function scannerBerhasil(teks){
 
 
     if(
-        upper.startsWith("TUMPUK|") ||
-        upper.startsWith("TPK|") ||
-        upper.includes("CEK-TUMPUK") ||
-        upper.includes("CEK_TUMPUK") ||
-        upper.includes("TUMPUK=")
+
+        upper.startsWith(
+            "TUMPUK|"
+        )
+
+        ||
+
+        upper.startsWith(
+            "TPK|"
+        )
+
+        ||
+
+        upper.includes(
+            "CEK-TUMPUK"
+        )
+
+        ||
+
+        upper.includes(
+            "CEK_TUMPUK"
+        )
+
+        ||
+
+        upper.includes(
+            "TUMPUK="
+        )
+
     ){
 
         alert(
@@ -1514,11 +2422,14 @@ function tutupScanner(){
     resetScannerState();
 
     scanLocked = false;
+
     scannerRunning = false;
 
 
     const hasil =
-        document.getElementById("scanResult");
+        document.getElementById(
+            "scanResult"
+        );
 
 
     if(hasil){
@@ -1530,7 +2441,9 @@ function tutupScanner(){
 
 
     const scanner =
-        document.getElementById("scannerOverlay");
+        document.getElementById(
+            "scannerOverlay"
+        );
 
 
     if(scanner){
@@ -1641,68 +2554,159 @@ function tutupHasilScan(){
 
 
 /* =====================================================
-   MENU PANEL
+   FORMAT VOLUME
 ===================================================== */
 
-function bukaMenuPanel(){
+function formatVolume(nilai){
 
-    document.getElementById(
-        "menuOverlay"
-    ).style.display =
-        "flex";
+    const angka =
+        Number(nilai);
+
+
+    if(
+        !Number.isFinite(angka)
+    ){
+
+        return "—";
+
+    }
+
+
+    return angka.toLocaleString(
+        "id-ID",
+        {
+            minimumFractionDigits:3,
+            maximumFractionDigits:3
+        }
+    );
 
 }
 
 
-function tutupMenuPanel(event){
+/* =====================================================
+   DASHBOARD DATA
+   SEMENTARA BELUM TERHUBUNG API
+===================================================== */
 
-    if(
-        event &&
-        event.target !== event.currentTarget
-    ){
+function setDashboardData(data){
+
+    if(!data){
 
         return;
 
     }
 
 
-    document.getElementById(
-        "menuOverlay"
-    ).style.display =
-        "none";
+    if(data.tanggal){
+
+        document.getElementById(
+            "dashboardDate"
+        ).textContent =
+            data.tanggal;
+
+
+        document.getElementById(
+            "dailyDate"
+        ).textContent =
+            data.tanggal;
+
+    }
+
+
+    if(
+        data.persediaanBBI !== undefined
+    ){
+
+        document.getElementById(
+            "persediaanBBI"
+        ).textContent =
+            formatVolume(
+                data.persediaanBBI
+            );
+
+    }
+
+
+    if(
+        data.persediaanRST !== undefined
+    ){
+
+        document.getElementById(
+            "persediaanRST"
+        ).textContent =
+            formatVolume(
+                data.persediaanRST
+            );
+
+    }
+
+
+    if(
+        data.olahBBI !== undefined
+    ){
+
+        document.getElementById(
+            "olahBBI"
+        ).textContent =
+            formatVolume(
+                data.olahBBI
+            );
+
+    }
+
+
+    if(
+        data.hasilRST !== undefined
+    ){
+
+        document.getElementById(
+            "hasilRST"
+        ).textContent =
+            formatVolume(
+                data.hasilRST
+            );
+
+    }
+
+
+    if(
+
+        Number(data.olahBBI) > 0 &&
+
+        Number(data.hasilRST) >= 0
+
+    ){
+
+        const nilai =
+            (
+                Number(data.hasilRST) /
+                Number(data.olahBBI)
+            ) * 100;
+
+
+        document.getElementById(
+            "rendemen"
+        ).textContent =
+            nilai.toFixed(2) +
+            "%";
+
+    }
 
 }
 
 
-function bukaOperasional(){
+/* =====================================================
+   INIT
+===================================================== */
 
-    alert(
-        "OPERASIONAL\n\n" +
-        "SCAN REGISTER\n" +
-        "CEK TUMPUK"
-    );
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
 
-}
+        updateTanggal();
 
-
-function bukaPengaturan(){
-
-    alert(
-        "PENGATURAN\n\n" +
-        "Belum tersedia."
-    );
-
-}
-
-
-function bukaTentang(){
-
-    alert(
-        "SUPER APP\n\n" +
-        "Sistem Operasional Terpadu"
-    );
-
-}
+    }
+);
 
 </script>
 
