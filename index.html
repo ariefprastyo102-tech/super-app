@@ -1,1341 +1,986 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
 
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-  <meta
+<meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
-  >
+>
 
-  <title>SUPER APP</title>
+<title>SUPER APP</title>
 
+<!-- ZXING -->
+<script src="https://unpkg.com/@zxing/browser@0.1.5/umd/zxing-browser.min.js"></script>
 
-  <style>
+<style>
 
-    /* =====================================================
-       RESET
-    ===================================================== */
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f3f6f4;
+    color:#1f2937;
+}
+
+.app{
+    width:100%;
+    max-width:600px;
+    min-height:100vh;
+    margin:auto;
+    background:#f3f6f4;
+    padding-bottom:90px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    background:linear-gradient(
+        135deg,
+        #0d5c36,
+        #176b3a,
+        #23834d
+    );
+
+    color:white;
+
+    padding:22px 20px 24px;
+
+    border-radius:0 0 22px 22px;
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,.12);
+}
+
+.header small{
+    font-size:12px;
+    opacity:.85;
+}
+
+.header h1{
+    margin-top:5px;
+    font-size:27px;
+    font-weight:800;
+}
+
+.header p{
+    margin-top:5px;
+    font-size:13px;
+    opacity:.9;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+    padding:20px 16px;
+}
+
+.section-title{
+    font-size:17px;
+    font-weight:800;
+    margin-bottom:14px;
+}
+
+/* =========================
+   MENU
+========================= */
+
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:13px;
+}
+
+.menu-card{
+    border:none;
+    background:white;
+    border-radius:17px;
+    padding:18px 13px;
+    min-height:105px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    gap:9px;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,.07);
+
+    cursor:pointer;
+
+    transition:.15s;
+}
+
+.menu-card:active{
+    transform:scale(.96);
+}
+
+.menu-icon{
+    font-size:30px;
+}
+
+.menu-name{
+    text-align:center;
+    font-size:13px;
+    font-weight:700;
+}
+
+/* =========================
+   BOTTOM NAV
+========================= */
+
+.bottom-nav{
+    position:fixed;
+    z-index:50;
+
+    bottom:0;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:100%;
+    max-width:600px;
+
+    height:72px;
+
+    background:white;
+
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+
+    border-top:1px solid #e5e7eb;
+
+    box-shadow:
+        0 -4px 18px rgba(0,0,0,.08);
+}
+
+.nav-item{
+    border:none;
+    background:none;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    gap:3px;
+
+    color:#64748b;
+
+    font-size:11px;
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+.nav-icon{
+    font-size:21px;
+}
+
+/* =========================
+   SCAN BUTTON
+========================= */
+
+.scan-wrapper{
+    position:relative;
+}
+
+.scan-button{
+    position:absolute;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    bottom:7px;
+
+    width:64px;
+    height:64px;
+
+    border-radius:50%;
+
+    border:5px solid #f3f6f4;
+
+    background:linear-gradient(
+        135deg,
+        #0d5c36,
+        #23834d
+    );
+
+    color:white;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,.22);
+
+    cursor:pointer;
+
+    z-index:60;
+}
+
+.scan-button .nav-icon{
+    font-size:25px;
+}
+
+.scan-button span{
+    font-size:9px;
+    font-weight:800;
+}
+
+/* =========================
+   SCANNER
+========================= */
+
+.scanner-overlay{
+    position:fixed;
+    inset:0;
+
+    z-index:100;
+
+    background:#000;
+
+    display:none;
+
+    flex-direction:column;
+}
+
+.scanner-header{
+    height:64px;
+
+    background:#0d5c36;
+
+    color:white;
+
+    display:flex;
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 18px;
+}
+
+.scanner-title{
+    font-size:17px;
+    font-weight:800;
+}
+
+.close-scanner{
+    border:none;
+    background:rgba(255,255,255,.15);
+
+    color:white;
+
+    width:40px;
+    height:40px;
+
+    border-radius:50%;
+
+    font-size:21px;
+
+    cursor:pointer;
+}
+
+.scanner-body{
+    position:relative;
+
+    flex:1;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+}
+
+#video{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+.scan-frame{
+    position:absolute;
+
+    width:260px;
+    height:260px;
+
+    border:3px solid white;
+
+    border-radius:20px;
+
+    box-shadow:
+        0 0 0 9999px rgba(0,0,0,.35);
+}
+
+.scan-line{
+    position:absolute;
+
+    width:230px;
+    height:2px;
+
+    background:#22c55e;
+
+    animation:scanLine 2s infinite;
+}
+
+@keyframes scanLine{
+
+    0%{
+        transform:translateY(-110px);
     }
 
-
-    html,
-    body{
-      width:100%;
-      min-height:100%;
+    50%{
+        transform:translateY(110px);
     }
 
-
-    body{
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-      background:#f3f6f4;
-
-      color:#173b2a;
+    100%{
+        transform:translateY(-110px);
     }
 
+}
 
-    /* =====================================================
-       APP
-    ===================================================== */
+.scanner-info{
+    position:absolute;
 
-    .app{
+    bottom:35px;
 
-      width:100%;
+    left:20px;
+    right:20px;
 
-      max-width:600px;
+    text-align:center;
 
-      min-height:100vh;
+    color:white;
 
-      margin:auto;
+    font-size:14px;
 
-      background:#ffffff;
+    text-shadow:
+        0 2px 5px #000;
+}
 
-      position:relative;
+/* =========================
+   MENU PANEL
+========================= */
 
-      padding-bottom:90px;
+.menu-overlay{
+    position:fixed;
+    inset:0;
 
+    z-index:90;
+
+    background:rgba(0,0,0,.45);
+
+    display:none;
+
+    align-items:flex-end;
+}
+
+.menu-sheet{
+    width:100%;
+    max-width:600px;
+
+    margin:auto;
+
+    background:white;
+
+    border-radius:22px 22px 0 0;
+
+    padding:20px;
+
+    box-shadow:
+        0 -8px 25px rgba(0,0,0,.15);
+}
+
+.menu-sheet h2{
+    font-size:19px;
+    margin-bottom:15px;
+}
+
+.panel-item{
+    width:100%;
+
+    border:none;
+
+    background:#f3f6f4;
+
+    padding:15px;
+
+    border-radius:13px;
+
+    margin-bottom:10px;
+
+    text-align:left;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+.panel-close{
+    background:#0d5c36;
+    color:white;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:380px){
+
+    .menu-card{
+        min-height:95px;
+        padding:14px 8px;
     }
 
-
-    /* =====================================================
-       HEADER
-    ===================================================== */
-
-    .header{
-
-      background:
-        linear-gradient(
-          135deg,
-          #0d5c36,
-          #176b3a,
-          #23834d
-        );
-
-      color:#ffffff;
-
-      padding:
-        22px
-        20px
-        26px;
-
-      border-radius:
-        0
-        0
-        24px
-        24px;
-
+    .menu-name{
+        font-size:12px;
     }
 
+}
 
-    .header small{
-
-      display:block;
-
-      font-size:12px;
-
-      opacity:.85;
-
-      letter-spacing:.3px;
-
-    }
-
-
-    .header h1{
-
-      margin-top:5px;
-
-      font-size:25px;
-
-      font-weight:700;
-
-      letter-spacing:.3px;
-
-    }
-
-
-    .header p{
-
-      margin-top:6px;
-
-      font-size:13px;
-
-      opacity:.9;
-
-    }
-
-
-    /* =====================================================
-       CONTENT
-    ===================================================== */
-
-    .content{
-
-      padding:
-        22px
-        16px
-        25px;
-
-    }
-
-
-    .section-title{
-
-      font-size:17px;
-
-      font-weight:700;
-
-      margin-bottom:15px;
-
-    }
-
-
-    /* =====================================================
-       MENU GRID
-    ===================================================== */
-
-    .menu-grid{
-
-      display:grid;
-
-      grid-template-columns:
-        repeat(
-          2,
-          minmax(0,1fr)
-        );
-
-      gap:13px;
-
-    }
-
-
-    .menu-item{
-
-      min-height:125px;
-
-      padding:
-        18px
-        15px;
-
-      background:#ffffff;
-
-      border:
-        1px solid
-        #e1ebe4;
-
-      border-radius:18px;
-
-      display:flex;
-
-      flex-direction:column;
-
-      justify-content:center;
-
-      align-items:flex-start;
-
-      cursor:pointer;
-
-      box-shadow:
-        0
-        4px
-        12px
-        rgba(0,0,0,.05);
-
-      transition:
-        transform .15s,
-        box-shadow .15s;
-
-    }
-
-
-    .menu-item:active{
-
-      transform:
-        scale(.97);
-
-      box-shadow:
-        0
-        2px
-        7px
-        rgba(0,0,0,.06);
-
-    }
-
-
-    .menu-icon{
-
-      width:48px;
-
-      height:48px;
-
-      border-radius:14px;
-
-      background:#e8f4ec;
-
-      display:flex;
-
-      align-items:center;
-
-      justify-content:center;
-
-      font-size:25px;
-
-      margin-bottom:12px;
-
-    }
-
-
-    .menu-item strong{
-
-      font-size:14px;
-
-      line-height:1.25;
-
-    }
-
-
-    .menu-item span{
-
-      margin-top:5px;
-
-      color:#718078;
-
-      font-size:11px;
-
-      line-height:1.25;
-
-    }
-
-
-    /* =====================================================
-       BOTTOM NAVIGATION
-    ===================================================== */
-
-    .bottom-nav{
-
-      position:fixed;
-
-      left:50%;
-
-      bottom:0;
-
-      transform:
-        translateX(-50%);
-
-      width:100%;
-
-      max-width:600px;
-
-      height:72px;
-
-      background:#ffffff;
-
-      border-top:
-        1px solid
-        #e7ece9;
-
-      display:grid;
-
-      grid-template-columns:
-        1fr
-        1fr
-        1fr;
-
-      align-items:center;
-
-      z-index:50;
-
-    }
-
-
-    /* =====================================================
-       NAV ITEM
-    ===================================================== */
-
-    .nav-item{
-
-      height:72px;
-
-      display:flex;
-
-      flex-direction:column;
-
-      align-items:center;
-
-      justify-content:center;
-
-      color:#738078;
-
-      font-size:10px;
-
-      font-weight:600;
-
-      cursor:pointer;
-
-      user-select:none;
-
-    }
-
-
-    .nav-item .nav-icon{
-
-      display:block;
-
-      font-size:21px;
-
-      line-height:1;
-
-      margin-bottom:4px;
-
-    }
-
-
-    .nav-item.active{
-
-      color:#0d6b3c;
-
-    }
-
-
-    /* =====================================================
-       SCAN AREA
-    ===================================================== */
-
-    .scan-wrapper{
-
-      position:relative;
-
-      height:72px;
-
-      display:flex;
-
-      align-items:center;
-
-      justify-content:center;
-
-    }
-
-
-    /* =====================================================
-       SCAN BUTTON
-    ===================================================== */
-
-    .scan-button{
-
-      position:absolute;
-
-      left:50%;
-
-      top:-27px;
-
-      transform:
-        translateX(-50%);
-
-      width:78px;
-
-      height:78px;
-
-      border-radius:50%;
-
-      border:
-        6px solid
-        #ffffff;
-
-      background:#0d6b3c;
-
-      color:#ffffff;
-
-      display:flex;
-
-      flex-direction:column;
-
-      align-items:center;
-
-      justify-content:center;
-
-      cursor:pointer;
-
-      box-shadow:
-        0
-        5px
-        18px
-        rgba(0,0,0,.22);
-
-      z-index:60;
-
-      transition:
-        transform .15s,
-        box-shadow .15s;
-
-    }
-
-
-    .scan-button:active{
-
-      transform:
-        translateX(-50%)
-        scale(.94);
-
-      box-shadow:
-        0
-        3px
-        10px
-        rgba(0,0,0,.18);
-
-    }
-
-
-    .scan-icon{
-
-      font-size:26px;
-
-      line-height:1;
-
-    }
-
-
-    .scan-text{
-
-      margin-top:4px;
-
-      font-size:10px;
-
-      font-weight:700;
-
-    }
-
-
-    /* =====================================================
-       MENU BOTTOM SHEET
-    ===================================================== */
-
-    .menu-overlay{
-
-      position:fixed;
-
-      inset:0;
-
-      background:
-        rgba(
-          0,
-          0,
-          0,
-          .35
-        );
-
-      display:flex;
-
-      align-items:flex-end;
-
-      justify-content:center;
-
-      opacity:0;
-
-      visibility:hidden;
-
-      transition:
-        opacity .2s,
-        visibility .2s;
-
-      z-index:100;
-
-    }
-
-
-    .menu-overlay.show{
-
-      opacity:1;
-
-      visibility:visible;
-
-    }
-
-
-    .menu-sheet{
-
-      width:100%;
-
-      max-width:600px;
-
-      background:#ffffff;
-
-      border-radius:
-        24px
-        24px
-        0
-        0;
-
-      padding:
-        10px
-        16px
-        24px;
-
-      transform:
-        translateY(100%);
-
-      transition:
-        transform .25s ease;
-
-    }
-
-
-    .menu-overlay.show
-    .menu-sheet{
-
-      transform:
-        translateY(0);
-
-    }
-
-
-    /* =====================================================
-       MENU HANDLE
-    ===================================================== */
-
-    .menu-handle{
-
-      width:42px;
-
-      height:4px;
-
-      border-radius:10px;
-
-      background:#d5ddd8;
-
-      margin:
-        2px
-        auto
-        18px;
-
-    }
-
-
-    /* =====================================================
-       MENU TITLE
-    ===================================================== */
-
-    .menu-sheet-title{
-
-      font-size:20px;
-
-      font-weight:700;
-
-      margin-bottom:14px;
-
-      color:#173b2a;
-
-    }
-
-
-    /* =====================================================
-       MENU OPTION
-    ===================================================== */
-
-    .menu-option{
-
-      display:flex;
-
-      align-items:center;
-
-      gap:13px;
-
-      padding:
-        14px
-        4px;
-
-      border-bottom:
-        1px solid
-        #edf1ee;
-
-      cursor:pointer;
-
-    }
-
-
-    .menu-option:active{
-
-      background:#f5f8f6;
-
-    }
-
-
-    .menu-option-icon{
-
-      width:44px;
-
-      height:44px;
-
-      border-radius:13px;
-
-      background:#e8f4ec;
-
-      display:flex;
-
-      align-items:center;
-
-      justify-content:center;
-
-      font-size:22px;
-
-      flex-shrink:0;
-
-    }
-
-
-    .menu-option-text{
-
-      flex:1;
-
-      display:flex;
-
-      flex-direction:column;
-
-      gap:4px;
-
-    }
-
-
-    .menu-option-text strong{
-
-      font-size:14px;
-
-      color:#173b2a;
-
-    }
-
-
-    .menu-option-text span{
-
-      font-size:11px;
-
-      color:#7a867f;
-
-    }
-
-
-    .menu-arrow{
-
-      font-size:25px;
-
-      color:#9aa59f;
-
-    }
-
-
-    /* =====================================================
-       CLOSE BUTTON
-    ===================================================== */
-
-    .menu-close{
-
-      width:100%;
-
-      height:45px;
-
-      margin-top:18px;
-
-      border:none;
-
-      border-radius:13px;
-
-      background:#edf3ef;
-
-      color:#176b3a;
-
-      font-size:13px;
-
-      font-weight:700;
-
-      cursor:pointer;
-
-    }
-
-
-    /* =====================================================
-       RESPONSIVE
-    ===================================================== */
-
-    @media(max-width:380px){
-
-      .content{
-
-        padding-left:12px;
-
-        padding-right:12px;
-
-      }
-
-
-      .menu-grid{
-
-        gap:10px;
-
-      }
-
-
-      .menu-item{
-
-        min-height:115px;
-
-        padding:
-          15px
-          13px;
-
-      }
-
-
-      .menu-item strong{
-
-        font-size:13px;
-
-      }
-
-
-      .menu-item span{
-
-        font-size:10px;
-
-      }
-
-    }
-
-  </style>
+</style>
 
 </head>
 
-
 <body>
 
+<div class="app">
 
-  <div class="app">
-
-
-    <!-- =================================================
-         HEADER
-    ================================================== -->
+    <!-- HEADER -->
 
     <header class="header">
 
-      <small>
-        SELAMAT DATANG
-      </small>
+        <small>SELAMAT DATANG</small>
 
-      <h1>
-        SUPER APP
-      </h1>
+        <h1>SUPER APP</h1>
 
-      <p>
-        Sistem Operasional Terpadu
-      </p>
+        <p>Sistem Operasional Terpadu</p>
 
     </header>
 
 
-
-    <!-- =================================================
-         MENU UTAMA
-    ================================================== -->
+    <!-- CONTENT -->
 
     <main class="content">
 
-      <div class="section-title">
-        Menu Utama
-      </div>
-
-
-      <div class="menu-grid">
-
-
-        <!-- DATA OLAH -->
-
-        <div
-          class="menu-item"
-          onclick="bukaMenuUtama('DATA OLAH')"
-        >
-
-          <div class="menu-icon">
-            🔨
-          </div>
-
-          <strong>
-            DATA OLAH
-          </strong>
-
-          <span>
-            Pengolahan kayu
-          </span>
-
+        <div class="section-title">
+            Menu Utama
         </div>
 
 
+        <div class="menu-grid">
 
-        <!-- MUTASI BBI -->
-
-        <div
-          class="menu-item"
-          onclick="bukaMenuUtama('MUTASI BBI')"
-        >
-
-          <div class="menu-icon">
-            📊
-          </div>
-
-          <strong>
-            MUTASI BBI
-          </strong>
-
-          <span>
-            Mutasi bahan baku
-          </span>
-
-        </div>
+            <button
+                class="menu-card"
+                onclick="bukaMenuUtama('DATA OLAH')"
+            >
+                <div class="menu-icon">🪵</div>
+                <div class="menu-name">DATA OLAH</div>
+            </button>
 
 
-
-        <!-- PERSEDIAAN RST -->
-
-        <div
-          class="menu-item"
-          onclick="bukaMenuUtama('PERSEDIAAN RST')"
-        >
-
-          <div class="menu-icon">
-            📦
-          </div>
-
-          <strong>
-            PERSEDIAAN RST
-          </strong>
-
-          <span>
-            Persediaan RST
-          </span>
-
-        </div>
+            <button
+                class="menu-card"
+                onclick="bukaMenuUtama('MUTASI BBI')"
+            >
+                <div class="menu-icon">📊</div>
+                <div class="menu-name">MUTASI BBI</div>
+            </button>
 
 
+            <button
+                class="menu-card"
+                onclick="bukaMenuUtama('PERSEDIAAN RST')"
+            >
+                <div class="menu-icon">📦</div>
+                <div class="menu-name">PERSEDIAAN RST</div>
+            </button>
 
-        <!-- MUTASI RST -->
 
-        <div
-          class="menu-item"
-          onclick="bukaMenuUtama('MUTASI RST')"
-        >
+            <button
+                class="menu-card"
+                onclick="bukaMenuUtama('MUTASI RST')"
+            >
+                <div class="menu-icon">📈</div>
+                <div class="menu-name">MUTASI RST</div>
+            </button>
 
-          <div class="menu-icon">
-            📈
-          </div>
 
-          <strong>
-            MUTASI RST
-          </strong>
+            <button
+                class="menu-card"
+                onclick="bukaMenuUtama('ENTRY RST')"
+            >
+                <div class="menu-icon">📝</div>
+                <div class="menu-name">ENTRY RST</div>
+            </button>
 
-          <span>
-            Mutasi persediaan RST
-          </span>
+
+            <button
+                class="menu-card"
+                onclick="bukaMenuUtama('BARCODE REGISTER')"
+            >
+                <div class="menu-icon">🔖</div>
+                <div class="menu-name">BARCODE REGISTER</div>
+            </button>
+
+
+            <button
+                class="menu-card"
+                onclick="bukaMenuUtama('BARCODE TUMPUK')"
+            >
+                <div class="menu-icon">🏷️</div>
+                <div class="menu-name">BARCODE TUMPUK</div>
+            </button>
 
         </div>
-
-
-
-        <!-- ENTRY RST -->
-
-        <div
-          class="menu-item"
-          onclick="bukaMenuUtama('ENTRY RST')"
-        >
-
-          <div class="menu-icon">
-            📝
-          </div>
-
-          <strong>
-            ENTRY RST
-          </strong>
-
-          <span>
-            Entry data RST
-          </span>
-
-        </div>
-
-
-
-        <!-- BARCODE REGISTER -->
-
-        <div
-          class="menu-item"
-          onclick="bukaMenuUtama('BARCODE REGISTER')"
-        >
-
-          <div class="menu-icon">
-            🏷️
-          </div>
-
-          <strong>
-            BARCODE REGISTER
-          </strong>
-
-          <span>
-            Cetak barcode register
-          </span>
-
-        </div>
-
-
-
-        <!-- BARCODE TUMPUK -->
-
-        <div
-          class="menu-item"
-          onclick="bukaMenuUtama('BARCODE TUMPUK')"
-        >
-
-          <div class="menu-icon">
-            🏗️
-          </div>
-
-          <strong>
-            BARCODE TUMPUK
-          </strong>
-
-          <span>
-            Cetak barcode tumpuk
-          </span>
-
-        </div>
-
-
-      </div>
 
     </main>
 
 
-
-    <!-- =================================================
-         BOTTOM NAVIGATION
-    ================================================== -->
+    <!-- BOTTOM NAV -->
 
     <nav class="bottom-nav">
 
-
-      <!-- HOME -->
-
-      <div
-        class="nav-item active"
-        onclick="bukaHome()"
-      >
-
-        <span class="nav-icon">
-          🏠
-        </span>
-
-        HOME
-
-      </div>
-
-
-
-      <!-- SCAN -->
-
-      <div class="scan-wrapper">
-
         <button
-          class="scan-button"
-          onclick="bukaScanner()"
-          aria-label="SCAN"
+            class="nav-item"
+            onclick="bukaHome()"
         >
-
-          <span class="scan-icon">
-            📷
-          </span>
-
-          <span class="scan-text">
-            SCAN
-          </span>
-
+            <div class="nav-icon">🏠</div>
+            <span>HOME</span>
         </button>
 
-      </div>
+
+        <div class="scan-wrapper">
+
+            <button
+                class="scan-button"
+                onclick="bukaScanner()"
+            >
+
+                <div class="nav-icon">📷</div>
+
+                <span>SCAN</span>
+
+            </button>
+
+        </div>
 
 
-
-      <!-- MENU -->
-
-      <div
-        class="nav-item"
-        onclick="bukaMenuPanel()"
-      >
-
-        <span class="nav-icon">
-          ☰
-        </span>
-
-        MENU
-
-      </div>
-
+        <button
+            class="nav-item"
+            onclick="bukaMenuPanel()"
+        >
+            <div class="nav-icon">☰</div>
+            <span>MENU</span>
+        </button>
 
     </nav>
 
-
-  </div>
-
+</div>
 
 
-  <!-- =====================================================
-       MENU OVERLAY
-  ====================================================== -->
+<!-- =========================
+     SCANNER
+========================= -->
 
-  <div
-    id="menuOverlay"
-    class="menu-overlay"
-    onclick="tutupMenuPanel(event)"
-  >
+<div
+    id="scannerOverlay"
+    class="scanner-overlay"
+>
 
+    <div class="scanner-header">
 
-    <div
-      class="menu-sheet"
-      onclick="event.stopPropagation()"
-    >
-
-
-      <div class="menu-handle"></div>
-
-
-      <div class="menu-sheet-title">
-        MENU
-      </div>
-
-
-
-      <!-- OPERASIONAL -->
-
-      <div
-        class="menu-option"
-        onclick="bukaOperasional()"
-      >
-
-        <div class="menu-option-icon">
-          🔧
+        <div class="scanner-title">
+            SCANNER
         </div>
 
-        <div class="menu-option-text">
-
-          <strong>
-            OPERASIONAL
-          </strong>
-
-          <span>
-            Akses alat dan proses operasional
-          </span>
-
-        </div>
-
-        <div class="menu-arrow">
-          ›
-        </div>
-
-      </div>
-
-
-
-      <!-- PENGATURAN -->
-
-      <div
-        class="menu-option"
-        onclick="bukaPengaturan()"
-      >
-
-        <div class="menu-option-icon">
-          ⚙️
-        </div>
-
-        <div class="menu-option-text">
-
-          <strong>
-            PENGATURAN
-          </strong>
-
-          <span>
-            Pengaturan aplikasi
-          </span>
-
-        </div>
-
-        <div class="menu-arrow">
-          ›
-        </div>
-
-      </div>
-
-
-
-      <!-- TENTANG -->
-
-      <div
-        class="menu-option"
-        onclick="bukaTentang()"
-      >
-
-        <div class="menu-option-icon">
-          ℹ️
-        </div>
-
-        <div class="menu-option-text">
-
-          <strong>
-            TENTANG APLIKASI
-          </strong>
-
-          <span>
-            Informasi aplikasi
-          </span>
-
-        </div>
-
-        <div class="menu-arrow">
-          ›
-        </div>
-
-      </div>
-
-
-
-      <!-- TUTUP -->
-
-      <button
-        class="menu-close"
-        onclick="tutupMenuPanel()"
-      >
-        TUTUP
-      </button>
-
+        <button
+            class="close-scanner"
+            onclick="tutupScanner()"
+        >
+            ✕
+        </button>
 
     </div>
 
-  </div>
+
+    <div class="scanner-body">
+
+        <video
+            id="video"
+            autoplay
+            muted
+            playsinline
+        ></video>
 
 
+        <div class="scan-frame"></div>
 
-  <!-- =====================================================
-       JAVASCRIPT
-  ====================================================== -->
-
-  <script>
+        <div class="scan-line"></div>
 
 
-    /* ===================================================
-       HOME
-    =================================================== */
+        <div class="scanner-info">
+            Arahkan kamera ke QR REGISTER atau QR TUMPUK
+        </div>
 
-    function bukaHome(){
+    </div>
 
-      window.scrollTo({
+</div>
+
+
+<!-- =========================
+     MENU PANEL
+========================= -->
+
+<div
+    id="menuOverlay"
+    class="menu-overlay"
+    onclick="tutupMenuPanel(event)"
+>
+
+    <div
+        class="menu-sheet"
+        onclick="event.stopPropagation()"
+    >
+
+        <h2>MENU</h2>
+
+
+        <button
+            class="panel-item"
+            onclick="bukaOperasional()"
+        >
+            🔧 OPERASIONAL
+        </button>
+
+
+        <button
+            class="panel-item"
+            onclick="bukaPengaturan()"
+        >
+            ⚙️ PENGATURAN
+        </button>
+
+
+        <button
+            class="panel-item"
+            onclick="bukaTentang()"
+        >
+            ℹ️ TENTANG APLIKASI
+        </button>
+
+
+        <button
+            class="panel-item panel-close"
+            onclick="tutupMenuPanel()"
+        >
+            TUTUP
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   GLOBAL SCANNER
+===================================================== */
+
+let codeReader = null;
+
+let scannerRunning = false;
+
+
+/* =====================================================
+   HOME
+===================================================== */
+
+function bukaHome(){
+
+    window.scrollTo({
         top:0,
         behavior:"smooth"
-      });
+    });
 
-    }
+}
 
 
+/* =====================================================
+   MENU UTAMA
+===================================================== */
 
-    /* ===================================================
-       MENU UTAMA
-    =================================================== */
+function bukaMenuUtama(nama){
 
-    function bukaMenuUtama(nama){
-
-      alert(
+    alert(
         nama +
         "\n\nBelum dihubungkan."
-      );
+    );
 
-    }
+}
 
 
+/* =====================================================
+   BUKA SCANNER
+===================================================== */
 
-    /* ===================================================
-       BUKA MENU PANEL
-    =================================================== */
+async function bukaScanner(){
 
-    function bukaMenuPanel(){
-
-      const overlay =
+    const overlay =
         document.getElementById(
-          "menuOverlay"
+            "scannerOverlay"
         );
 
-      overlay.classList.add(
-        "show"
-      );
+    overlay.style.display =
+        "flex";
+
+
+    try{
+
+        codeReader =
+            new ZXingBrowser.BrowserQRCodeReader();
+
+        scannerRunning = true;
+
+
+        const video =
+            document.getElementById("video");
+
+
+        await codeReader.decodeFromVideoDevice(
+            undefined,
+            video,
+            (result, error) => {
+
+                if(!scannerRunning){
+                    return;
+                }
+
+
+                if(result){
+
+                    scannerBerhasil(
+                        result.getText()
+                    );
+
+                }
+
+            }
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "Kamera tidak dapat dibuka.\n\n" +
+            "Pastikan izin kamera sudah diberikan."
+        );
+
+        tutupScanner();
+
+    }
+
+}
+
+
+/* =====================================================
+   HASIL SCAN
+===================================================== */
+
+function scannerBerhasil(teks){
+
+    if(!teks){
+        return;
+    }
+
+
+    scannerRunning = false;
+
+
+    if(codeReader){
+
+        try{
+
+            codeReader.reset();
+
+        }
+        catch(e){}
 
     }
 
 
+    console.log(
+        "HASIL SCAN:",
+        teks
+    );
 
-    /* ===================================================
-       TUTUP MENU PANEL
-    =================================================== */
 
-    function tutupMenuPanel(event){
+    /*
+       UNTUK SEMENTARA
+       KITA TAMPILKAN HASIL QR.
 
-      if(
+       NANTI DI LANGKAH BERIKUTNYA
+       KITA BUAT DETEKSI:
+
+       REGISTER
+       ↓
+       SCAN REGISTER
+
+       TUMPUK
+       ↓
+       CEK TUMPUK
+    */
+
+    alert(
+        "QR TERBACA\n\n" +
+        teks
+    );
+
+}
+
+
+/* =====================================================
+   TUTUP SCANNER
+===================================================== */
+
+function tutupScanner(){
+
+    scannerRunning = false;
+
+
+    if(codeReader){
+
+        try{
+
+            codeReader.reset();
+
+        }
+        catch(e){}
+
+        codeReader = null;
+
+    }
+
+
+    const video =
+        document.getElementById("video");
+
+
+    if(video.srcObject){
+
+        video.srcObject
+            .getTracks()
+            .forEach(
+                track => track.stop()
+            );
+
+        video.srcObject = null;
+
+    }
+
+
+    document.getElementById(
+        "scannerOverlay"
+    ).style.display = "none";
+
+}
+
+
+/* =====================================================
+   MENU PANEL
+===================================================== */
+
+function bukaMenuPanel(){
+
+    document.getElementById(
+        "menuOverlay"
+    ).style.display = "flex";
+
+}
+
+
+function tutupMenuPanel(event){
+
+    if(
         event &&
         event.target !== event.currentTarget
-      ){
+    ){
 
         return;
 
-      }
-
-
-      const overlay =
-        document.getElementById(
-          "menuOverlay"
-        );
-
-      overlay.classList.remove(
-        "show"
-      );
-
     }
 
 
+    document.getElementById(
+        "menuOverlay"
+    ).style.display = "none";
 
-    /* ===================================================
-       OPERASIONAL
-    =================================================== */
+}
 
-    function bukaOperasional(){
 
-      alert(
+/* =====================================================
+   OPERASIONAL
+===================================================== */
+
+function bukaOperasional(){
+
+    alert(
         "OPERASIONAL\n\n" +
         "SCAN REGISTER\n" +
         "CEK TUMPUK"
-      );
+    );
 
-    }
+}
 
 
+/* =====================================================
+   PENGATURAN
+===================================================== */
 
-    /* ===================================================
-       PENGATURAN
-    =================================================== */
+function bukaPengaturan(){
 
-    function bukaPengaturan(){
-
-      alert(
+    alert(
         "PENGATURAN\n\n" +
-        "Belum dihubungkan."
-      );
+        "Belum tersedia."
+    );
 
-    }
+}
 
 
+/* =====================================================
+   TENTANG
+===================================================== */
 
-    /* ===================================================
-       TENTANG
-    =================================================== */
+function bukaTentang(){
 
-    function bukaTentang(){
-
-      alert(
+    alert(
         "SUPER APP\n\n" +
         "Sistem Operasional Terpadu"
-      );
+    );
 
-    }
+}
 
-
-
-    /* ===================================================
-       SCANNER
-    =================================================== */
-
-    function bukaScanner(){
-
-      alert(
-        "SCANNER\n\n" +
-        "Belum dihubungkan."
-      );
-
-    }
-
-
-  </script>
-
+</script>
 
 </body>
-
 </html>
