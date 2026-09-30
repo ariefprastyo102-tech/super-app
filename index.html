@@ -781,10 +781,99 @@ const URL_SCAN_REGISTER =
 ===================================================== */
 
 let codeReader = null;
-
 let scannerRunning = false;
-
 let scanLocked = false;
+
+
+/* =====================================================
+   RESET SCANNER
+===================================================== */
+
+function resetScannerState(){
+
+    scannerRunning = false;
+    scanLocked = false;
+
+    if(codeReader){
+
+        try{
+            codeReader.reset();
+        }
+        catch(e){}
+
+        codeReader = null;
+    }
+
+    const video =
+        document.getElementById("video");
+
+    if(video){
+
+        try{
+
+            video.pause();
+
+            if(video.srcObject){
+
+                video.srcObject
+                    .getTracks()
+                    .forEach(function(track){
+
+                        try{
+                            track.stop();
+                        }
+                        catch(e){}
+
+                    });
+
+            }
+
+            video.srcObject = null;
+
+        }
+        catch(e){}
+
+    }
+
+    const overlay =
+        document.getElementById("scannerOverlay");
+
+    if(overlay){
+
+        overlay.style.display = "none";
+
+    }
+
+}
+
+
+/* =====================================================
+   PAGESHOW
+   RESET SAAT KEMBALI KE SUPER APP
+===================================================== */
+
+window.addEventListener(
+    "pageshow",
+    function(){
+
+        resetScannerState();
+
+        const hasil =
+            document.getElementById("scanResult");
+
+        if(hasil){
+            hasil.style.display = "none";
+        }
+
+        const menu =
+            document.getElementById("menuOverlay");
+
+        if(menu){
+            menu.style.display = "none";
+        }
+
+    }
+);
 
 
 /* =====================================================
@@ -792,6 +881,8 @@ let scanLocked = false;
 ===================================================== */
 
 function bukaHome(){
+
+    resetScannerState();
 
     window.scrollTo({
         top:0,
@@ -821,11 +912,15 @@ function bukaMenuUtama(nama){
 
 async function bukaScanner(){
 
-    // Pastikan scanner lama benar-benar mati
-    tutupScanner();
+    // Bersihkan scanner lama
+    resetScannerState();
 
     const overlay =
         document.getElementById("scannerOverlay");
+
+    if(!overlay){
+        return;
+    }
 
     overlay.style.display = "flex";
 
@@ -841,25 +936,36 @@ async function bukaScanner(){
             document.getElementById("video");
 
         await codeReader.decodeFromConstraints(
+
             {
                 video:{
                     facingMode:{
                         ideal:"environment"
                     },
+
                     width:{
                         ideal:1280
                     },
+
                     height:{
                         ideal:720
                     }
                 },
+
                 audio:false
             },
+
             video,
+
             function(result, error){
 
-                if(!scannerRunning) return;
-                if(scanLocked) return;
+                if(!scannerRunning){
+                    return;
+                }
+
+                if(scanLocked){
+                    return;
+                }
 
                 if(result){
 
@@ -878,6 +984,7 @@ async function bukaScanner(){
                 }
 
             }
+
         );
 
     }
@@ -888,18 +995,17 @@ async function bukaScanner(){
             error
         );
 
-        scannerRunning = false;
+        resetScannerState();
 
         alert(
             "KAMERA GAGAL DIBUKA.\n\n" +
             "Pastikan izin kamera sudah diberikan."
         );
 
-        tutupScanner();
-
     }
 
 }
+
 
 /* =====================================================
    DETEKSI QR
@@ -907,22 +1013,19 @@ async function bukaScanner(){
 
 function deteksiJenisQR(teks){
 
-    const nilai = String(teks || "").trim();
+    const nilai =
+        String(teks || "").trim();
 
-    // ==========================================
-    // REGISTER
-    // ==========================================
-
-    // QR langsung berupa nomor register
+    // REGISTER langsung
     if(/^\d{7}$/.test(nilai)){
         return "REGISTER";
     }
 
-    // QR berupa URL:
-    // https://.../index-test-qr?register=2600014
+    // REGISTER berupa URL
     try{
 
-        const url = new URL(nilai);
+        const url =
+            new URL(nilai);
 
         const register =
             url.searchParams.get("register");
@@ -931,21 +1034,16 @@ function deteksiJenisQR(teks){
             register &&
             /^\d{7}$/.test(register)
         ){
+
             return "REGISTER";
+
         }
 
     }
-    catch(e){
-
-        // Bukan URL, lanjut cek format lain
-
-    }
+    catch(e){}
 
 
-    // ==========================================
     // TUMPUK
-    // ==========================================
-
     const upper =
         nilai.toUpperCase();
 
@@ -956,16 +1054,15 @@ function deteksiJenisQR(teks){
         upper.includes("CEK_TUMPUK") ||
         upper.includes("TUMPUK=")
     ){
+
         return "TUMPUK";
+
     }
 
-
-    // ==========================================
-    // TIDAK DIKENALI
-    // ==========================================
-
     return "TIDAK DIKENAL";
+
 }
+
 
 /* =====================================================
    HASIL SCAN
@@ -973,78 +1070,62 @@ function deteksiJenisQR(teks){
 
 function scannerBerhasil(teks){
 
-    scannerRunning = false;
+    const nilai =
+        String(teks || "").trim();
 
-    if(codeReader){
+    console.log(
+        "HASIL QR:",
+        nilai
+    );
 
-        try{
-            codeReader.reset();
+    // MATIKAN SCANNER SEBELUM PINDAH
+    resetScannerState();
+
+
+    /* ================================================
+       REGISTER
+    ================================================ */
+
+    try{
+
+        const url =
+            new URL(nilai);
+
+        const register =
+            url.searchParams.get("register");
+
+        if(
+            register &&
+            /^\d{7}$/.test(register)
+        ){
+
+            // Gunakan URL QR ASLI
+            window.location.assign(nilai);
+
+            return;
+
         }
-        catch(e){}
 
     }
+    catch(e){}
 
-    tutupScanner();
 
-    const nilai = String(teks || "").trim();
-
-    console.log("QR TERBACA:", nilai);
-
-    // ==========================================
-    // CEK QR REGISTER
-    // ==========================================
-
-    let register = null;
-
-    // Kalau QR langsung angka
+    // REGISTER langsung angka
     if(/^\d{7}$/.test(nilai)){
-        register = nilai;
-    }
 
-    // Kalau QR berupa URL
-    if(!register){
-
-     try {
-
-    const url = new URL(nilai);
-
-    const register =
-        url.searchParams.get("register");
-
-    if (
-        register &&
-        /^\d{7}$/.test(register)
-    ) {
-
-        window.location.href = nilai;
+        alert(
+            "REGISTER TERBACA:\n\n" +
+            nilai
+        );
 
         return;
-    }
-
-}
-catch(e) {}
 
     }
 
-    // ==========================================
-    // JIKA REGISTER DITEMUKAN
-    // ==========================================
 
-    if(
-        register &&
-        /^\d{7}$/.test(register)
-    ){
-
-        window.location.href =
-            "https://ariefprastyo102-tech.github.io/scan-kayu/?register=" +
-            encodeURIComponent(register);
-
-        return;
-    }
-
-    // ==========================================
-    // CEK TUMPUK
-    // ==========================================
+    /* ================================================
+       TUMPUK
+    ================================================ */
 
     const upper =
         nilai.toUpperCase();
@@ -1063,11 +1144,13 @@ catch(e) {}
         );
 
         return;
+
     }
 
-    // ==========================================
-    // TIDAK DIKENALI
-    // ==========================================
+
+    /* ================================================
+       TIDAK DIKENALI
+    ================================================ */
 
     alert(
         "QR TIDAK DIKENALI.\n\n" +
@@ -1075,8 +1158,21 @@ catch(e) {}
     );
 
 }
+
+
 /* =====================================================
-   TAMPILKAN HASIL
+   TUTUP SCANNER
+===================================================== */
+
+function tutupScanner(){
+
+    resetScannerState();
+
+}
+
+
+/* =====================================================
+   HASIL SCAN
 ===================================================== */
 
 function tampilkanHasilScan(
@@ -1084,14 +1180,12 @@ function tampilkanHasilScan(
     teks
 ){
 
-    tutupScanner();
-
+    resetScannerState();
 
     let icon = "❓";
 
     let title =
         "QR TIDAK DIKENALI";
-
 
     if(jenis === "REGISTER"){
 
@@ -1102,7 +1196,6 @@ function tampilkanHasilScan(
 
     }
 
-
     if(jenis === "TUMPUK"){
 
         icon = "🏗️";
@@ -1112,22 +1205,18 @@ function tampilkanHasilScan(
 
     }
 
-
     document.getElementById(
         "resultIcon"
     ).textContent = icon;
-
 
     document.getElementById(
         "resultTitle"
     ).textContent = title;
 
-
     document.getElementById(
         "resultText"
     ).textContent =
         "ISI QR:\n" + teks;
-
 
     document.getElementById(
         "scanResult"
@@ -1146,63 +1235,10 @@ function tutupHasilScan(){
         "scanResult"
     ).style.display = "none";
 
-}
-
-
-/* =====================================================
-   TUTUP SCANNER
-===================================================== */
-
-function tutupScanner(){
-
-    scannerRunning = false;
-    scanLocked = true;
-
-    if(codeReader){
-
-        try{
-            codeReader.reset();
-        }
-        catch(e){}
-
-        codeReader = null;
-    }
-
-    const video =
-        document.getElementById("video");
-
-    if(video){
-
-        try{
-
-            video.pause();
-
-            const stream =
-                video.srcObject;
-
-            if(stream){
-
-                stream.getTracks().forEach(
-                    track => track.stop()
-                );
-
-            }
-
-            video.srcObject = null;
-
-        }
-        catch(e){}
-
-    }
-
-    const overlay =
-        document.getElementById("scannerOverlay");
-
-    if(overlay){
-        overlay.style.display = "none";
-    }
+    resetScannerState();
 
 }
+
 
 /* =====================================================
    MENU
@@ -1223,7 +1259,9 @@ function tutupMenuPanel(event){
         event &&
         event.target !== event.currentTarget
     ){
+
         return;
+
     }
 
     document.getElementById(
