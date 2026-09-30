@@ -14,7 +14,7 @@
     }
 
     body{
-      font-family:Arial, sans-serif;
+      font-family:Arial,sans-serif;
       background:#f3f6f4;
       color:#173b2a;
       min-height:100vh;
@@ -22,24 +22,31 @@
 
     .app{
       max-width:600px;
-      margin:auto;
       min-height:100vh;
-      background:#ffffff;
+      margin:auto;
+      background:#fff;
       position:relative;
       padding-bottom:100px;
     }
 
     /* HEADER */
     .header{
-      background:linear-gradient(135deg,#0d5c36,#176b3a,#23834d);
+      background:linear-gradient(
+        135deg,
+        #0d5c36,
+        #176b3a,
+        #23834d
+      );
+
       color:white;
       padding:22px 20px 26px;
+
       border-radius:0 0 24px 24px;
     }
 
     .header small{
+      font-size:12px;
       opacity:.85;
-      font-size:13px;
     }
 
     .header h1{
@@ -54,7 +61,7 @@
       opacity:.9;
     }
 
-    /* MENU */
+    /* CONTENT */
     .content{
       padding:22px 16px;
     }
@@ -62,9 +69,10 @@
     .section-title{
       font-size:17px;
       font-weight:700;
-      margin-bottom:14px;
+      margin-bottom:15px;
     }
 
+    /* MENU GRID */
     .menu-grid{
       display:grid;
       grid-template-columns:repeat(2,1fr);
@@ -72,18 +80,26 @@
     }
 
     .menu-item{
-      border:1px solid #e2ebe5;
+      min-height:125px;
+
+      padding:18px 15px;
+
       background:#fff;
+
+      border:1px solid #e1ebe4;
       border-radius:18px;
-      padding:20px 14px;
-      min-height:120px;
+
       display:flex;
       flex-direction:column;
       justify-content:center;
       align-items:flex-start;
+
       cursor:pointer;
-      box-shadow:0 4px 12px rgba(0,0,0,.05);
-      transition:.15s;
+
+      box-shadow:
+        0 4px 12px rgba(0,0,0,.05);
+
+      transition:transform .15s;
     }
 
     .menu-item:active{
@@ -91,56 +107,132 @@
     }
 
     .menu-icon{
-      width:46px;
-      height:46px;
+      width:48px;
+      height:48px;
+
       border-radius:14px;
+
       background:#e8f4ec;
+
       display:flex;
       align-items:center;
       justify-content:center;
+
       font-size:25px;
+
       margin-bottom:12px;
     }
 
     .menu-item strong{
-      font-size:15px;
+      font-size:14px;
+      line-height:1.25;
     }
 
     .menu-item span{
-      margin-top:4px;
+      margin-top:5px;
+
       color:#718078;
+
       font-size:11px;
     }
 
-    /* SCAN BUTTON */
+    /* SCAN AREA */
     .scan-area{
       position:fixed;
+
       left:50%;
-      bottom:8px;
+      bottom:0;
+
       transform:translateX(-50%);
+
       width:min(600px,100%);
       height:86px;
+
       pointer-events:none;
+
       z-index:20;
     }
 
+    /* BOTTOM NAV */
+    .bottom-nav{
+      position:absolute;
+
+      left:0;
+      right:0;
+      bottom:0;
+
+      height:68px;
+
+      background:#fff;
+
+      border-top:1px solid #e7ece9;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-around;
+
+      padding:0 12px;
+    }
+
+    .nav-item{
+      width:25%;
+
+      text-align:center;
+
+      color:#738078;
+
+      font-size:10px;
+
+      cursor:pointer;
+    }
+
+    .nav-icon{
+      display:block;
+
+      font-size:21px;
+
+      margin-bottom:3px;
+    }
+
+    .nav-item.active{
+      color:#0d6b3c;
+      font-weight:bold;
+    }
+
+    .nav-space{
+      width:25%;
+    }
+
+    /* SCAN BUTTON */
     .scan-button{
       pointer-events:auto;
+
       position:absolute;
+
       left:50%;
       top:-28px;
+
       transform:translateX(-50%);
+
       width:76px;
       height:76px;
+
       border-radius:50%;
+
       border:6px solid white;
+
       background:#0d6b3c;
+
       color:white;
+
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
-      box-shadow:0 5px 18px rgba(0,0,0,.22);
+
+      box-shadow:
+        0 5px 18px rgba(0,0,0,.22);
+
       cursor:pointer;
     }
 
@@ -155,53 +247,25 @@
       margin-top:4px;
     }
 
-    /* BOTTOM NAV */
-    .bottom-nav{
-      position:absolute;
-      left:0;
-      right:0;
-      bottom:0;
-      height:68px;
-      background:white;
-      border-top:1px solid #e7ece9;
-      display:flex;
-      align-items:center;
-      justify-content:space-around;
-      padding:0 12px;
-    }
-
-    .nav-item{
-      width:25%;
-      text-align:center;
-      color:#738078;
-      font-size:10px;
-      cursor:pointer;
-    }
-
-    .nav-item .nav-icon{
-      display:block;
-      font-size:21px;
-      margin-bottom:3px;
-    }
-
-    .nav-item.active{
-      color:#0d6b3c;
-      font-weight:bold;
-    }
-
-    .nav-space{
-      width:25%;
-    }
-
+    /* MOBILE */
     @media(max-width:380px){
+
+      .content{
+        padding-left:12px;
+        padding-right:12px;
+      }
+
       .menu-grid{
         gap:10px;
       }
 
       .menu-item{
-        min-height:110px;
+        min-height:115px;
+        padding:15px 13px;
       }
+
     }
+
   </style>
 </head>
 
@@ -211,102 +275,273 @@
 
   <!-- HEADER -->
   <header class="header">
+
     <small>SELAMAT DATANG</small>
+
     <h1>SUPER APP</h1>
-    <p>Sistem Operasional Terpadu</p>
+
+    <p>
+      Sistem Operasional Terpadu
+    </p>
+
   </header>
 
-  <!-- MENU -->
+
+  <!-- MENU UTAMA -->
   <main class="content">
 
     <div class="section-title">
       Menu Utama
     </div>
 
+
     <div class="menu-grid">
 
-      <div class="menu-item" onclick="bukaMenu('PASOKAN')">
-        <div class="menu-icon">📦</div>
-        <strong>PASOKAN</strong>
-        <span>Data pasokan</span>
+
+      <!-- DATA OLAH -->
+      <div
+        class="menu-item"
+        onclick="bukaMenu('DATA OLAH')"
+      >
+
+        <div class="menu-icon">
+          🔨
+        </div>
+
+        <strong>
+          DATA OLAH
+        </strong>
+
+        <span>
+          Pengolahan kayu
+        </span>
+
       </div>
 
-      <div class="menu-item" onclick="bukaMenu('DATA OLAH')">
-        <div class="menu-icon">🔨</div>
-        <strong>DATA OLAH</strong>
-        <span>Pengolahan kayu</span>
+
+      <!-- MUTASI BBI -->
+      <div
+        class="menu-item"
+        onclick="bukaMenu('MUTASI BBI')"
+      >
+
+        <div class="menu-icon">
+          📊
+        </div>
+
+        <strong>
+          MUTASI BBI
+        </strong>
+
+        <span>
+          Mutasi bahan baku
+        </span>
+
       </div>
 
-      <div class="menu-item" onclick="bukaMenu('PERSEDIAAN')">
-        <div class="menu-icon">📊</div>
-        <strong>PERSEDIAAN</strong>
-        <span>Stok dan mutasi</span>
+
+      <!-- PERSEDIAAN RST -->
+      <div
+        class="menu-item"
+        onclick="bukaMenu('PERSEDIAAN RST')"
+      >
+
+        <div class="menu-icon">
+          📦
+        </div>
+
+        <strong>
+          PERSEDIAAN RST
+        </strong>
+
+        <span>
+          Persediaan RST
+        </span>
+
       </div>
 
-      <div class="menu-item" onclick="bukaMenu('LAPORAN')">
-        <div class="menu-icon">📈</div>
-        <strong>LAPORAN</strong>
-        <span>Data dan laporan</span>
+
+      <!-- MUTASI -->
+      <div
+        class="menu-item"
+        onclick="bukaMenu('MUTASI')"
+      >
+
+        <div class="menu-icon">
+          📈
+        </div>
+
+        <strong>
+          MUTASI
+        </strong>
+
+        <span>
+          Mutasi persediaan
+        </span>
+
       </div>
 
-      <div class="menu-item" onclick="bukaMenu('BARCODE')">
-        <div class="menu-icon">🏷️</div>
-        <strong>BARCODE</strong>
-        <span>Cetak barcode</span>
+
+      <!-- ENTRY RST -->
+      <div
+        class="menu-item"
+        onclick="bukaMenu('ENTRY RST')"
+      >
+
+        <div class="menu-icon">
+          📝
+        </div>
+
+        <strong>
+          ENTRY RST
+        </strong>
+
+        <span>
+          Entry data RST
+        </span>
+
       </div>
 
-      <div class="menu-item" onclick="bukaMenu('LAINNYA')">
-        <div class="menu-icon">⚙️</div>
-        <strong>LAINNYA</strong>
-        <span>Pengaturan dan alat</span>
+
+      <!-- BARCODE REGISTER -->
+      <div
+        class="menu-item"
+        onclick="bukaMenu('BARCODE REGISTER')"
+      >
+
+        <div class="menu-icon">
+          🏷️
+        </div>
+
+        <strong>
+          BARCODE REGISTER
+        </strong>
+
+        <span>
+          Cetak barcode register
+        </span>
+
       </div>
+
+
+      <!-- BARCODE TUMPUK -->
+      <div
+        class="menu-item"
+        onclick="bukaMenu('BARCODE TUMPUK')"
+      >
+
+        <div class="menu-icon">
+          🏗️
+        </div>
+
+        <strong>
+          BARCODE TUMPUK
+        </strong>
+
+        <span>
+          Cetak barcode tumpuk
+        </span>
+
+      </div>
+
 
     </div>
 
   </main>
 
+
   <!-- BOTTOM NAV -->
   <nav class="bottom-nav">
 
-    <div class="nav-item active" onclick="bukaMenu('HOME')">
-      <span class="nav-icon">🏠</span>
+    <div
+      class="nav-item active"
+      onclick="bukaMenu('HOME')"
+    >
+
+      <span class="nav-icon">
+        🏠
+      </span>
+
       HOME
+
     </div>
 
-    <div class="nav-item" onclick="bukaMenu('DATA')">
-      <span class="nav-icon">📊</span>
+
+    <div
+      class="nav-item"
+      onclick="bukaMenu('DATA')"
+    >
+
+      <span class="nav-icon">
+        📊
+      </span>
+
       DATA
+
     </div>
+
 
     <div class="nav-space"></div>
 
-    <div class="nav-item" onclick="bukaMenu('MENU')">
-      <span class="nav-icon">☰</span>
+
+    <div
+      class="nav-item"
+      onclick="bukaMenu('MENU')"
+    >
+
+      <span class="nav-icon">
+        ☰
+      </span>
+
       MENU
+
     </div>
 
   </nav>
 
-  <!-- SCAN -->
+
+  <!-- SCANER -->
   <div class="scan-area">
 
-    <button class="scan-button" onclick="bukaScanner()">
-      <span class="icon">📷</span>
-      <span class="text">SCAN</span>
+    <button
+      class="scan-button"
+      onclick="bukaScanner()"
+    >
+
+      <span class="icon">
+        📷
+      </span>
+
+      <span class="text">
+        SCAN
+      </span>
+
     </button>
 
   </div>
 
+
 </div>
+
 
 <script>
 
 function bukaMenu(nama){
-  alert(nama + " belum dihubungkan.");
+
+  alert(
+    nama +
+    " belum dihubungkan."
+  );
+
 }
 
+
 function bukaScanner(){
-  alert("SCANNER belum dihubungkan.");
+
+  alert(
+    "SCANNER belum dihubungkan."
+  );
+
 }
 
 </script>
