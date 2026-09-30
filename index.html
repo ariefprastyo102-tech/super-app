@@ -922,7 +922,6 @@ body{
 
 <div class="app">
 
-
 <header class="header">
 
     <small>
@@ -937,7 +936,6 @@ body{
         Sistem Operasional Terpadu
     </p>
 
-
     <div
         id="dashboardDate"
         class="dashboard-date"
@@ -950,20 +948,13 @@ body{
 
 <main class="content">
 
-
-    <!-- =================================================
-         DASHBOARD PERSEDIAAN
-    ================================================== -->
-
     <section class="dashboard-section">
 
         <div class="section-title">
             PERSEDIAAN
         </div>
 
-
         <div class="stock-grid">
-
 
             <div class="stock-card">
 
@@ -984,7 +975,6 @@ body{
 
             </div>
 
-
             <div class="stock-card">
 
                 <div class="stock-label">
@@ -1004,21 +994,14 @@ body{
 
             </div>
 
-
         </div>
 
     </section>
 
 
-    <!-- =================================================
-         PENGOLAHAN HARIAN
-    ================================================== -->
-
     <section class="dashboard-section">
 
-
         <div class="daily-card">
-
 
             <div class="daily-header">
 
@@ -1035,9 +1018,7 @@ body{
 
             </div>
 
-
             <div class="daily-grid">
-
 
                 <div class="daily-item">
 
@@ -1078,7 +1059,6 @@ body{
 
                 </div>
 
-
             </div>
 
 
@@ -1101,15 +1081,10 @@ body{
 
             </div>
 
-
         </div>
 
     </section>
 
-
-    <!-- =================================================
-         MENU UTAMA
-    ================================================== -->
 
     <div class="section-title">
         Menu Utama
@@ -1118,14 +1093,10 @@ body{
 
     <div class="menu-grid">
 
-
-        <!-- DATA OLAH -->
-
         <button
             class="menu-card"
             onclick="bukaMenuUtama('DATA OLAH')"
         >
-
             <div class="menu-icon">
                 🪵
             </div>
@@ -1133,17 +1104,13 @@ body{
             <div class="menu-name">
                 DATA OLAH
             </div>
-
         </button>
 
-
-        <!-- MUTASI BBI -->
 
         <button
             class="menu-card"
             onclick="bukaMenuUtama('MUTASI BBI')"
         >
-
             <div class="menu-icon">
                 📊
             </div>
@@ -1151,17 +1118,13 @@ body{
             <div class="menu-name">
                 MUTASI BBI
             </div>
-
         </button>
 
-
-        <!-- PERSEDIAAN RST -->
 
         <button
             class="menu-card"
             onclick="bukaMenuUtama('PERSEDIAAN RST')"
         >
-
             <div class="menu-icon">
                 📦
             </div>
@@ -1169,17 +1132,13 @@ body{
             <div class="menu-name">
                 PERSEDIAAN RST
             </div>
-
         </button>
 
-
-        <!-- MUTASI RST -->
 
         <button
             class="menu-card"
             onclick="bukaMenuUtama('MUTASI RST')"
         >
-
             <div class="menu-icon">
                 📈
             </div>
@@ -1187,17 +1146,13 @@ body{
             <div class="menu-name">
                 MUTASI RST
             </div>
-
         </button>
 
-
-        <!-- ENTRY RST -->
 
         <button
             class="menu-card"
             onclick="bukaMenuUtama('ENTRY RST')"
         >
-
             <div class="menu-icon">
                 📝
             </div>
@@ -1205,17 +1160,13 @@ body{
             <div class="menu-name">
                 ENTRY RST
             </div>
-
         </button>
 
-
-        <!-- BARCODE REGISTER -->
 
         <button
             class="menu-card"
             onclick="bukaMenuUtama('BARCODE REGISTER')"
         >
-
             <div class="menu-icon">
                 🔖
             </div>
@@ -1223,17 +1174,13 @@ body{
             <div class="menu-name">
                 BARCODE REGISTER
             </div>
-
         </button>
 
-
-        <!-- BARCODE TUMPUK -->
 
         <button
             class="menu-card"
             onclick="bukaMenuUtama('BARCODE TUMPUK')"
         >
-
             <div class="menu-icon">
                 🏷️
             </div>
@@ -1241,24 +1188,14 @@ body{
             <div class="menu-name">
                 BARCODE TUMPUK
             </div>
-
         </button>
 
-
     </div>
-
 
 </main>
 
 
-<!-- =====================================================
-     BOTTOM NAV
-===================================================== -->
-
 <nav class="bottom-nav">
-
-
-    <!-- HOME -->
 
     <button
         class="nav-item active"
@@ -1275,8 +1212,6 @@ body{
 
     </button>
 
-
-    <!-- SCAN -->
 
     <div class="scan-wrapper">
 
@@ -1298,8 +1233,6 @@ body{
     </div>
 
 
-    <!-- HISTORY -->
-
     <button
         class="nav-item"
         onclick="bukaHistory()"
@@ -1315,15 +1248,10 @@ body{
 
     </button>
 
-
 </nav>
 
 </div>
 
-
-<!-- =====================================================
-     HISTORY
-===================================================== -->
 
 <div
     id="historyOverlay"
@@ -1331,12 +1259,10 @@ body{
     onclick="tutupHistory(event)"
 >
 
-
     <div
         class="history-sheet"
         onclick="event.stopPropagation()"
     >
-
 
         <div class="history-head">
 
@@ -1356,34 +1282,21 @@ body{
 
         <div id="historyList">
 
-
             <div class="history-empty">
-
-                History pengolahan akan menampilkan
-                tanggal, Olah BBI, Hasil RST,
-                dan Rendemen setelah data API
-                dashboard kita sambungkan.
-
+                MEMUAT HISTORY...
             </div>
 
-
         </div>
-
 
     </div>
 
 </div>
 
 
-<!-- =====================================================
-     SCANNER
-===================================================== -->
-
 <div
     id="scannerOverlay"
     class="scanner-overlay"
 >
-
 
     <div class="scanner-header">
 
@@ -1403,7 +1316,6 @@ body{
 
     <div class="scanner-body">
 
-
         <video
             id="video"
             autoplay
@@ -1411,34 +1323,25 @@ body{
             playsinline
         ></video>
 
-
         <div class="scan-frame"></div>
 
         <div class="scan-line"></div>
 
-
         <div class="scanner-info">
             Arahkan QR / BARCODE REGISTER / QR TUMPUK ke kotak putih
         </div>
-
 
     </div>
 
 </div>
 
 
-<!-- =====================================================
-     HASIL SCAN
-===================================================== -->
-
 <div
     id="scanResult"
     class="scan-result"
 >
 
-
     <div class="result-box">
-
 
         <div
             id="resultIcon"
@@ -1447,7 +1350,6 @@ body{
             ✅
         </div>
 
-
         <div
             id="resultTitle"
             class="result-title"
@@ -1455,12 +1357,10 @@ body{
             QR TERBACA
         </div>
 
-
         <div
             id="resultText"
             class="result-text"
         ></div>
-
 
         <button
             class="result-button"
@@ -1468,7 +1368,6 @@ body{
         >
             TUTUP
         </button>
-
 
     </div>
 
@@ -1504,6 +1403,17 @@ const URL_BARCODE_TUMPUK =
 
 
 /* =====================================================
+   API DASHBOARD
+===================================================== */
+
+const API_DATA_OLAH =
+    "https://script.google.com/macros/s/AKfycbx3wriyYJKQAUWp_QMWR3J0TxwdjVL0Htigd2g59vawku1c4abcwORWT8rwHzdlsg/exec";
+
+const API_RST =
+    "https://script.google.com/macros/s/AKfycby9dcBegLV7frA3KRFNW3cvM7dwbeBI91smsnFmX8KijjpuTk15KRo4XDsAvNYAFpU2/exec";
+
+
+/* =====================================================
    SCANNER
 ===================================================== */
 
@@ -1525,7 +1435,6 @@ function resetScannerState(){
     scannerRunning = false;
 
     scanLocked = false;
-
 
     scanSession++;
 
@@ -1699,6 +1608,178 @@ function formatTanggalIndonesia(
 }
 
 
+function formatTanggalDashboard(
+    tanggal
+){
+
+    if(!tanggal){
+
+        return "—";
+
+    }
+
+
+    const teks =
+        String(tanggal).trim();
+
+
+    let cocok =
+        teks.match(
+            /^(\d{4})-(\d{1,2})-(\d{1,2})$/
+        );
+
+
+    if(cocok){
+
+        const date =
+            new Date(
+                Number(cocok[1]),
+                Number(cocok[2]) - 1,
+                Number(cocok[3])
+            );
+
+
+        return formatTanggalIndonesia(
+            date
+        );
+
+    }
+
+
+    cocok =
+        teks.match(
+            /^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})$/
+        );
+
+
+    if(cocok){
+
+        const date =
+            new Date(
+                Number(cocok[3]),
+                Number(cocok[2]) - 1,
+                Number(cocok[1])
+            );
+
+
+        return formatTanggalIndonesia(
+            date
+        );
+
+    }
+
+
+    return teks
+        .toUpperCase();
+
+}
+
+
+function nilaiTanggalDashboard(
+    tanggal
+){
+
+    const teks =
+        String(tanggal || "")
+            .trim()
+            .toLowerCase();
+
+
+    if(!teks){
+
+        return 0;
+
+    }
+
+
+    let cocok =
+        teks.match(
+            /^(\d{4})-(\d{1,2})-(\d{1,2})$/
+        );
+
+
+    if(cocok){
+
+        return new Date(
+            Number(cocok[1]),
+            Number(cocok[2]) - 1,
+            Number(cocok[3])
+        ).getTime();
+
+    }
+
+
+    cocok =
+        teks.match(
+            /^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})$/
+        );
+
+
+    if(cocok){
+
+        return new Date(
+            Number(cocok[3]),
+            Number(cocok[2]) - 1,
+            Number(cocok[1])
+        ).getTime();
+
+    }
+
+
+    const bulan = {
+
+        januari:0,
+        februari:1,
+        maret:2,
+        april:3,
+        mei:4,
+        juni:5,
+        juli:6,
+        agustus:7,
+        september:8,
+        oktober:9,
+        nopember:10,
+        november:10,
+        desember:11
+
+    };
+
+
+    cocok =
+        teks.match(
+            /^(\d{1,2})\s+([a-z]+)\s+(\d{4})$/
+        );
+
+
+    if(cocok){
+
+        const namaBulan =
+            cocok[2];
+
+
+        if(
+            Object.prototype.hasOwnProperty.call(
+                bulan,
+                namaBulan
+            )
+        ){
+
+            return new Date(
+                Number(cocok[3]),
+                bulan[namaBulan],
+                Number(cocok[1])
+            ).getTime();
+
+        }
+
+    }
+
+
+    return 0;
+
+}
+
+
 function updateTanggal(){
 
     const sekarang =
@@ -1717,23 +1798,9 @@ function updateTanggal(){
         );
 
 
-    const dailyTanggal =
-        document.getElementById(
-            "dailyDate"
-        );
-
-
     if(headerTanggal){
 
         headerTanggal.textContent =
-            teks;
-
-    }
-
-
-    if(dailyTanggal){
-
-        dailyTanggal.textContent =
             teks;
 
     }
@@ -1788,6 +1855,9 @@ function bukaHistory(){
             "flex";
 
     }
+
+
+    muatHistoryDashboard();
 
 }
 
@@ -1917,7 +1987,7 @@ function bukaMenuUtama(nama){
 
 
 /* =====================================================
-   BUKA SCANNER
+   SCANNER
 ===================================================== */
 
 function bukaScanner(){
@@ -1928,7 +1998,6 @@ function bukaScanner(){
 
 
     resetScannerState();
-
 
     tutupHistory();
 
@@ -2074,7 +2143,6 @@ function bukaScanner(){
 
         })
 
-
         .catch(function(error){
 
             console.error(
@@ -2208,10 +2276,6 @@ function scannerBerhasil(teks){
     resetScannerState();
 
 
-    /* =================================================
-       CODE 128 REGISTER
-    ================================================= */
-
     if(
         /^\d{7}$/.test(nilai)
     ){
@@ -2219,18 +2283,6 @@ function scannerBerhasil(teks){
         const urlRegister =
             "https://ariefprastyo102-tech.github.io/scan-kayu/index-test-qr?register=" +
             encodeURIComponent(nilai);
-
-
-        console.log(
-            "REGISTER CODE 128:",
-            nilai
-        );
-
-
-        console.log(
-            "BUKA SCAN REGISTER:",
-            urlRegister
-        );
 
 
         window.location.assign(
@@ -2242,10 +2294,6 @@ function scannerBerhasil(teks){
 
     }
 
-
-    /* =================================================
-       QR REGISTER
-    ================================================= */
 
     try{
 
@@ -2267,12 +2315,6 @@ function scannerBerhasil(teks){
 
         ){
 
-            console.log(
-                "QR REGISTER:",
-                register
-            );
-
-
             window.location.assign(
                 nilai
             );
@@ -2286,10 +2328,6 @@ function scannerBerhasil(teks){
 
     catch(e){}
 
-
-    /* =================================================
-       QR TUMPUK
-    ================================================= */
 
     try{
 
@@ -2329,13 +2367,6 @@ function scannerBerhasil(teks){
 
         ){
 
-            console.log(
-                "QR TUMPUK:",
-                tpk,
-                tumpuk
-            );
-
-
             window.location.assign(
                 nilai
             );
@@ -2349,10 +2380,6 @@ function scannerBerhasil(teks){
 
     catch(e){}
 
-
-    /* =================================================
-       FORMAT TUMPUK LAIN
-    ================================================= */
 
     const upper =
         nilai.toUpperCase();
@@ -2400,10 +2427,6 @@ function scannerBerhasil(teks){
 
     }
 
-
-    /* =================================================
-       TIDAK DIKENALI
-    ================================================= */
 
     alert(
         "QR / BARCODE TIDAK DIKENALI.\n\n" +
@@ -2584,16 +2607,993 @@ function formatVolume(nilai){
 
 
 /* =====================================================
+   JSONP
+===================================================== */
+
+let jsonpCounter = 0;
+
+
+function ambilJSONP(
+    url,
+    parameter,
+    timeout
+){
+
+    return new Promise(
+        function(resolve,reject){
+
+            jsonpCounter++;
+
+
+            const callbackName =
+                "superAppJSONP_" +
+                Date.now() +
+                "_" +
+                jsonpCounter;
+
+
+            const script =
+                document.createElement(
+                    "script"
+                );
+
+
+            let selesai =
+                false;
+
+
+            const query =
+                new URLSearchParams(
+                    parameter || {}
+                );
+
+
+            query.set(
+                "callback",
+                callbackName
+            );
+
+
+            const src =
+                url +
+                (
+                    url.includes("?")
+                        ? "&"
+                        : "?"
+                ) +
+                query.toString();
+
+
+            const timer =
+                setTimeout(
+                    function(){
+
+                        if(selesai){
+                            return;
+                        }
+
+
+                        selesai =
+                            true;
+
+
+                        cleanup();
+
+
+                        reject(
+                            new Error(
+                                "TIMEOUT"
+                            )
+                        );
+
+                    },
+                    timeout || 15000
+                );
+
+
+            function cleanup(){
+
+                clearTimeout(
+                    timer
+                );
+
+
+                try{
+
+                    delete window[
+                        callbackName
+                    ];
+
+                }
+                catch(e){
+
+                    window[
+                        callbackName
+                    ] = undefined;
+
+                }
+
+
+                if(script.parentNode){
+
+                    script.parentNode.removeChild(
+                        script
+                    );
+
+                }
+
+            }
+
+
+            window[
+                callbackName
+            ] =
+                function(data){
+
+                    if(selesai){
+                        return;
+                    }
+
+
+                    selesai =
+                        true;
+
+
+                    cleanup();
+
+
+                    resolve(data);
+
+                };
+
+
+            script.onerror =
+                function(){
+
+                    if(selesai){
+                        return;
+                    }
+
+
+                    selesai =
+                        true;
+
+
+                    cleanup();
+
+
+                    reject(
+                        new Error(
+                            "GAGAL MEMUAT API"
+                        )
+                    );
+
+                };
+
+
+            script.src =
+                src;
+
+
+            document
+                .head
+                .appendChild(
+                    script
+                );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   AMBIL HISTORY DATA OLAH
+===================================================== */
+
+async function ambilHistoryOlahDashboard(){
+
+    const data =
+        await ambilJSONP(
+
+            API_DATA_OLAH,
+
+            {
+                getHistoryOlah:"1"
+            },
+
+            20000
+
+        );
+
+
+    if(
+        !data ||
+        data.status !== "success"
+    ){
+
+        throw new Error(
+            "API DATA OLAH tidak mengembalikan data."
+        );
+
+    }
+
+
+    return Array.isArray(
+        data.data
+    )
+        ? data.data
+        : [];
+
+}
+
+
+/* =====================================================
+   AMBIL HARIAN RST
+===================================================== */
+
+async function ambilHistoryRSTDashboard(){
+
+    const data =
+        await ambilJSONP(
+
+            API_RST,
+
+            {
+                action:"daily"
+            },
+
+            20000
+
+        );
+
+
+    if(
+        !data ||
+        data.sukses !== true
+    ){
+
+        throw new Error(
+            "API RST tidak mengembalikan data."
+        );
+
+    }
+
+
+    return Array.isArray(
+        data.data
+    )
+        ? data.data
+        : [];
+
+}
+
+
+/* =====================================================
+   NORMALISASI TANGGAL
+===================================================== */
+
+function normalisasiTanggalDashboard(
+    tanggal
+){
+
+    const teks =
+        String(
+            tanggal || ""
+        )
+            .trim()
+            .toLowerCase();
+
+
+    if(!teks){
+
+        return "";
+
+    }
+
+
+    let cocok =
+        teks.match(
+            /^(\d{4})-(\d{1,2})-(\d{1,2})$/
+        );
+
+
+    if(cocok){
+
+        return (
+
+            cocok[1] +
+            "-" +
+            String(
+                Number(cocok[2])
+            ).padStart(2,"0") +
+            "-" +
+            String(
+                Number(cocok[3])
+            ).padStart(2,"0")
+
+        );
+
+    }
+
+
+    cocok =
+        teks.match(
+            /^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})$/
+        );
+
+
+    if(cocok){
+
+        return (
+
+            cocok[3] +
+            "-" +
+            String(
+                Number(cocok[2])
+            ).padStart(2,"0") +
+            "-" +
+            String(
+                Number(cocok[1])
+            ).padStart(2,"0")
+
+        );
+
+    }
+
+
+    const bulan = {
+
+        januari:"01",
+        februari:"02",
+        maret:"03",
+        april:"04",
+        mei:"05",
+        juni:"06",
+        juli:"07",
+        agustus:"08",
+        september:"09",
+        oktober:"10",
+        nopember:"11",
+        november:"11",
+        desember:"12"
+
+    };
+
+
+    cocok =
+        teks.match(
+            /^(\d{1,2})\s+([a-z]+)\s+(\d{4})$/
+        );
+
+
+    if(cocok){
+
+        const nomorBulan =
+            bulan[
+                cocok[2]
+            ];
+
+
+        if(nomorBulan){
+
+            return (
+
+                cocok[3] +
+                "-" +
+                nomorBulan +
+                "-" +
+                String(
+                    Number(cocok[1])
+                ).padStart(2,"0")
+
+            );
+
+        }
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =====================================================
+   GABUNG DATA HARIAN
+===================================================== */
+
+function gabungkanDataHarian(
+    dataOlah,
+    dataRST
+){
+
+    const mapOlah =
+        new Map();
+
+
+    const mapRST =
+        new Map();
+
+
+    /*
+      DATA OLAH
+    */
+
+    dataOlah.forEach(
+        function(item){
+
+            const tanggal =
+                normalisasiTanggalDashboard(
+                    item.tanggal
+                );
+
+
+            if(!tanggal){
+                return;
+            }
+
+
+            const volume =
+                Number(
+                    item.volume
+                ) || 0;
+
+
+            mapOlah.set(
+                tanggal,
+                (
+                    Number(
+                        mapOlah.get(
+                            tanggal
+                        )
+                    ) || 0
+                ) + volume
+            );
+
+        }
+    );
+
+
+    /*
+      RST
+    */
+
+    dataRST.forEach(
+        function(item){
+
+            const tanggal =
+                normalisasiTanggalDashboard(
+                    item.tanggal
+                );
+
+
+            if(!tanggal){
+                return;
+            }
+
+
+            const volume =
+                Number(
+                    item.volume
+                ) || 0;
+
+
+            mapRST.set(
+                tanggal,
+                (
+                    Number(
+                        mapRST.get(
+                            tanggal
+                        )
+                    ) || 0
+                ) + volume
+            );
+
+        }
+    );
+
+
+    /*
+      HANYA TANGGAL YANG
+      ADA DI KEDUA DATA
+    */
+
+    const tanggalGabung =
+        Array.from(
+            mapOlah.keys()
+        )
+        .filter(
+            function(tanggal){
+
+                return mapRST.has(
+                    tanggal
+                );
+
+            }
+        );
+
+
+    tanggalGabung.sort(
+        function(a,b){
+
+            return (
+                nilaiTanggalDashboard(b)
+                -
+                nilaiTanggalDashboard(a)
+            );
+
+        }
+    );
+
+
+    return tanggalGabung.map(
+        function(tanggal){
+
+            const olahBBI =
+                Number(
+                    mapOlah.get(
+                        tanggal
+                    )
+                ) || 0;
+
+
+            const hasilRST =
+                Number(
+                    mapRST.get(
+                        tanggal
+                    )
+                ) || 0;
+
+
+            const rendemen =
+                olahBBI > 0
+
+                    ?
+
+                    (
+                        hasilRST /
+                        olahBBI
+                    ) * 100
+
+                    :
+
+                    0;
+
+
+            return {
+
+                tanggal:
+                    tanggal,
+
+                olahBBI:
+                    olahBBI,
+
+                hasilRST:
+                    hasilRST,
+
+                rendemen:
+                    rendemen
+
+            };
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   TAMPILKAN DASHBOARD
+===================================================== */
+
+function tampilkanDataHarianDashboard(
+    data
+){
+
+    if(
+        !Array.isArray(data) ||
+        !data.length
+    ){
+
+        document.getElementById(
+            "dashboardDate"
+        ).textContent =
+            "DATA HARIAN BELUM TERSEDIA";
+
+
+        document.getElementById(
+            "dailyDate"
+        ).textContent =
+            "—";
+
+
+        document.getElementById(
+            "olahBBI"
+        ).textContent =
+            "—";
+
+
+        document.getElementById(
+            "hasilRST"
+        ).textContent =
+            "—";
+
+
+        document.getElementById(
+            "rendemen"
+        ).textContent =
+            "—";
+
+
+        return;
+
+    }
+
+
+    const terbaru =
+        data[0];
+
+
+    const tanggalTampil =
+        formatTanggalDashboard(
+            terbaru.tanggal
+        );
+
+
+    document.getElementById(
+        "dashboardDate"
+    ).textContent =
+        tanggalTampil;
+
+
+    document.getElementById(
+        "dailyDate"
+    ).textContent =
+        tanggalTampil;
+
+
+    document.getElementById(
+        "olahBBI"
+    ).textContent =
+        formatVolume(
+            terbaru.olahBBI
+        );
+
+
+    document.getElementById(
+        "hasilRST"
+    ).textContent =
+        formatVolume(
+            terbaru.hasilRST
+        );
+
+
+    document.getElementById(
+        "rendemen"
+    ).textContent =
+        Number(
+            terbaru.rendemen
+        ).toFixed(2) +
+        "%";
+
+}
+
+
+/* =====================================================
+   RENDER HISTORY
+===================================================== */
+
+function renderHistoryDashboard(
+    data
+){
+
+    const container =
+        document.getElementById(
+            "historyList"
+        );
+
+
+    if(!container){
+        return;
+    }
+
+
+    if(
+        !Array.isArray(data) ||
+        !data.length
+    ){
+
+        container.innerHTML =
+
+            '<div class="history-empty">' +
+
+            'Belum ada history pengolahan ' +
+            'yang memiliki data Olah BBI dan Hasil RST ' +
+            'pada tanggal yang sama.' +
+
+            '</div>';
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        data.map(
+            function(item){
+
+                return (
+
+                    '<div class="history-card">' +
+
+                        '<div class="history-date">' +
+                            formatTanggalDashboard(
+                                item.tanggal
+                            ) +
+                        '</div>' +
+
+                        '<div class="history-grid">' +
+
+                            '<div class="history-item">' +
+
+                                '<div class="history-label">' +
+                                    'OLAH BBI' +
+                                '</div>' +
+
+                                '<div class="history-value">' +
+                                    formatVolume(
+                                        item.olahBBI
+                                    ) +
+                                    ' m³' +
+                                '</div>' +
+
+                            '</div>' +
+
+
+                            '<div class="history-item">' +
+
+                                '<div class="history-label">' +
+                                    'HASIL RST' +
+                                '</div>' +
+
+                                '<div class="history-value">' +
+                                    formatVolume(
+                                        item.hasilRST
+                                    ) +
+                                    ' m³' +
+                                '</div>' +
+
+                            '</div>' +
+
+
+                            '<div class="history-item">' +
+
+                                '<div class="history-label">' +
+                                    'RENDEMEN' +
+                                '</div>' +
+
+                                '<div class="history-value">' +
+                                    Number(
+                                        item.rendemen
+                                    ).toFixed(2) +
+                                    '%' +
+                                '</div>' +
+
+                            '</div>' +
+
+                        '</div>' +
+
+                    '</div>'
+
+                );
+
+            }
+        )
+        .join("");
+
+}
+
+
+/* =====================================================
+   MUAT DATA DASHBOARD
+===================================================== */
+
+let dashboardDataHarian = [];
+
+
+async function muatDashboard(){
+
+    console.log(
+        "MEMUAT DATA DASHBOARD..."
+    );
+
+
+    try{
+
+        const hasil =
+            await Promise.all([
+
+                ambilHistoryOlahDashboard(),
+
+                ambilHistoryRSTDashboard()
+
+            ]);
+
+
+        const dataOlah =
+            hasil[0];
+
+
+        const dataRST =
+            hasil[1];
+
+
+        console.log(
+            "DATA OLAH:",
+            dataOlah
+        );
+
+
+        console.log(
+            "DATA RST:",
+            dataRST
+        );
+
+
+        dashboardDataHarian =
+            gabungkanDataHarian(
+                dataOlah,
+                dataRST
+            );
+
+
+        console.log(
+            "DATA HARIAN GABUNGAN:",
+            dashboardDataHarian
+        );
+
+
+        tampilkanDataHarianDashboard(
+            dashboardDataHarian
+        );
+
+
+    }
+
+    catch(error){
+
+        console.error(
+            "GAGAL MEMUAT DASHBOARD:",
+            error
+        );
+
+
+        document.getElementById(
+            "dashboardDate"
+        ).textContent =
+            "GAGAL MEMUAT DATA";
+
+
+        document.getElementById(
+            "dailyDate"
+        ).textContent =
+            "—";
+
+
+        document.getElementById(
+            "olahBBI"
+        ).textContent =
+            "—";
+
+
+        document.getElementById(
+            "hasilRST"
+        ).textContent =
+            "—";
+
+
+        document.getElementById(
+            "rendemen"
+        ).textContent =
+            "—";
+
+    }
+
+}
+
+
+/* =====================================================
+   MUAT HISTORY
+===================================================== */
+
+async function muatHistoryDashboard(){
+
+    const container =
+        document.getElementById(
+            "historyList"
+        );
+
+
+    if(container){
+
+        container.innerHTML =
+
+            '<div class="history-empty">' +
+
+            'MEMUAT HISTORY...' +
+
+            '</div>';
+
+    }
+
+
+    try{
+
+        if(
+            !dashboardDataHarian.length
+        ){
+
+            const hasil =
+                await Promise.all([
+
+                    ambilHistoryOlahDashboard(),
+
+                    ambilHistoryRSTDashboard()
+
+                ]);
+
+
+            dashboardDataHarian =
+                gabungkanDataHarian(
+                    hasil[0],
+                    hasil[1]
+                );
+
+        }
+
+
+        renderHistoryDashboard(
+            dashboardDataHarian
+        );
+
+    }
+
+    catch(error){
+
+        console.error(
+            "GAGAL MEMUAT HISTORY:",
+            error
+        );
+
+
+        if(container){
+
+            container.innerHTML =
+
+                '<div class="history-empty">' +
+
+                'Gagal memuat history.<br>' +
+
+                'Periksa koneksi API.' +
+
+                '</div>';
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
    DASHBOARD DATA
-   SEMENTARA BELUM TERHUBUNG API
 ===================================================== */
 
 function setDashboardData(data){
 
     if(!data){
-
         return;
-
     }
 
 
@@ -2704,6 +3704,8 @@ document.addEventListener(
     function(){
 
         updateTanggal();
+
+        muatDashboard();
 
     }
 );
