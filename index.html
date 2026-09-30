@@ -1078,12 +1078,12 @@ function scannerBerhasil(teks){
         nilai
     );
 
-    // MATIKAN SCANNER SEBELUM PINDAH
+    // MATIKAN SCANNER
     resetScannerState();
 
 
     /* ================================================
-       REGISTER
+       QR REGISTER
     ================================================ */
 
     try{
@@ -1099,7 +1099,6 @@ function scannerBerhasil(teks){
             /^\d{7}$/.test(register)
         ){
 
-            // Gunakan URL QR ASLI
             window.location.assign(nilai);
 
             return;
@@ -1110,21 +1109,49 @@ function scannerBerhasil(teks){
     catch(e){}
 
 
-    // REGISTER langsung angka
-    if(/^\d{7}$/.test(nilai)){
+    /* ================================================
+       QR TUMPUK
+    ================================================ */
 
-        alert(
-            "REGISTER TERBACA:\n\n" +
-            nilai
-        );
+    try{
 
-        return;
+        const url =
+            new URL(nilai);
+
+        const pathname =
+            url.pathname.toLowerCase();
+
+        const tpk =
+            url.searchParams.get("tpk");
+
+        const tumpuk =
+            url.searchParams.get("tumpuk");
+
+        if(
+            pathname.includes("cek-tumpuk.html") &&
+            tpk &&
+            tumpuk
+        ){
+
+            console.log(
+                "QR TUMPUK:",
+                tpk,
+                tumpuk
+            );
+
+            // BUKA URL ASLI DARI QR
+            window.location.assign(nilai);
+
+            return;
+
+        }
 
     }
+    catch(e){}
 
 
     /* ================================================
-       TUMPUK
+       TUMPUK FORMAT LAIN
     ================================================ */
 
     const upper =
@@ -1158,7 +1185,6 @@ function scannerBerhasil(teks){
     );
 
 }
-
 
 /* =====================================================
    TUTUP SCANNER
