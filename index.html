@@ -783,7 +783,7 @@ const URL_SCAN_REGISTER =
 let codeReader = null;
 let scannerRunning = false;
 let scanLocked = false;
-
+let scanSession = 0;
 
 /* =====================================================
    RESET SCANNER
@@ -1213,8 +1213,32 @@ function scannerBerhasil(teks){
 
 function tutupScanner(){
 
+    // Matikan scanner
     resetScannerState();
 
+    // Hapus hasil scan lama
+    scanLocked = false;
+    scannerRunning = false;
+
+    // Pastikan overlay hasil scan tertutup
+    const hasil =
+        document.getElementById("scanResult");
+
+    if(hasil){
+        hasil.style.display = "none";
+    }
+
+    // Pastikan scanner benar-benar tertutup
+    const scanner =
+        document.getElementById("scannerOverlay");
+
+    if(scanner){
+        scanner.style.display = "none";
+    }
+
+    console.log(
+        "SCANNER DITUTUP - STATE LAMA DIHAPUS"
+    );
 }
 
 
