@@ -1165,12 +1165,44 @@ function scannerBerhasil(teks){
         String(teks || "").trim();
 
     console.log(
-        "HASIL QR:",
+        "HASIL SCAN:",
         nilai
     );
 
     // MATIKAN SCANNER
     resetScannerState();
+
+
+    /* ================================================
+       REGISTER CODE 128
+       HASIL SCAN = NOMOR REGISTER 7 DIGIT
+       CONTOH: 2600014
+    ================================================ */
+
+    if(
+        /^\d{7}$/.test(nilai)
+    ){
+
+        console.log(
+            "REGISTER CODE 128:",
+            nilai
+        );
+
+        const urlRegister =
+            "https://ariefprastyo102-tech.github.io/scan-kayu/index-test-qr?register=" +
+            encodeURIComponent(nilai);
+
+        console.log(
+            "BUKA SCAN REGISTER:",
+            urlRegister
+        );
+
+        window.location.assign(
+            urlRegister
+        );
+
+        return;
+    }
 
 
     /* ================================================
@@ -1190,7 +1222,15 @@ function scannerBerhasil(teks){
             /^\d{7}$/.test(register)
         ){
 
-            window.location.assign(nilai);
+            console.log(
+                "QR REGISTER:",
+                register
+            );
+
+            // PAKAI URL ASLI DARI QR
+            window.location.assign(
+                nilai
+            );
 
             return;
 
@@ -1230,8 +1270,10 @@ function scannerBerhasil(teks){
                 tumpuk
             );
 
-            // BUKA URL ASLI DARI QR
-            window.location.assign(nilai);
+            // PAKAI URL ASLI DARI QR
+            window.location.assign(
+                nilai
+            );
 
             return;
 
@@ -1271,12 +1313,11 @@ function scannerBerhasil(teks){
     ================================================ */
 
     alert(
-        "QR TIDAK DIKENALI.\n\n" +
+        "QR / BARCODE TIDAK DIKENALI.\n\n" +
         nilai
     );
 
 }
-
 /* =====================================================
    TUTUP SCANNER
 ===================================================== */
