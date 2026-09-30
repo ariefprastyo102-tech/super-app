@@ -1177,9 +1177,7 @@ function tutupHasilScan(){
 function tutupScanner(){
 
     scannerRunning = false;
-
-    scanLocked = false;
-
+    scanLocked = true;
 
     if(codeReader){
 
@@ -1189,35 +1187,43 @@ function tutupScanner(){
         catch(e){}
 
         codeReader = null;
-
     }
-
 
     const video =
         document.getElementById("video");
 
+    if(video){
 
-    if(video.srcObject){
+        try{
 
-        video.srcObject
-            .getTracks()
-            .forEach(
-                function(track){
-                    track.stop();
-                }
-            );
+            video.pause();
 
-        video.srcObject = null;
+            const stream =
+                video.srcObject;
+
+            if(stream){
+
+                stream.getTracks().forEach(
+                    track => track.stop()
+                );
+
+            }
+
+            video.srcObject = null;
+
+        }
+        catch(e){}
 
     }
 
+    const overlay =
+        document.getElementById("scannerOverlay");
 
-    document.getElementById(
-        "scannerOverlay"
-    ).style.display = "none";
+    if(overlay){
+        overlay.style.display = "none";
+    }
 
 }
-
 
 /* =====================================================
    MENU
