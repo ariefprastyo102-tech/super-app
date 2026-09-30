@@ -1007,16 +1007,85 @@ function scannerBerhasil(teks){
 
     tutupScanner();
 
+    const nilai = String(teks || "").trim();
+
+    console.log("QR TERBACA:", nilai);
+
+    // ==========================================
+    // CEK QR REGISTER
+    // ==========================================
+
+    let register = null;
+
+    // Kalau QR langsung angka
+    if(/^\d{7}$/.test(nilai)){
+        register = nilai;
+    }
+
+    // Kalau QR berupa URL
+    if(!register){
+
+        try{
+
+            const url = new URL(nilai);
+
+            register =
+                url.searchParams.get("register");
+
+        }
+        catch(e){}
+
+    }
+
+    // ==========================================
+    // JIKA REGISTER DITEMUKAN
+    // ==========================================
+
+    if(
+        register &&
+        /^\d{7}$/.test(register)
+    ){
+
+        window.location.href =
+            "https://ariefprastyo102-tech.github.io/scan-kayu/?register=" +
+            encodeURIComponent(register);
+
+        return;
+    }
+
+    // ==========================================
+    // CEK TUMPUK
+    // ==========================================
+
+    const upper =
+        nilai.toUpperCase();
+
+    if(
+        upper.startsWith("TUMPUK|") ||
+        upper.startsWith("TPK|") ||
+        upper.includes("CEK-TUMPUK") ||
+        upper.includes("CEK_TUMPUK") ||
+        upper.includes("TUMPUK=")
+    ){
+
+        alert(
+            "QR TUMPUK TERBACA.\n\n" +
+            nilai
+        );
+
+        return;
+    }
+
+    // ==========================================
+    // TIDAK DIKENALI
+    // ==========================================
+
     alert(
-        "HASIL MENTAH QR:\n\n[" +
-        teks +
-        "]\n\n" +
-        "PANJANG DATA: " +
-        String(teks).length
+        "QR TIDAK DIKENALI.\n\n" +
+        nilai
     );
 
 }
-
 /* =====================================================
    TAMPILKAN HASIL
 ===================================================== */
