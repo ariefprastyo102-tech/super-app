@@ -1025,15 +1025,25 @@ function scannerBerhasil(teks){
     // Kalau QR berupa URL
     if(!register){
 
-        try{
+     try {
 
-            const url = new URL(nilai);
+    const url = new URL(nilai);
 
-            register =
-                url.searchParams.get("register");
+    const register =
+        url.searchParams.get("register");
 
-        }
-        catch(e){}
+    if (
+        register &&
+        /^\d{7}$/.test(register)
+    ) {
+
+        window.location.href = nilai;
+
+        return;
+    }
+
+}
+catch(e) {}
 
     }
 
