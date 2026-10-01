@@ -3350,7 +3350,6 @@ function setDashboardData(data){
     }
 
 }
-
 async function muatDashboard(){
 
     try{
@@ -3377,7 +3376,32 @@ async function muatDashboard(){
 
 
         /* ==========================================
-           TANGGAL
+           TANGGAL PENGOLAHAN HARIAN
+        ========================================== */
+
+        const tanggalTampil =
+            data.tanggal
+                ? formatTanggalDashboard(
+                    data.tanggal
+                  )
+                : "—";
+
+
+        const elDailyDate =
+            document.getElementById(
+                "dailyDate"
+            );
+
+        if(elDailyDate){
+
+            elDailyDate.textContent =
+                tanggalTampil;
+
+        }
+
+
+        /* ==========================================
+           TANGGAL DASHBOARD
         ========================================== */
 
         const elTanggal =
@@ -3388,7 +3412,7 @@ async function muatDashboard(){
         if(elTanggal){
 
             elTanggal.textContent =
-                data.tanggal || "";
+                tanggalTampil;
 
         }
 
@@ -3412,25 +3436,27 @@ async function muatDashboard(){
         }
 
 
-/* ==========================================
-   HASIL RST — 6 ANGKA DI BELAKANG KOMA
-========================================== */
+        /* ==========================================
+           HASIL RST
+           6 ANGKA DI BELAKANG KOMA
+        ========================================== */
 
-const elRST =
-    document.getElementById(
-        "hasilRST"
-    );
+        const elRST =
+            document.getElementById(
+                "hasilRST"
+            );
 
-if(elRST){
+        if(elRST){
 
-    elRST.textContent =
-        (
-            Number(
-                data.hasilRST
-            ) || 0
-        ).toFixed(6);
+            elRST.textContent =
+                (
+                    Number(
+                        data.hasilRST
+                    ) || 0
+                ).toFixed(6);
 
-}
+        }
+
 
         /* ==========================================
            RENDEMEN
@@ -3448,7 +3474,8 @@ if(elRST){
                     Number(
                         data.rendemen
                     ) || 0
-                ).toFixed(3) + "%";
+                ).toFixed(2) +
+                "%";
 
         }
 
@@ -3474,6 +3501,7 @@ if(elRST){
 
         /* ==========================================
            PERSEDIAAN RST
+           6 ANGKA DI BELAKANG KOMA
         ========================================== */
 
         const elPersediaanRST =
@@ -3484,9 +3512,11 @@ if(elRST){
         if(elPersediaanRST){
 
             elPersediaanRST.textContent =
-                formatVolume(
-                    data.persediaanRST
-                );
+                (
+                    Number(
+                        data.persediaanRST
+                    ) || 0
+                ).toFixed(6);
 
         }
 
@@ -3508,6 +3538,10 @@ if(elRST){
 
 }
 
+
+/* ==========================================
+   SAAT HALAMAN SELESAI DIMUAT
+========================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
