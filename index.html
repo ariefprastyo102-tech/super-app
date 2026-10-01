@@ -925,7 +925,10 @@ body{
 .history-overlay{
     position:fixed;
 
-    inset:0;
+    top:var(--header-height, 0px);
+    right:0;
+    bottom:0;
+    left:0;
 
     z-index:90;
 
@@ -939,7 +942,7 @@ body{
     backdrop-filter:
         blur(3px);
 }
-
+    
 .history-sheet{
     width:100%;
 
@@ -1478,60 +1481,7 @@ body{
 
 }
 
-function sesuaikanHeaderSticky(){
 
-    const header =
-        document.querySelector(".header");
-
-    if(!header){
-        return;
-    }
-
-    const tinggiHeader =
-        header.getBoundingClientRect().height;
-
-    document.documentElement.style
-        .setProperty(
-            "--header-height",
-            tinggiHeader + "px"
-        );
-
-    document.documentElement.style
-        .scrollPaddingTop =
-        (tinggiHeader + 8) + "px";
-}
-
-
-window.addEventListener(
-    "load",
-    sesuaikanHeaderSticky
-);
-
-
-window.addEventListener(
-    "resize",
-    sesuaikanHeaderSticky
-);
-
-
-if(typeof ResizeObserver !== "undefined"){
-
-    const header =
-        document.querySelector(".header");
-
-    if(header){
-
-        const observer =
-            new ResizeObserver(
-                sesuaikanHeaderSticky
-            );
-
-        observer.observe(header);
-
-    }
-
-}
-    
 </style>
 
 </head>
@@ -3796,7 +3746,7 @@ async function muatHistoryDashboard(){
         {
             action:"history"
         },
-        20000
+        60000
     );
 
 
@@ -4170,6 +4120,35 @@ document.addEventListener(
     }
 );
 
+function updateHistoryHeaderHeight(){
+
+    const header =
+        document.querySelector(".header");
+
+    if(!header){
+        return;
+    }
+
+    const tinggi =
+        header.getBoundingClientRect().height;
+
+    document.documentElement.style
+        .setProperty(
+            "--header-height",
+            tinggi + "px"
+        );
+}
+
+window.addEventListener(
+    "load",
+    updateHistoryHeaderHeight
+);
+
+window.addEventListener(
+    "resize",
+    updateHistoryHeaderHeight
+);
+    
 </script>
 
 </body>
