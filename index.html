@@ -1478,6 +1478,60 @@ body{
 
 }
 
+function sesuaikanHeaderSticky(){
+
+    const header =
+        document.querySelector(".header");
+
+    if(!header){
+        return;
+    }
+
+    const tinggiHeader =
+        header.getBoundingClientRect().height;
+
+    document.documentElement.style
+        .setProperty(
+            "--header-height",
+            tinggiHeader + "px"
+        );
+
+    document.documentElement.style
+        .scrollPaddingTop =
+        (tinggiHeader + 8) + "px";
+}
+
+
+window.addEventListener(
+    "load",
+    sesuaikanHeaderSticky
+);
+
+
+window.addEventListener(
+    "resize",
+    sesuaikanHeaderSticky
+);
+
+
+if(typeof ResizeObserver !== "undefined"){
+
+    const header =
+        document.querySelector(".header");
+
+    if(header){
+
+        const observer =
+            new ResizeObserver(
+                sesuaikanHeaderSticky
+            );
+
+        observer.observe(header);
+
+    }
+
+}
+    
 </style>
 
 </head>
