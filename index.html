@@ -3351,110 +3351,161 @@ function setDashboardData(data){
 
 }
 
-
 async function muatDashboard(){
-
-    /* ==========================================
-       DATA HARIAN
-    ========================================== */
 
     try{
 
-        const dataHarian =
+        const data =
             await ambilJSONP(
                 API_SUPER_APP,
                 {
                     action:"dashboard"
                 },
-                20000
+                30000
             );
 
         if(
-            !dataHarian ||
-            dataHarian.sukses !== true
+            !data ||
+            data.sukses !== true
         ){
+
             throw new Error(
                 "Data dashboard tidak valid."
             );
+
         }
 
-        dashboardDataHarian =
-            Array.isArray(dataHarian.data)
-                ? dataHarian.data
-                : [];
 
-        if(
-            dashboardDataHarian.length
-        ){
+        /* ==========================================
+           TANGGAL
+        ========================================== */
 
-            tampilkanDataHarianDashboard(
-                dashboardDataHarian
+        const elTanggal =
+            document.getElementById(
+                "dashboardDate"
             );
 
+        if(elTanggal){
+
+            elTanggal.textContent =
+                data.tanggal || "";
+
         }
+
+
+        /* ==========================================
+           OLAH BBI
+        ========================================== */
+
+        const elOlah =
+            document.getElementById(
+                "olahBBI"
+            );
+
+        if(elOlah){
+
+            elOlah.textContent =
+                formatVolume(
+                    data.olahBBI
+                );
+
+        }
+
+
+        /* ==========================================
+           HASIL RST
+        ========================================== */
+
+        const elRST =
+            document.getElementById(
+                "hasilRST"
+            );
+
+        if(elRST){
+
+            elRST.textContent =
+                formatVolume(
+                    data.hasilRST
+                );
+
+        }
+
+
+        /* ==========================================
+           RENDEMEN
+        ========================================== */
+
+        const elRendemen =
+            document.getElementById(
+                "rendemen"
+            );
+
+        if(elRendemen){
+
+            elRendemen.textContent =
+                (
+                    Number(
+                        data.rendemen
+                    ) || 0
+                ).toFixed(3) + "%";
+
+        }
+
+
+        /* ==========================================
+           PERSEDIAAN BBI
+        ========================================== */
+
+        const elPersediaanBBI =
+            document.getElementById(
+                "persediaanBBI"
+            );
+
+        if(elPersediaanBBI){
+
+            elPersediaanBBI.textContent =
+                formatVolume(
+                    data.persediaanBBI
+                );
+
+        }
+
+
+        /* ==========================================
+           PERSEDIAAN RST
+        ========================================== */
+
+        const elPersediaanRST =
+            document.getElementById(
+                "persediaanRST"
+            );
+
+        if(elPersediaanRST){
+
+            elPersediaanRST.textContent =
+                formatVolume(
+                    data.persediaanRST
+                );
+
+        }
+
+
+        console.log(
+            "DASHBOARD BERHASIL:",
+            data
+        );
 
     }
     catch(error){
 
         console.error(
-            "GAGAL MEMUAT DATA HARIAN:",
+            "GAGAL MEMUAT DASHBOARD:",
             error
         );
 
     }
 
-
-    /* ==========================================
-       PERSEDIAAN
-    ========================================== */
-
-    try{
-
-        const dataPersediaan =
-            await ambilJSONP(
-                API_SUPER_APP,
-                {
-                    action:"persediaan"
-                },
-                20000
-            );
-
-        if(
-            !dataPersediaan ||
-            dataPersediaan.sukses !== true
-        ){
-
-            throw new Error(
-                "Data persediaan tidak valid."
-            );
-
-        }
-
-        document.getElementById(
-            "persediaanBBI"
-        ).textContent =
-            formatVolume(
-                dataPersediaan.bbi
-            );
-
-        document.getElementById(
-            "persediaanRST"
-        ).textContent =
-            formatVolume(
-                dataPersediaan.rst
-            );
-
-    }
-    catch(error){
-
-        console.error(
-            "GAGAL MEMUAT PERSEDIAAN:",
-            error
-        );
-
-    }
-
-} // <-- TUTUP muatDashboard DI SINI
+}
 
 
 document.addEventListener(
