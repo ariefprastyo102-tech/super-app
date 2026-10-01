@@ -3352,10 +3352,6 @@ function setDashboardData(data){
 }
 
 
-/* =====================================================
-   MUAT DASHBOARD
-===================================================== */
-
 async function muatDashboard(){
 
     /* ==========================================
@@ -3373,24 +3369,19 @@ async function muatDashboard(){
                 20000
             );
 
-
         if(
             !dataHarian ||
             dataHarian.sukses !== true
         ){
-
             throw new Error(
                 "Data dashboard tidak valid."
             );
-
         }
-
 
         dashboardDataHarian =
             Array.isArray(dataHarian.data)
                 ? dataHarian.data
                 : [];
-
 
         if(
             dashboardDataHarian.length
@@ -3403,7 +3394,6 @@ async function muatDashboard(){
         }
 
     }
-
     catch(error){
 
         console.error(
@@ -3429,7 +3419,6 @@ async function muatDashboard(){
                 20000
             );
 
-
         if(
             !dataPersediaan ||
             dataPersediaan.sukses !== true
@@ -3441,22 +3430,12 @@ async function muatDashboard(){
 
         }
 
-
-        /* ==========================================
-           PERSEDIAAN BBI
-        ========================================== */
-
         document.getElementById(
             "persediaanBBI"
         ).textContent =
             formatVolume(
                 dataPersediaan.bbi
             );
-
-
-        /* ==========================================
-           PERSEDIAAN RST
-        ========================================== */
 
         document.getElementById(
             "persediaanRST"
@@ -3466,7 +3445,6 @@ async function muatDashboard(){
             );
 
     }
-
     catch(error){
 
         console.error(
@@ -3476,4 +3454,16 @@ async function muatDashboard(){
 
     }
 
-}
+} // <-- TUTUP muatDashboard DI SINI
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        updateTanggal();
+
+        muatDashboard();
+
+    }
+);
