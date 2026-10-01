@@ -3740,17 +3740,13 @@ async function muatHistoryDashboard(){
         ){
 
             const hasil =
-                await ambilJSONP(
-
-                    API_SUPER_APP,
-
-                    {
-                        action:"dashboard"
-                    },
-
-                    20000
-
-                );
+    await ambilJSONP(
+        API_SUPER_APP,
+        {
+            action:"history"
+        },
+        20000
+    );
 
 
             if(
