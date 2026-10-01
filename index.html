@@ -3412,24 +3412,25 @@ async function muatDashboard(){
         }
 
 
-        /* ==========================================
-           HASIL RST
-        ========================================== */
+/* ==========================================
+   HASIL RST — 6 ANGKA DI BELAKANG KOMA
+========================================== */
 
-        const elRST =
-            document.getElementById(
-                "hasilRST"
-            );
+const elRST =
+    document.getElementById(
+        "hasilRST"
+    );
 
-        if(elRST){
+if(elRST){
 
-            elRST.textContent =
-                formatVolume(
-                    data.hasilRST
-                );
+    elRST.textContent =
+        (
+            Number(
+                data.hasilRST
+            ) || 0
+        ).toFixed(6);
 
-        }
-
+}
 
         /* ==========================================
            RENDEMEN
