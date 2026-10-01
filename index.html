@@ -3357,44 +3357,20 @@ function setDashboardData(data){
 
 async function muatDashboard(){
 
+    /* ==========================================
+       DATA HARIAN
+    ========================================== */
+
     try{
 
-        const hasil =
-            await Promise.all([
-
-                ambilJSONP(
-
-                    API_SUPER_APP,
-
-                    {
-                        action:"dashboard"
-                    },
-
-                    20000
-
-                ),
-
-                ambilJSONP(
-
-                    API_SUPER_APP,
-
-                    {
-                        action:"persediaan"
-                    },
-
-                    20000
-
-                )
-
-            ]);
-
-
         const dataHarian =
-            hasil[0];
-
-
-        const dataPersediaan =
-            hasil[1];
+            await ambilJSONP(
+                API_SUPER_APP,
+                {
+                    action:"dashboard"
+                },
+                20000
+            );
 
 
         if(
@@ -3409,29 +3385,11 @@ async function muatDashboard(){
         }
 
 
-        if(
-            !dataPersediaan ||
-            dataPersediaan.sukses !== true
-        ){
-
-            throw new Error(
-                "Data persediaan tidak valid."
-            );
-
-        }
-
-
         dashboardDataHarian =
-            Array.isArray(
-                dataHarian.data
-            )
+            Array.isArray(dataHarian.data)
                 ? dataHarian.data
                 : [];
 
-
-        /* ==========================================
-           DATA HARIAN TERBARU
-        ========================================== */
 
         if(
             dashboardDataHarian.length
@@ -3439,6 +3397,45 @@ async function muatDashboard(){
 
             tampilkanDataHarianDashboard(
                 dashboardDataHarian
+            );
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(
+            "GAGAL MEMUAT DATA HARIAN:",
+            error
+        );
+
+    }
+
+
+    /* ==========================================
+       PERSEDIAAN
+    ========================================== */
+
+    try{
+
+        const dataPersediaan =
+            await ambilJSONP(
+                API_SUPER_APP,
+                {
+                    action:"persediaan"
+                },
+                20000
+            );
+
+
+        if(
+            !dataPersediaan ||
+            dataPersediaan.sukses !== true
+        ){
+
+            throw new Error(
+                "Data persediaan tidak valid."
             );
 
         }
@@ -3472,61 +3469,10 @@ async function muatDashboard(){
     catch(error){
 
         console.error(
-            "GAGAL MEMUAT DASHBOARD:",
+            "GAGAL MEMUAT PERSEDIAAN:",
             error
         );
-
-
-        document.getElementById(
-            "persediaanBBI"
-        ).textContent =
-            "—";
-
-
-        document.getElementById(
-            "persediaanRST"
-        ).textContent =
-            "—";
-
-
-        document.getElementById(
-            "olahBBI"
-        ).textContent =
-            "—";
-
-
-        document.getElementById(
-            "hasilRST"
-        ).textContent =
-            "—";
-
-
-        document.getElementById(
-            "rendemen"
-        ).textContent =
-            "—";
 
     }
 
 }
-
-
-/* =====================================================
-   INIT
-===================================================== */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
-
-        updateTanggal();
-
-        muatDashboard();
-
-    }
-);
-
-</script>
-
-</body>
-</html>
