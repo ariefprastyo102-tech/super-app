@@ -1481,7 +1481,49 @@ body{
 
 }
 
+/* ================================
+   POPUP PILIH SCAN
+================================ */
 
+#pilihScanOverlay{
+    backdrop-filter: blur(4px);
+}
+
+#pilihScanOverlay > div{
+    width: calc(100% - 40px) !important;
+    max-width: 360px !important;
+    padding: 26px 22px !important;
+    border-radius: 24px !important;
+}
+
+#pilihScanOverlay > div > div:first-child{
+    font-size: 21px !important;
+    font-weight: 700 !important;
+    margin-bottom: 22px !important;
+}
+
+#pilihScanOverlay button{
+    transition:
+        transform 0.12s ease,
+        opacity 0.12s ease;
+}
+
+#pilihScanOverlay button:active{
+    transform: scale(0.97);
+    opacity: 0.8;
+}
+
+#pilihScanOverlay button:nth-of-type(1),
+#pilihScanOverlay button:nth-of-type(2){
+    min-height: 56px;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+}
+
+#pilihScanOverlay button:nth-of-type(3){
+    color: #666;
+}
+    
 </style>
 
 </head>
