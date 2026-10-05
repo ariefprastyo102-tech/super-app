@@ -853,13 +853,13 @@ body{
     left:50%;
 
     transform:
-        translateX(-50%);
+        translateX(-50%)
+        translateY(-12px);
 
     bottom:8px;
 
-    width:65px;
-
-    height:65px;
+    width:74px;
+    height:74px;
 
     border-radius:50%;
 
@@ -870,8 +870,8 @@ body{
     background:
         linear-gradient(
             145deg,
-            #0b6338,
-            #249256
+            #0a6b3c,
+            #28a45f
         );
 
     color:white;
@@ -885,39 +885,52 @@ body{
     justify-content:center;
 
     box-shadow:
-        0 6px 17px
-        rgba(6,73,38,.32);
+        0 8px 20px
+        rgba(6,73,38,.38),
+        0 0 0 5px
+        rgba(11,99,56,.10);
 
     cursor:pointer;
 
     z-index:60;
 
     transition:
-        transform .13s ease,
-        box-shadow .13s ease;
+        transform .15s ease,
+        box-shadow .15s ease;
 }
 
 .scan-button:active{
     transform:
         translateX(-50%)
+        translateY(-9px)
         scale(.94);
+
+    box-shadow:
+        0 4px 10px
+        rgba(6,73,38,.32);
 }
 
 .scan-button .nav-icon{
-    font-size:24px;
+    font-size:28px;
+
+    line-height:1;
+
+    filter:
+        drop-shadow(
+            0 2px 2px
+            rgba(0,0,0,.18)
+        );
 }
 
 .scan-button span{
-    margin-top:2px;
+    margin-top:3px;
 
-    font-size:8px;
+    font-size:9px;
 
     font-weight:900;
 
-    letter-spacing:.5px;
+    letter-spacing:.8px;
 }
-
-
 /* =====================================================
    HISTORY OVERLAY
 ===================================================== */
