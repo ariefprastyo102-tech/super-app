@@ -1787,9 +1787,9 @@ body{
     <div class="scan-wrapper">
 
         <button
-            class="scan-button"
-            onclick="bukaScanner()"
-        >
+    class="scan-button"
+    onclick="pilihJenisScan()"
+>
 
             <div class="nav-icon">
                 📷
@@ -1863,7 +1863,90 @@ body{
 
 </div>
 
+<div
+    id="pilihScanOverlay"
+    style="
+        display:none;
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,0.65);
+        z-index:99999;
+        align-items:center;
+        justify-content:center;
+    "
+>
 
+    <div
+        style="
+            width:85%;
+            max-width:360px;
+            background:white;
+            border-radius:20px;
+            padding:24px;
+            text-align:center;
+            box-shadow:0 10px 40px rgba(0,0,0,0.3);
+        "
+    >
+
+        <div
+            style="
+                font-size:22px;
+                font-weight:700;
+                margin-bottom:20px;
+            "
+        >
+            PILIH SCAN
+        </div>
+
+        <button
+            onclick="bukaScanRegister()"
+            style="
+                width:100%;
+                padding:15px;
+                margin-bottom:12px;
+                border:none;
+                border-radius:12px;
+                font-size:16px;
+                font-weight:600;
+                cursor:pointer;
+            "
+        >
+            📦 SCAN REGISTER
+        </button>
+
+        <button
+            onclick="bukaScanTumpuk()"
+            style="
+                width:100%;
+                padding:15px;
+                border:none;
+                border-radius:12px;
+                font-size:16px;
+                font-weight:600;
+                cursor:pointer;
+            "
+        >
+            🏗️ SCAN TUMPUK
+        </button>
+
+        <button
+            onclick="tutupPilihScan()"
+            style="
+                width:100%;
+                margin-top:15px;
+                padding:12px;
+                border:none;
+                background:transparent;
+                font-size:14px;
+                cursor:pointer;
+            "
+        >
+            BATAL
+        </button>
+
+    </div>
+
+</div>
 <div
     id="scannerOverlay"
     class="scanner-overlay"
@@ -2567,7 +2650,56 @@ function bukaMenuUtama(nama){
 
 }
 
+function pilihJenisScan(){
 
+    const pilihan =
+        document.getElementById(
+            "pilihScanOverlay"
+        );
+
+    if(pilihan){
+
+        pilihan.style.display =
+            "flex";
+
+    }
+
+}
+
+function bukaScanRegister(){
+
+    window.location.assign(
+        "https://ariefprastyo102-tech.github.io/scan-kayu/index-test-qr"
+    );
+
+}
+
+
+function bukaScanTumpuk(){
+
+    window.location.assign(
+        "https://ariefprastyo102-tech.github.io/scan-kayu/cek-tumpuk.html"
+    );
+
+}
+
+
+function tutupPilihScan(){
+
+    const overlay =
+        document.getElementById(
+            "pilihScanOverlay"
+        );
+
+    if(overlay){
+
+        overlay.style.display =
+            "none";
+
+    }
+
+}
+    
 /* =====================================================
    SCANNER
 ===================================================== */
